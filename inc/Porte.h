@@ -37,7 +37,7 @@ public:
 
   //////accesseur//////
   string getOutput(int numero_element) const;
-  
+
   int getNbOutput() const;
 
   void ajoutOutput(string output_d);

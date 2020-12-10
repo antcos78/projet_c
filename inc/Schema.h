@@ -11,6 +11,7 @@
 #include <vector>
 #include <list>
 
+#include "../inc/Dot.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ public:
     cout << "constructeur" << endl;
   }
 
-  virtual ~Schema()
+  ~Schema()
   {
     cout << "destruction" << endl;
   }
@@ -46,7 +47,7 @@ public:
   string lireElements_output(int numero);
   string lireElements_input(int numero);
 
-  void construction_schema();
+  void construction_schema( Dot z );
 
 };
 
