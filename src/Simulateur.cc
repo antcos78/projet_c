@@ -6,16 +6,16 @@
 
 using namespace std;
 
-/*void Simulateur::declaration_resultat(Schema sch)
+void Simulateur::declaration_resultat(Schema sch)
 {
   int i = 0;
-  map<string,string>::iterator it = sch.begin();
-  for(it=sch.begin(); it!=sch.end(); ++it)
+  map<string,string>::iterator it = resultat.begin();
+  for(it=resultat.begin(); it!=resultat.end(); ++it)
   {
-    resultat.insert (it, pair<string,string>(sch.lireElements_output(),"d");
+    resultat[sch.lireElements_output(i)] = "d";
     i++;
   }
-}*/
+}
 
 int Simulateur::getNbElements_resultat()
 {

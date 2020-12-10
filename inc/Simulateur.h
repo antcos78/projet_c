@@ -1,5 +1,5 @@
-#ifndef _SCHEMA_H_
-#define _SCHEMA_H_
+#ifndef _SIMULATEUR_H_
+#define _SIMULATEUR_H_
 
 
 #include <iostream>
