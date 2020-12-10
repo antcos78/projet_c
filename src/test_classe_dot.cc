@@ -21,15 +21,20 @@ int main ()
 
   Not salut("porte",1,1);
 
-  Items * forme[2];
-  forme[0] = new Not ("porte", 1,1);
+  parsingDot.parsingDot();
+  parsingDot.addItems("porte",Not("porte",1,1));
+  parsingDot.recupEntreeParNom("porte") << endl;
+  parsingDot.recupEntreeParNumero(0) << endl;
 
-  parsingDot.addItems("porte", &salut);
-  parsingDot.addItems("porte", forme[0]);
-
-  cout << parsingDot.trouverItemsParNom("porte")->getNom() << endl;
-
-  cout << forme[0]->getNbOutput()  << endl;
+  // Items * forme[2];
+  // forme[0] = new Not ("porte", 1,1);
+  //
+  // parsingDot.addItems("porte", &salut);
+  // parsingDot.addItems("porte", forme[0]);
+  //
+  // cout << parsingDot.trouverItemsParNom("porte")->getNom() << endl;
+  //
+  // cout << forme[0]->getNbOutput()  << endl;
 
 
 
