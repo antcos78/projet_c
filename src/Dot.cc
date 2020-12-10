@@ -10,10 +10,10 @@ Dot::Dot()
   cout << "construction du Dot" << endl;
 }
 
-void Dot::parsingDot()
-{
-
-}
+// void Dot::parsingDot()
+// {
+//
+// }
 
 
 //addItems(porte, Not(porte,0,1))
@@ -29,6 +29,16 @@ void Dot::addItems(const string & nom, Items *p_items)
 
   cout << "l'item est ajouté" << p_items->getNom() << endl;
 
+}
+
+Items * trouverItemsParNom( const string & nom)
+{
+  return m[nom];
+}
+
+Items * trouverItemsParNumero(int numero)
+{
+  return m[v[numero]];
 }
 
 
