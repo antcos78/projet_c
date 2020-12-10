@@ -15,7 +15,6 @@ class Items{
 private:
   string nom;
   char type;
-  
   char nbPorts;
 
 public:
@@ -23,7 +22,7 @@ public:
 
   Items(const string &nom, char type, char nbPorts);
 
-  virtual ~Items()
+  ~Items()
   {
     cout << "destruction" << endl;
   }
@@ -36,7 +35,6 @@ public:
 
   const char getNbPorts() const;
 
-  ///////méthodes//////
 
 
 };
