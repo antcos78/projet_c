@@ -1,5 +1,7 @@
 
 #include "../inc/Schema.h"
+#include "../inc/Dot.h"
+
 
 using namespace std;
 
@@ -59,4 +61,43 @@ string Schema::lireElements_input(int numero)
   return input[numero];
 }
 
-//void Schema::construction_schema();
+void Schema::construction_schema(const Dot &z )
+{
+  int i = 0;
+  int j;
+  string element;
+
+  for(i=0;i<z.getnbItems()-1;i++)
+  {
+    if(z.trouverItemsParNumero(i)->getType() == 0)
+    {
+      ajouterElements_schema(z.trouverItemsParNumero(i)->getNom());
+      ajouterElements_input(z.trouverItemsParNumero(i)->getNom());
+    }
+  }
+
+  i = 0;
+  j = 0;
+  while(z.getnbItems()<=getNbElements_schema())
+  {
+    for(int i =0; i < z.trouverItemsParNumero(i)->getNbOutput() -1 ; i++ )
+    {
+      element = z.trouverItemsParNumero(j)->getOutput(i);
+      if(z.trouverItemsParNumero(j)->getNbPorts() == 1)
+      {
+        if(z.trouverItemsParNumero(j)->getType() == 1)
+        {
+          ajouterElements_output(element);
+        }
+        ajouterElements_schema(element);
+      }
+      else
+      {
+
+      }
+
+    }
+
+    j++;
+  }
+}
