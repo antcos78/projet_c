@@ -5,40 +5,35 @@ using namespace std;
 
 #include "../inc/stimuli.h"
 
-Dot::Dot()
+Stimuli::Stimuli()
 {
-  cout << "construction du Dot" << endl;
+  cout << "construction du Stimuli" << endl;
 }
 
-// void Dot::parsingDot()
-// {
-//
-// }
 
 
-//addItems(porte, Not(porte,0,1))
-
-void Dot::addItems(const string & nom, Items *p_items)
+void Stimuli::addEntree(const string & nom, bool[] etat)
 {
-  if(m.count(p_items->getNom()) > 0)  {
-    cout << "L'item existe déjà" << endl;
+  if(m_stimuli.count(nom) > 0)
+  {
+    cout << "L'entree existe déjà" << endl;
     exit(1);
+  }
+  m_stimuli[nom] = etat;
+  v_stimuli.push_back(etat);
+
+  cout << "l'entrée est ajoutée" << nom << endl;
 }
-  m[p_items->getNom()] = p_items;
-  v.push_back(p_items->getNom());
 
-  cout << "l'item est ajouté" << p_items->getNom() << endl;
-
-}
-
-Items * Dot::trouverItemsParNom( const string & nom)
+bool Stimuli::recupEntreeParNom( const string & nom)
 {
-  return m[nom];
+  return m_stimuli[nom];
 }
 
-Items * Dot::trouverItemsParNumero(int numero)
+bool Stimuli::recupEntreeParNumero(int numeroEntree, int numeroBool)
 {
-  return m[v[numero]];
+  return m_stimuli[v_stimuli[numeroEntree]];
+  return m_stimuli[v_stimuli[numeroBool]];
 }
 
 

@@ -14,38 +14,39 @@
 
 using namespace std;
 
-class Dot{
+class Stimuli{
 
 //  friend ostream& operator<<(ostream& out, const Zoo &z);
 
 
 private:
 
-  map<string,Items*> m;
-  vector<string> v;
+  int nbPeriode;
+  map<string,bool[nbPeriode]> m_stimuli;
+  vector<string> v_stimuli;
 
 public:
   //////constructeur-destructeur///////
-  Dot();
+  Stimuli();
 
-  ~Dot()
+  ~Stimuli()
   {
-      cout << "Destruction du Dot" << endl;
+      cout << "Destruction du Stimuli" << endl;
   }
 
-  int getnbItems()const
+  int getnbPeriode()const
   {
-    return m.size();
+    return stimuli.size();
   }
 
 
-  void parsingDot();
+  void parsingStimuli();
 
-  void addItems(const string & nom, Items *p_items);
+  void addEntree(const string & nom, bool[]);
 
-  Items * trouverItemsParNom( const string & nom);
+  bool recupEntreeParNom( const string & nom);
 
-  Items * trouverItemsParNumero(int numero);
+  bool recupEntreeParNumero(int numeroEntree, int numeroBool);
 
 
 
