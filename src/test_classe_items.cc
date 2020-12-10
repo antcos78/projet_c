@@ -6,7 +6,6 @@
 #include "../inc/Not.h"
 #include "../inc/Porte_2.h"
 #include "../inc/And2.h"
-#include "../inc/Or2.h"
 
 using namespace std;
 
@@ -16,7 +15,7 @@ int main ()
 {
   cout << "salut" << endl;
 
-  Or2 salut("porte_AND2",2,26);
+  And2 salut("porte_AND2",2,26);
   Not notnot("not2",1,1);
   And2 tigre("porte",2,2);
 

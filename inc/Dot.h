@@ -8,7 +8,9 @@
 #include <stdlib.h>
 #include <iomanip>
 
+#include "../inc/Items.h"
 #include <map>
+#include <vector>
 
 using namespace std;
 
@@ -19,14 +21,17 @@ class Dot{
 
 private:
 
-  map<string,items*> m ;
+  map<string,Items*> m;
   vector<string> v;
 
 public:
   //////constructeur-destructeur///////
   Dot();
 
-  virtual ~Dot();
+  ~Dot()
+  {
+      cout << "Destruction du Dot" << endl;
+  }
 
   int getnbItems()const
   {
