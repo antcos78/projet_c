@@ -12,6 +12,9 @@
 #include <list>
 
 #include "Dot.h"
+#include "Items.h"
+#include "Porte.h"
+
 
 using namespace std;
 
