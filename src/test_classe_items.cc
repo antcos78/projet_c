@@ -7,6 +7,7 @@
 #include "../inc/Porte_2.h"
 #include "../inc/And2.h"
 #include "../inc/Or2.h"
+
 using namespace std;
 
 
@@ -37,10 +38,14 @@ int main ()
   salut.ajoutOutput(tigre.getNom());
   cout << "en sortie : " << salut.getOutput(0) << endl;
   cout << "en sortie : " << salut.getOutput(1) << endl;
-  cout << "en sortie : " << salut.getNbOutput() << endl;
+  cout << "nb sortie : " << salut.getNbOutput() << endl;
 
-  cout << "en sortie : " << salut.getOutput(2) << endl;
+  //cout << "en sortie : " << salut.getOutput(2) << endl;
 
+  Or2  *tigrre = new Or2("porte_AND2",2,26);
+
+
+  cout << "en sortie : " << tigrre->getEtat_1() << endl;
 
   return 0;
 }

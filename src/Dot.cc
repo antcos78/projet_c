@@ -176,7 +176,7 @@ void Dot::parsingDot()
   }
   cout << "fin du DOT" << endl;
 
-  return 0;
+  
 }
 
 
