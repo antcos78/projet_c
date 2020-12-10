@@ -22,7 +22,7 @@ class Stimuli{
 private:
 
   int nbPeriode;
-  map<string,bool[nbPeriode]> m_stimuli;
+  map<string,string> m_stimuli;
   vector<string> v_stimuli;
 
 public:
@@ -36,17 +36,17 @@ public:
 
   int getnbPeriode()const
   {
-    return stimuli.size();
+    return m_stimuli.size();
   }
 
 
   void parsingStimuli();
 
-  void addEntree(const string & nom, bool[]);
+  void addEntree(const string & nom, const string & etat);
 
-  bool recupEntreeParNom( const string & nom);
+  char recupEntreeParNom(const string & nom, int numero);
 
-  bool recupEntreeParNumero(int numeroEntree, int numeroBool);
+  char recupEntreeParNumero(int numeroEntree, int numeroBool);
 
 
 

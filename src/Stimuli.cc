@@ -1,9 +1,10 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
-#include "../inc/stimuli.h"
+#include "../inc/Stimuli.h"
 
 Stimuli::Stimuli()
 {
@@ -12,28 +13,73 @@ Stimuli::Stimuli()
 
 
 
-void Stimuli::addEntree(const string & nom, bool[] etat)
+void Stimuli::addEntree(const string & nom, const string & etat)
 {
   if(m_stimuli.count(nom) > 0)
   {
     cout << "L'entree existe déjà" << endl;
     exit(1);
   }
+
   m_stimuli[nom] = etat;
-  v_stimuli.push_back(etat);
+
+  v_stimuli.push_back(nom);
 
   cout << "l'entrée est ajoutée" << nom << endl;
 }
 
-bool Stimuli::recupEntreeParNom( const string & nom)
+char Stimuli::recupEntreeParNom(const string & nom, int numero)
 {
-  return m_stimuli[nom];
+//   // for (map<string,string>::const_iterator it =  m_stimuli.find(nom); it!=m_stimuli.end(); ++it)
+//   // {
+//   //   return it->second;
+//   // }
+
+  map<string,string>::const_iterator it =  m_stimuli.find(nom);
+  if(it == m_stimuli.end()) {
+    return 0;
+  }
+
+  int i = 0;
+  for (string::iterator itr=m_stimuli[nom].begin(); itr!=m_stimuli[nom].end(); ++itr)
+  {
+    if(i==numero)
+    {
+      return *itr;
+    }
+    i++;
+  }
+  // if(m_stimuli.count(nom) == 2)
+  // {
+  //   return it->second;
+  // }
+
+
+  // return m_stimuli[nom] = numero;
 }
 
-bool Stimuli::recupEntreeParNumero(int numeroEntree, int numeroBool)
+char Stimuli::recupEntreeParNumero(int numeroEntree, int numeroBool)
 {
-  return m_stimuli[v_stimuli[numeroEntree]];
-  return m_stimuli[v_stimuli[numeroBool]];
+  string nom = v_stimuli[numeroEntree];
+  //cout << nom;
+
+  map<string,string>::const_iterator it =  m_stimuli.find(nom);
+  if(it == m_stimuli.end()) {
+    return 0;
+  }
+
+  int i = 0;
+  for (string::iterator itr=m_stimuli[nom].begin(); itr!=m_stimuli[nom].end(); ++itr)
+  {
+    //cout << i;
+    if(i==numeroBool)
+    {
+
+      return *itr;
+    }
+    i++;
+  }
+
 }
 
 

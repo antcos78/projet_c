@@ -7,7 +7,7 @@
 #include "../inc/Porte_2.h"
 #include "../inc/And2.h"
 #include "../inc/Or2.h"
-#include "../inc/Dot.h"
+#include "../inc/Stimuli.h"
 
 using namespace std;
 
@@ -17,13 +17,13 @@ int main ()
 {
   cout << "salut" << endl;
 
-  Dot parsingDot;
+  Stimuli parsingStimuli;
 
-  Not salut("porte",1,1);
 
-  parsingDot.addItems("porte", &salut);
-  cout << parsingDot.trouverItemsParNom("porte")->getNom() << endl;
-  cout << parsingDot.trouverItemsParNumero(0)->getNom() << endl;
+
+  parsingStimuli.addEntree("I1", "1010");
+  cout << parsingStimuli.recupEntreeParNom("I1",1) << endl;
+  cout << parsingStimuli.recupEntreeParNumero(0,2) << endl;
 
 
 
