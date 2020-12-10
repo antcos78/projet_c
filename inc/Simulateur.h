@@ -11,7 +11,7 @@
 
 #include <map>
 
-#include "../inc/Schema.h"
+#include "Schema.h"
 
 
 using namespace std;
@@ -38,7 +38,7 @@ public:
 
   int getNbElements_resultat();
 
-  void ajouterElements_resultat(const string & nom,bool etat);
+  void ajouterElements_resultat(const string & nom,char etat);
 
   string lireElements_resultat(const string & nom);
 

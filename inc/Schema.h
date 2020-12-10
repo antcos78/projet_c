@@ -11,7 +11,7 @@
 #include <vector>
 #include <list>
 
-#include "../inc/Dot.h"
+#include "Dot.h"
 
 using namespace std;
 

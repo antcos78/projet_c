@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void Simulateur::declaration_resultat(Schema sch)
+/*void Simulateur::declaration_resultat(Schema sch)
 {
   int i = 0;
   map<string,string>::iterator it = sch.begin();
@@ -15,14 +15,14 @@ void Simulateur::declaration_resultat(Schema sch)
     resultat.insert (it, pair<string,string>(sch.lireElements_output(),"d");
     i++;
   }
-}
+}*/
 
 int Simulateur::getNbElements_resultat()
 {
   return resultat.size();
 }
 
-void Simulateur::ajouterElements_resultat(const string & nom,bool etat)
+void Simulateur::ajouterElements_resultat(const string & nom,char etat)
 {
   resultat[nom] = resultat[nom] + etat;
 }
