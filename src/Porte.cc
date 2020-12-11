@@ -12,7 +12,7 @@ string Porte::getOutput(int numero_element) const
   }
   else
   {
-    cout << "erreur";
+    cout << "erreur porte";
     exit(1);
   }
 }

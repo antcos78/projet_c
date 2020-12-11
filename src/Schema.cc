@@ -47,7 +47,7 @@ string Schema::lireElements_schema(int numero)
     }
     i++;
   }
-  cout << "erreur";
+  cout << "erreur lecture schema";
   exit(1);
 }
 
@@ -91,7 +91,7 @@ void Schema::construction_schema( Dot z )
 
       for(int i = 0; i < z.trouverItemsParNom(lireElements_schema(j))->getNbOutput() ; i++ )
       {
-        
+
         element = z.trouverItemsParNom(lireElements_schema(j))->getOutput(i);
         char nb_port = z.trouverItemsParNom(element)->getNbPorts();
 
@@ -141,7 +141,6 @@ void Schema::construction_schema( Dot z )
   }
   for(i = 0; i< getNbElements_output(); i ++)
   {
-    cout << "sortie : " << lireElements_output(i) <<endl;
     ajouterElements_schema(lireElements_output(i));
   }
 
