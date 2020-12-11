@@ -11,7 +11,7 @@ test2 :  ../src/test_classe_stimuli.o ../src/Stimuli.o ../src/Items.o ../src/Por
 	g++ -o $@ $^ $(LDFLAGS)
 
 %.o:%.cpp
-	g++ $(CFLAGS) -c $^
+	g++ $(CFLAGS) -c $^ 
 
 
 clean:
