@@ -6,5 +6,5 @@ using namespace std;
 
 bool And2::calculEtat()
 {
-  return (this->etat_1)&(this->etat_2);
+  return (getEtat(0))&(getEtat(1));
 }

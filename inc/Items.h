@@ -22,7 +22,7 @@ public:
 
   Items(const string &nom, char type, char nbPorts);
 
-  ~Items()
+  virtual ~Items()
   {
     cout << "destruction" << endl;
   }
@@ -36,6 +36,25 @@ public:
   const char getNbPorts() const;
 
 
+  virtual string getOutput(int numero_element) const = 0;
+
+  virtual int getNbOutput() const = 0;
+
+  virtual void ajoutOutput(string output_d) = 0;
+
+
+
+
+  virtual char getEtat(int numero_etat) const =0 ;
+
+  virtual int getNbEtat() const  =0 ;
+
+  virtual void ajoutEtat(char etat, int numero_etat)  =0 ;
+
+
+  virtual void setFlag(char flag) =0 ;
+
+  virtual char getFlag()const =0 ;
 };
 
 

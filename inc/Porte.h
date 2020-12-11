@@ -20,13 +20,19 @@ class Porte :  public Items{
 
 private:
   vector <string> output;
+  vector <char> etat;
+  int flag;
 
 public:
   //////constructeur-destructeur//////
 
-  Porte(const string &nom, char type, char nbPorts):
+  Porte(const string &nom, char type, char nbPorts, int flag=0):
   Items(nom,type,nbPorts)
   {
+    this->flag = flag;
+    etat.push_back(0);
+    etat.push_back(0);
+    etat.push_back(0);
     cout << "constructeur" << endl;
   }
 
@@ -42,6 +48,17 @@ public:
 
   void ajoutOutput(string output_d);
 
+
+  char getEtat(int numero_etat) const;
+
+  int getNbEtat() const;
+
+  void ajoutEtat(char etat, int numero_etat);
+
+
+  void setFlag(char flag);
+
+  char getFlag()const;
 
 
 

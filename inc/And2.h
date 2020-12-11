@@ -8,18 +8,18 @@
 #include <stdlib.h>
 #include <iomanip>
 
-#include "Porte_2.h"
+#include "Porte.h"
 
 using namespace std;
 
 
-class And2 : public Porte_2 {
+class And2 : public Porte {
 
 
 public:
   //////constructeur-destructeur///////
-  And2(const string &nom, char type, char nbPorts,bool etat_1 = 0, bool etat_2 = 0, char flag = 0):
-  Porte_2(nom,type,nbPorts,etat_1,etat_2,flag)
+  And2(const string &nom, char type, char nbPorts,char flag = 0):
+  Porte(nom,type,nbPorts,flag)
   {
     cout << "constructeur" << endl;
   }

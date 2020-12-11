@@ -6,5 +6,5 @@ using namespace std;
 
 bool Not::calculEtat()
 {
-  return !(this->etat_1);
+  return !(getEtat(0));
 }

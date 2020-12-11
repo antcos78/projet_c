@@ -26,3 +26,30 @@ void Porte::ajoutOutput(string output_d)
 {
   output.push_back(output_d);
 }
+
+
+void Porte::setFlag(char flag)
+{
+  this->flag = flag;
+}
+
+char Porte::getFlag()const
+{
+  return this->flag;
+}
+
+
+char Porte::getEtat(int numero_etat) const
+{
+  return etat[numero_etat];
+}
+
+int Porte::getNbEtat() const
+{
+  return etat.size();
+}
+
+void Porte::ajoutEtat(char etat_s, int numero_etat)
+{
+  etat[numero_etat] = etat_s;
+}

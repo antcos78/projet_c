@@ -8,18 +8,18 @@
 #include <stdlib.h>
 #include <iomanip>
 
-#include "Porte_1.h"
+#include "Porte.h"
 
 using namespace std;
 
 
-class Not : public Porte_1 {
+class Not : public  Porte {
 
 
 public:
   //////constructeur-destructeur///////
-  Not(const string &nom, char type, char nbPorts,bool etat_1 = 0):
-  Porte_1(nom,type,nbPorts,etat_1)
+  Not(const string &nom, char type, char nbPorts,int flag = 0):
+  Porte(nom,type,nbPorts,flag)
   {
     cout << "constructeur" << endl;
   }
