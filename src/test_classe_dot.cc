@@ -19,12 +19,14 @@ int main ()
 
   Dot parsingDot;
 
-  Not salut("porte",1,1);
+  Items *salut = new Not("porte",1,1);
 
   parsingDot.parsingDot();
-  parsingDot.addItems("porte",Not("porte",1,1));
-  parsingDot.recupEntreeParNom("porte") << endl;
-  parsingDot.recupEntreeParNumero(0) << endl;
+  parsingDot.addItems("porte",salut);
+
+  cout << salut->getNbOutput()  << endl;
+  //parsingDot.recupEntreeParNom("porte") << endl;
+  //parsingDot.recupEntreeParNumero(0) << endl;
 
   // Items * forme[2];
   // forme[0] = new Not ("porte", 1,1);
