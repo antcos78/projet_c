@@ -19,7 +19,7 @@ Stimuli::Stimuli()
 }
 
 void Stimuli::parsingStimuli()
-{
+{ 
 
   char tab[500];
   char a;
