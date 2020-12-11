@@ -3,7 +3,20 @@
 
 using namespace std;
 
+#include "../inc/Items.h"
+#include "../inc/Porte.h"
+#include "../inc/Not.h"
+#include "../inc/And2.h"
+#include "../inc/Or2.h"
 #include "../inc/Dot.h"
+
+#define INPUT 0
+#define OUTPUT 1
+#define NOT 2
+#define AND2 3
+#define OR2 4
+#define MUX 5
+
 
 Dot::Dot()
 {
@@ -31,24 +44,25 @@ void Dot::parsingDot()
 
 
 
-  // while(monFlux.get(a)) //Récupération des données
-  // {
-  //   tab[i] = a; //On transfère la donnée
-  //   cout << a << endl; //On affiche chaque caractère
-  //   i++;
-  // }
-  //
-  // i = 0; //Remise à 0 du compteur
+  while(monFlux.get(a)) //Récupération des données
+  {
+    tab[i] = a; //On transfère la donnée
+    //cout << a << endl; //On affiche chaque caractère
+    i++;
+  }
+
+  //i = 0; //Remise à 0 du compteur
+  cout << "salut" << endl;
 
   for(i=0;i<14;i++)
   {
     if(tab[i]!=digraph[i])
     {
       cout <<" erreur1" << endl; //Si texte différente de digraph test{ alors erreur
+      }
     }
-  }
-  while(tab[i]!='}')
-  {
+    while(tab[i]!='}')
+    {
       while(tab[i]=='\n'){i++;}
       while((tab[i]!='[')&&(tab[i]!='-'))
       {
@@ -59,14 +73,11 @@ void Dot::parsingDot()
         i++;
       }
 
-
-
       if(tab[i] == '[')
       {
         i++;
 
         b = i;
-        cout << tab[i];
         for(int c = 0;i<b+8;i++,c++)
         {
           if(tab[i]!=label[c])
@@ -85,6 +96,7 @@ void Dot::parsingDot()
           }
           cout << "Entrée : " << entree << ", type : " << type <<endl;
         }
+
         i++;
         if(tab[i]!=']')
         {
@@ -122,85 +134,111 @@ void Dot::parsingDot()
 
         //cout << "Entrée : " << entree << ", type : " << type << ", select :"<< select <<endl;
 
+        // if(type == "INPUT")
+        // {
+        //   addItems(entree, new Input(entree, 0, 0));
+        // }
+        // if(type == "OUTPUT")
+        // {
+        //   addItems(entree, new Output(entree, 1, 0));
+        // }
+        if(type == "NOT")
+        {
+          addItems(entree, new Not(entree, 2, 1));
+        }
+        if(type == "AND2")
+        {
+          addItems(entree, new And2(entree, 3, 2));
+        }
+        if(type == "OR2")
+        {
+          addItems(entree, new Or2(entree, 4, 2));
+        }
+        // if(type == "MUX")
+        // {
+        //   addItems(entree, new Mux(entree, 5, 2));
+        // }
 
+        entree.clear();
+        type.clear();
+
+        cout << "Ligne finie" << endl;
         /////CREATION DE L'OBJET//////
       }
-
 
 
       if(tab[i]=='-')
       {
         i++;
+        if(tab[i]=='>')
+        {
+          i++;
 
-        if(tab[i]=='>'){
-        i++;
-
-          while((tab[i]!='-')&&(tab[i]!=';'))
-          {
-
-            if(tab[i]!=' ')
+          do{
+            if(tab[i] != ' ')
             {
               porte += tab[i]; //Récupération du nom d'élement
-
             }
-            //etape de stockage dans element stockage de MY_AND dans I1
-            //Ajout de MY_AND à la liste "output" de I1
-            //entree = porte;
-            cout << "Entrée :" << porte;
-
+            cout << "salut" << endl;
+            cout << "Entrée1 :" << entree << endl;
+            cout << " porte : " << porte << endl;
             i++;
-            if(tab[i]=='>')
+            if(tab[i]=='-')
             {
               i++;
+              if(tab[i]=='>')
+              {
+                i++;
+                cout << "taille " << entree.size();
+                cout << trouverItemsParNom(entree)->getType() << endl;
+                entree = porte;
+                porte.clear();
+              }
             }
-            i++;
-            cout << " -> Entrée2 :" << entree << endl;
 
+          }while(tab[i]!=';');
+
+          trouverItemsParNom(entree)->ajoutOutput(porte);
+          entree = porte;
+          porte.clear();
 
         }
-          if(tab[i]!='\n')
-          {
-            cout <<"erreur6" << endl;
-          }
-          i++;
+        i++;
+        if(tab[i]!='\n')
+        {
+          cout <<"erreur6" << endl;
+        }
+        i++;
+
+        entree.clear();
+        cout << "Ligne finie" << endl;
       }
-      i++;
-
-      //cout << "Entrée :" << entree << endl;
-
     }
+    cout << "fin du DOT" << endl;
+  }
 
 
-    cout << "Ligne finie" << endl;
+  //addItems(porte, Not(porte,0,1))
+
+  void Dot::addItems(const string & nom, Items *p_items)
+  {
+    if(m.count(p_items->getNom()) > 0)  {
+      cout << "L'item existe déjà" << endl;
+      exit(1);
+    }
+    m[p_items->getNom()] = p_items;
+    v.push_back(p_items->getNom());
+
+    cout << "l'item est ajouté" << p_items->getNom() << endl;
 
   }
-  cout << "fin du DOT" << endl;
 
-  
-}
+  Items * Dot::trouverItemsParNom( const string & nom)
+  {
+    return m[nom];
+  }
 
-
-//addItems(porte, Not(porte,0,1))
-
-void Dot::addItems(const string & nom, Items *p_items)
-{
-  if(m.count(p_items->getNom()) > 0)  {
-    cout << "L'item existe déjà" << endl;
-    exit(1);
-}
-  m[p_items->getNom()] = p_items;
-  v.push_back(p_items->getNom());
-
-  cout << "l'item est ajouté" << p_items->getNom() << endl;
-
-}
-
-Items * Dot::trouverItemsParNom( const string & nom)
-{
-  return m[nom];
-}
-
-Items * Dot::trouverItemsParNumero(int numero)
-{
-  return m[v[numero]];
-}
+  Items * Dot::trouverItemsParNumero(int numero)
+  {
+    return m[v[numero]];
+  }

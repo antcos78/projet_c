@@ -2,9 +2,7 @@
 
 #include "../inc/Items.h"
 #include "../inc/Porte.h"
-#include "../inc/Porte_1.h"
 #include "../inc/Not.h"
-#include "../inc/Porte_2.h"
 #include "../inc/And2.h"
 #include "../inc/Or2.h"
 #include "../inc/Dot.h"
@@ -19,12 +17,15 @@ int main ()
 
   Dot parsingDot;
 
-  Items *salut = new Not("porte",1,1);
+//  Items *salut = new Not("porte",1,1);
 
   parsingDot.parsingDot();
-  parsingDot.addItems("porte",salut);
 
-  cout << salut->getNbOutput()  << endl;
+  cout << parsingDot.trouverItemsParNom("GATE1")->getNom() <<endl;
+  cout << parsingDot.trouverItemsParNumero(0)->getType() << endl;
+
+
+  // cout << salut->getNbOutput()  << endl;
   //parsingDot.recupEntreeParNom("porte") << endl;
   //parsingDot.recupEntreeParNumero(0) << endl;
 

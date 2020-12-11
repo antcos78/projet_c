@@ -4,10 +4,10 @@ LDFLAGS = -lm
 
 all : test1
 
-test1 :  ../src/test_classe_dot.o ../src/Dot.o ../src/Items.o ../src/Porte.o ../src/Porte_1.o ../src/Porte_2.o ../src/Not.o ../src/And2.o ../src/Or2.o
+test1 :  ../src/test_classe_dot.o ../src/Dot.o ../src/Items.o ../src/Porte.o ../src/Not.o ../src/And2.o ../src/Or2.o
 	g++ -o $@ $^ $(LDFLAGS)
 
-test2 :  ../src/test_classe_stimuli.o ../src/Stimuli.o ../src/Items.o ../src/Porte.o ../src/Porte_1.o ../src/Porte_2.o ../src/Not.o ../src/And2.o ../src/Or2.o
+test2 :  ../src/test_classe_stimuli.o ../src/Stimuli.o ../src/Items.o ../src/Porte.o ../src/Not.o ../src/And2.o ../src/Or2.o
 	g++ -o $@ $^ $(LDFLAGS)
 
 %.o:%.cpp
