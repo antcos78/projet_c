@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <iomanip>
 
+#include "../inc/Stimuli.h"
 
 using namespace std;
 
@@ -56,7 +57,11 @@ public:
 
   virtual char getFlag()const =0 ;
 
-  virtual char calculEtat() =0;
+  virtual char calculEtat() {return 0;}
+
+  //virtual char calculEtat(Stimuli sti, int numero_periode) {return 0;}
+
+
 
 };
 

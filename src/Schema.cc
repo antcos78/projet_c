@@ -61,14 +61,13 @@ string Schema::lireElements_input(int numero)
   return input[numero];
 }
 
-/*
+
 void Schema::construction_schema( Dot z )
 {
   int i = 0;
   int j;
   string element;
-
-  for(i=0;i<z.getnbItems()-1;i++)
+  for(i=0;i<z.getnbItems();i++)
   {
     if(z.trouverItemsParNumero(i)->getType() == 0)
     {
@@ -77,19 +76,25 @@ void Schema::construction_schema( Dot z )
     }
   }
 
+  cout << "element dans le schema : " << getNbElements_schema() << endl;
+  cout << "element dans le input : " << getNbElements_input()<< endl;
+
+
   i = 0;
   j = 0;
 
-  while(getNbElements_schema()  <= z.getnbItems())
-  {
+while(getNbElements_schema() < z.getnbItems())  {
     if(z.trouverItemsParNumero(j)->getType() != 1)
     {
-      for(int i = 0; i < z.trouverItemsParNom(lireElements_schema(j))->getNbOutput() -1 ; i++ )
+      for(int i = 0; i < z.trouverItemsParNom(lireElements_schema(j))->getNbOutput() ; i++ )
       {
 
         element = z.trouverItemsParNom(lireElements_schema(j))->getOutput(i);
+        cout << element << " ";
+        char nb_port = z.trouverItemsParNom(element)->getNbPorts();
+        cout << "nb ports : " << nb_port << endl;
 
-        if(z.trouverItemsParNom(element)->getNbPorts() == 1)
+        if(nb_port == 1)
         {
           if(z.trouverItemsParNom(element)->getType() == 1)
           {
@@ -97,18 +102,23 @@ void Schema::construction_schema( Dot z )
           }
           ajouterElements_schema(element);
         }
-        else if(z.trouverItemsParNom(element)->getNbPorts() == 2)
+
+        else if(nb_port == 2)
         {
           if(z.trouverItemsParNom(element)->getFlag() != 1)
           {
             z.trouverItemsParNom(element)->setFlag(1);
+            cout << "flag à 1" << endl;
           }
           else
           {
             ajouterElements_schema(element);
+            cout << "flag OK" << endl;
+
           }
         }
-        else if(z.trouverItemsParNom(element)->getNbPorts() == 3)
+
+        else if(nb_port == 3)
         {
           if(z.trouverItemsParNom(element)->getFlag() != 2)
           {
@@ -119,9 +129,12 @@ void Schema::construction_schema( Dot z )
             ajouterElements_schema(element);
           }
         }
+
+
+
       }
     }
-
     j++;
   }
-}*/
+
+}
