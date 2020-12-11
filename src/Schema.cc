@@ -83,16 +83,16 @@ void Schema::construction_schema( Dot z )
   i = 0;
   j = 0;
 
-while(getNbElements_schema() < z.getnbItems())  {
+  while(getNbElements_schema() < z.getnbItems())  {
     if(z.trouverItemsParNumero(j)->getType() != 1)
     {
       for(int i = 0; i < z.trouverItemsParNom(lireElements_schema(j))->getNbOutput() ; i++ )
       {
 
         element = z.trouverItemsParNom(lireElements_schema(j))->getOutput(i);
-        cout << element << " ";
+        //cout << element << " ";
         char nb_port = z.trouverItemsParNom(element)->getNbPorts();
-        cout << "nb ports : " << nb_port << endl;
+      //  cout << "nb ports : " << nb_port << endl;
 
         if(nb_port == 1)
         {
@@ -108,12 +108,13 @@ while(getNbElements_schema() < z.getnbItems())  {
           if(z.trouverItemsParNom(element)->getFlag() != 1)
           {
             z.trouverItemsParNom(element)->setFlag(1);
-            cout << "flag à 1" << endl;
+            //cout << "flag à 1" << endl;
           }
           else
           {
             ajouterElements_schema(element);
-            cout << "flag OK" << endl;
+            z.trouverItemsParNom(element)->setFlag(0);
+            //cout << "flag OK" << endl;
 
           }
         }
@@ -127,6 +128,7 @@ while(getNbElements_schema() < z.getnbItems())  {
           else
           {
             ajouterElements_schema(element);
+            z.trouverItemsParNom(element)->setFlag(0);
           }
         }
 

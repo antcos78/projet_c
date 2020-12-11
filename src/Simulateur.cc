@@ -35,14 +35,15 @@ string Simulateur::lireElements_resultat(const string & nom)
 void algo_simulation(int numero, Schema sch, Dot d)
 {
   char delta_etat;
+  string element ;
   for(int i = 0; i < sch.getNbElements_schema()-1;i++ )
   {
-    string element = sch.lireElements_schema(i);
-    if(d.trouverItemsParNom(element)->getType() == 0)
+    element = sch.lireElements_schema(i);
+    if(d.trouverItemsParNom(element)->getType() == 0) //INPUT
     {
         resultat[element] = resultat[element] + d.trouverItemsParNom(element)->getEtat_1();
     }
-    else if(d.trouverItemsParNom(element)->getType() == 1)
+    else if(d.trouverItemsParNom(element)->getType() == 1) //OUTPUT
     {
       deltat_etat = d.trouverItemsParNom(element)->calculEtat();
     }
@@ -51,18 +52,35 @@ void algo_simulation(int numero, Schema sch, Dot d)
       deltat_etat = d.trouverItemsParNom(element)->calculEtat();
     }
 
-    for(int j = 0; i < d.trouverItemsParNom(element)->getNbOutput()-1; j++)
+
+    if(d.trouverItemsParNom(element)->getType() != 1) //Si pas output
     {
-      string sortie = d.trouverItemsParNom(element)->getOutput(j);
-      if(d.trouverItemsParNom(sortie)->getNbPorts() == 1)
+      for(int j = 0; i < d.trouverItemsParNom(element)->getNbOutput(); j++) //Pour chaque sortie
       {
-        d.trouverItemsParNom(sortie)->setEtat_1(deltat_etat);
-      }
-      else
-      {
-        if()
+        string sortie = d.trouverItemsParNom(element)->getOutput(j);
+        if(d.trouverItemsParNom(sortie)->getNbPorts() == 1)
+        {
+          d.trouverItemsParNom(sortie)->ajoutEtat(deltat_etat, numero);
+        }
+        else
+        {
+          if(d.trouverItemsParNom(sortie) == 5) //MUX
+          {
+
+          }
+          if(d.trouverItemsParNom(sortie)->getFlag() != 1 )
+          {
+            d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  0);
+            d.trouverItemsParNom(sortie)->setFlag(1);
+          }
+          else
+          {
+            d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  1);
+          }
+        }
       }
     }
+
 
   }
 }
