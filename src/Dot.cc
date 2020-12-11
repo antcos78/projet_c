@@ -9,6 +9,8 @@ using namespace std;
 #include "../inc/And2.h"
 #include "../inc/Or2.h"
 #include "../inc/Dot.h"
+//#include "../inc/Input.h"
+//#include "../inc/Output.h"
 
 #define INPUT 0
 #define OUTPUT 1
@@ -30,7 +32,7 @@ void Dot::parsingDot()
   int i = 0;
   int b;
   int d;
-  ifstream monFlux("/Users/leomichel/Desktop/Phelma_2A/Projet_info/Projet_C/AND.gv");
+  ifstream monFlux("/home/phelma/Documents/AND.gv");
 
   char digraph [14] = {'d','i','g','r','a','p','h',' ','t','e','s','t',' ','{'};
   char label [8] = {'l','a','b','e','l',' ','=',' '};
@@ -134,14 +136,14 @@ void Dot::parsingDot()
 
         //cout << "Entrée : " << entree << ", type : " << type << ", select :"<< select <<endl;
 
-        // if(type == "INPUT")
-        // {
-        //   addItems(entree, new Input(entree, 0, 0));
-        // }
-        // if(type == "OUTPUT")
-        // {
-        //   addItems(entree, new Output(entree, 1, 0));
-        // }
+        /*if(type == "INPUT")
+        {
+          addItems(entree, new Input(entree, 0, 0));
+        }
+        if(type == "OUTPUT")
+        {
+           addItems(entree, new Output(entree, 1, 0));
+        }*/
         if(type == "NOT")
         {
           addItems(entree, new Not(entree, 2, 1));
@@ -157,6 +159,7 @@ void Dot::parsingDot()
         // if(type == "MUX")
         // {
         //   addItems(entree, new Mux(entree, 5, 2));
+        //AJOUTER ENTREE SEL
         // }
 
         entree.clear();
@@ -179,9 +182,6 @@ void Dot::parsingDot()
             {
               porte += tab[i]; //Récupération du nom d'élement
             }
-            cout << "salut" << endl;
-            cout << "Entrée1 :" << entree << endl;
-            cout << " porte : " << porte << endl;
             i++;
             if(tab[i]=='-')
             {
@@ -189,15 +189,20 @@ void Dot::parsingDot()
               if(tab[i]=='>')
               {
                 i++;
-                cout << "taille " << entree.size();
-                cout << trouverItemsParNom(entree)->getType() << endl;
+                cout << "Entrée1 :" << entree << endl;
+                cout << " porte : " << porte << endl;
+                cout << "taille " << entree.size() << endl;
+                trouverItemsParNom(entree)->ajoutOutput(porte);
+
                 entree = porte;
                 porte.clear();
               }
             }
 
           }while(tab[i]!=';');
-
+          cout << "Entrée1 :" << entree << endl;
+          cout << " porte : " << porte << endl;
+          cout << "taille " << entree.size() << endl;
           trouverItemsParNom(entree)->ajoutOutput(porte);
           entree = porte;
           porte.clear();
@@ -235,7 +240,10 @@ void Dot::parsingDot()
 
   Items * Dot::trouverItemsParNom( const string & nom)
   {
-    return m[nom];
+    if(m.count(nom) > 0)  {
+      cout << "L'item existe " << endl;
+      return m[nom];
+    }
   }
 
   Items * Dot::trouverItemsParNumero(int numero)

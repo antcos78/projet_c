@@ -18,6 +18,7 @@ int main ()
   And2 salut("porte_AND2",2,26);
   Not notnot("not2",1,1);
   And2 tigre("porte",2,2);
+  Input lll ("input",2,2);
 
   salut.ajoutEtat(0,0);
   salut.ajoutEtat(0,1);
@@ -33,11 +34,11 @@ int main ()
   cout << "Etat avec etat_1 1 et etat2 1: " << (int*)salut.calculEtat() << endl;
 
 
-  salut.ajoutOutput(notnot.getNom());
-  salut.ajoutOutput(tigre.getNom());
-  cout << "en sortie : " << salut.getOutput(0) << endl;
-  cout << "en sortie : " << salut.getOutput(1) << endl;
-  cout << "nb sortie : " << salut.getNbOutput() << endl;
+  lll.ajoutOutput(notnot.getNom());
+  lll.ajoutOutput(tigre.getNom());
+  cout << "en sortie : " << lll.getOutput(0) << endl;
+  cout << "en sortie : " << lll.getOutput(1) << endl;
+  cout << "nb sortie : " << lll.getNbOutput() << endl;
 
   //cout << "en sortie : " << salut.getOutput(2) << endl;
 

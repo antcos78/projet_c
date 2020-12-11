@@ -2,12 +2,12 @@ CFLAGS = -g -lm -Wall -std=c++11
 LDFLAGS = -lm
 
 
-all : test4
+all : test2
 
 test :   ../src/Items.o ../src/Porte.o ../src/Not.o ../src/And2.o ../src/Stimuli.cc ../src/Or2.o ../src/test_classe_items.o ../src/Input.o ../src/Output.o
 	g++ -o $@ $^ $(LDFLAGS)
 
-test2 :../src/test_classe_schema.o ../src/Dot.o ../src/Items.o ../src/Porte.o../src/Not.o ../src/And2.o ../src/Or2.o ../src/Schema.o
+test2 :../src/test_classe_dot.o ../src/Dot.o ../src/Items.o ../src/Porte.o ../src/Not.o ../src/And2.o ../src/Or2.o ../src/Porte.o ../src/Not.o
 	g++ -o $@ $^ $(LDFLAGS)
 
 test3 : ../src/Dot.o ../src/Stimuli.o ../src/Items.o ../src/Porte.o  ../src/Not.o  ../src/And2.o ../src/Or2.o ../src/Schema.o ../src/Input.o ../src/Output.o ../src/Dot.o ../src/test_classe_schema.o

@@ -6,6 +6,7 @@
 #include "../inc/And2.h"
 #include "../inc/Or2.h"
 #include "../inc/Dot.h"
+#include "../inc/Input.h"
 
 using namespace std;
 
@@ -21,8 +22,10 @@ int main ()
 
   parsingDot.parsingDot();
 
-  cout << parsingDot.trouverItemsParNom("GATE1")->getNom() <<endl;
+  cout << parsingDot.trouverItemsParNom("GATE1")->getNbOutput() <<endl;
   cout << parsingDot.trouverItemsParNumero(0)->getType() << endl;
+
+
 
 
   // cout << salut->getNbOutput()  << endl;

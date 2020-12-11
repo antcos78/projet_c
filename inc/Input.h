@@ -30,7 +30,6 @@ public:
   ~Input()
   {
     cout << "destruction" << endl;
-
   }
 
   ///////méthodes//////
