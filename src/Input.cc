@@ -7,5 +7,7 @@ using namespace std;
 
 char Input::calculEtat(Stimuli sti, int numero_periode)
 {
-  return sti.recupEntreeParNom(getNom(),numero_periode);
+  char input = sti.recupEntreeParNom(getNom(),numero_periode);
+  cout << "input ... : " << input <<endl;
+  return input;
 }

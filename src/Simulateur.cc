@@ -11,10 +11,10 @@ void Simulateur::declaration_resultat(Schema sch)
 {
   int i = 0;
   map<string,string>::iterator it = resultat.begin();
-  for(it=resultat.begin(); it!=resultat.end(); ++it)
+  for(i=0; i < sch.getNbElements_output(); i++)
   {
     resultat[sch.lireElements_output(i)] = "d";
-    i++;
+    ++it;
   }
 }
 
@@ -37,28 +37,34 @@ void Simulateur::algo_simulation(int numero, Schema sch, Dot d)
 {
   char delta_etat;
   string element ;
-  for(int i = 0; i < sch.getNbElements_schema()-1;i++ )
+  cout << "element schema " <<sch.getNbElements_schema() << endl;
+  for(int i = 0; i < sch.getNbElements_schema();i++ )
   {
     element = sch.lireElements_schema(i);
-    if(d.trouverItemsParNom(element)->getType() == 0) //INPUT
+    cout << "type" << d.trouverItemsParNom(element)->getType() +1<< "9" << endl;
+    if(d.trouverItemsParNom(element)->getType() == 1) //OUTPUT
     {
         resultat.at(element) = resultat.at(element) + d.trouverItemsParNom(element)->getEtat(0);
     }
-    else if(d.trouverItemsParNom(element)->getType() == 1) //OUTPUT
+    else if(d.trouverItemsParNom(element)->getType() == 0) //INPUT
     {
       delta_etat = d.trouverItemsParNom(element)->calculEtat();
+      delta_etat += 1;
     }
     else
     {
       delta_etat = d.trouverItemsParNom(element)->calculEtat();
     }
+    cout << "etat" << delta_etat << endl;
 
 
     if(d.trouverItemsParNom(element)->getType() != 1) //Si pas output
     {
+      cout << "nb output " << d.trouverItemsParNom(element)->getNbOutput();
       for(int j = 0; i < d.trouverItemsParNom(element)->getNbOutput(); j++) //Pour chaque sortie
       {
         string sortie = d.trouverItemsParNom(element)->getOutput(j);
+        cout << "sortie : " << sortie << endl;
         if(d.trouverItemsParNom(sortie)->getNbPorts() == 1)
         {
           d.trouverItemsParNom(sortie)->ajoutEtat(delta_etat, numero);
@@ -73,6 +79,8 @@ void Simulateur::algo_simulation(int numero, Schema sch, Dot d)
           {
             d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  0);
             d.trouverItemsParNom(sortie)->setFlag(1);
+
+            cout << "tout va bien"  <<endl;
           }
           else
           {
