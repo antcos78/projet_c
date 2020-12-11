@@ -45,7 +45,7 @@ public:
 
   void calcul_simulation();
 
-  void algo_simulation(int numero);
+  void algo_simulation(int numero, Schema sch, Dot d);
 
 };
 

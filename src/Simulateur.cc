@@ -1,6 +1,7 @@
 
 #include "../inc/Simulateur.h"
 #include "../inc/Schema.h"
+#include "../inc/Items.h"
 
 
 
@@ -32,7 +33,7 @@ string Simulateur::lireElements_resultat(const string & nom)
   return resultat[nom];
 }
 
-void algo_simulation(int numero, Schema sch, Dot d)
+void Simulateur::algo_simulation(int numero, Schema sch, Dot d)
 {
   char delta_etat;
   string element ;
@@ -41,15 +42,15 @@ void algo_simulation(int numero, Schema sch, Dot d)
     element = sch.lireElements_schema(i);
     if(d.trouverItemsParNom(element)->getType() == 0) //INPUT
     {
-        resultat[element] = resultat[element] + d.trouverItemsParNom(element)->getEtat_1();
+        resultat.at(element) = resultat.at(element) + d.trouverItemsParNom(element)->getEtat(0);
     }
     else if(d.trouverItemsParNom(element)->getType() == 1) //OUTPUT
     {
-      deltat_etat = d.trouverItemsParNom(element)->calculEtat();
+      delta_etat = d.trouverItemsParNom(element)->calculEtat();
     }
     else
     {
-      deltat_etat = d.trouverItemsParNom(element)->calculEtat();
+      delta_etat = d.trouverItemsParNom(element)->calculEtat();
     }
 
 
@@ -60,11 +61,11 @@ void algo_simulation(int numero, Schema sch, Dot d)
         string sortie = d.trouverItemsParNom(element)->getOutput(j);
         if(d.trouverItemsParNom(sortie)->getNbPorts() == 1)
         {
-          d.trouverItemsParNom(sortie)->ajoutEtat(deltat_etat, numero);
+          d.trouverItemsParNom(sortie)->ajoutEtat(delta_etat, numero);
         }
         else
         {
-          if(d.trouverItemsParNom(sortie) == 5) //MUX
+          if(d.trouverItemsParNom(sortie)->getType() == 5) //MUX
           {
 
           }

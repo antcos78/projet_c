@@ -59,7 +59,7 @@ public:
 
   virtual char calculEtat() {return 0;}
 
-  //virtual char calculEtat(Stimuli sti, int numero_periode) {return 0;}
+  virtual char calculEtat(Stimuli sti, int numero_periode) {return 0;}
 
 
 
