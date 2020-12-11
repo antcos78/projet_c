@@ -32,7 +32,7 @@ public:
   }
 
   ///////méthodes//////
-  bool calculEtat();
+  char calculEtat();
 
 
 };

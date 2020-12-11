@@ -1,5 +1,5 @@
-#ifndef _NOT_H_
-#define _NOT_H_
+#ifndef _OUTPUT_H_
+#define _OUTPUT_H_
 
 
 #include <iostream>
@@ -13,19 +13,19 @@
 using namespace std;
 
 
-class Not : public  Porte {
+class Output : public  Items {
 
 
 public:
   //////constructeur-destructeur///////
-  Not(const string &nom, char type, char nbPorts,int flag = 0):
-  Porte(nom,type,nbPorts,flag)
+  Output(const string &nom, char type, char nbPorts):
+  Items(nom,type,nbPorts)
   {
     cout << "constructeur" << endl;
   }
 
 
-  ~Not()
+  ~Output()
   {
     cout << "destruction" << endl;
 

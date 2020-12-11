@@ -1,5 +1,5 @@
-#ifndef _NOT_H_
-#define _NOT_H_
+#ifndef _INPUT_H_
+#define _INPUT_H_
 
 
 #include <iostream>
@@ -9,30 +9,32 @@
 #include <iomanip>
 
 #include "Porte.h"
+#include "Stimuli.h"
+
 
 using namespace std;
 
 
-class Not : public  Porte {
+class Input : public  Porte {
 
 
 public:
   //////constructeur-destructeur///////
-  Not(const string &nom, char type, char nbPorts,int flag = 0):
+  Input(const string &nom, char type, char nbPorts,int flag = 0):
   Porte(nom,type,nbPorts,flag)
   {
     cout << "constructeur" << endl;
   }
 
 
-  ~Not()
+  ~Input()
   {
     cout << "destruction" << endl;
 
   }
 
   ///////méthodes//////
-  char calculEtat();
+  char calculEtat(Stimuli sti, int numero_periode);
 
 
 };

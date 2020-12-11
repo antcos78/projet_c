@@ -4,7 +4,7 @@
 using namespace std;
 
 
-bool Not::calculEtat()
+char Not::calculEtat()
 {
   return !(getEtat(0));
 }

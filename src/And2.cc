@@ -4,7 +4,7 @@
 using namespace std;
 
 
-bool And2::calculEtat()
+char And2::calculEtat()
 {
-  return (getEtat(0))&(getEtat(1));
+  return (getEtat(0))&&(getEtat(1));
 }

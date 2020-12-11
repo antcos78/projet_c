@@ -4,7 +4,7 @@
 using namespace std;
 
 
-bool Or2::calculEtat()
+char Or2::calculEtat()
 {
-  return (getEtat(0))|(getEtat(1));
+  return (getEtat(0))||(getEtat(1));
 }

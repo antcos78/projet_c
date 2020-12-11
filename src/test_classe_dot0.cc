@@ -17,15 +17,16 @@ int main ()
   cout << "salut" << endl;
 
   Dot parsingDot;
-  Items *salut = new Not("porte",1,1);
+  Items *salut = new Or2("porte",1,1);
 
   //Not porte_not("porte_1",1,1);
-
+  salut->ajoutEtat(0,0);
+  salut->ajoutEtat(1,1);
 
   //parsingDot.parsingDot();
   parsingDot.addItems("porte",salut);
 
-  cout << (salut)->getNbOutput()  << endl;
+  cout << "calcul : " << (int*)salut->calculEtat()  << endl;
   //parsingDot.recupEntreeParNom("porte") << endl;
   //parsingDot.recupEntreeParNumero(0) << endl;
 
