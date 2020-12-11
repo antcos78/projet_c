@@ -83,16 +83,17 @@ void Schema::construction_schema( Dot z )
   i = 0;
   j = 0;
 
-  while(getNbElements_schema() < z.getnbItems())  {
-    if(z.trouverItemsParNumero(j)->getType() != 1)
+  while(getNbElements_schema()+getNbElements_output() < z.getnbItems())
+  {
+
+    if(z.trouverItemsParNom(lireElements_schema(j))->getType() != 1)
     {
+
       for(int i = 0; i < z.trouverItemsParNom(lireElements_schema(j))->getNbOutput() ; i++ )
       {
-
+        
         element = z.trouverItemsParNom(lireElements_schema(j))->getOutput(i);
-        //cout << element << " ";
         char nb_port = z.trouverItemsParNom(element)->getNbPorts();
-      //  cout << "nb ports : " << nb_port << endl;
 
         if(nb_port == 1)
         {
@@ -100,7 +101,10 @@ void Schema::construction_schema( Dot z )
           {
             ajouterElements_output(element);
           }
-          ajouterElements_schema(element);
+          else
+          {
+            ajouterElements_schema(element);
+          }
         }
 
         else if(nb_port == 2)
@@ -131,12 +135,14 @@ void Schema::construction_schema( Dot z )
             z.trouverItemsParNom(element)->setFlag(0);
           }
         }
-
-
-
       }
     }
     j++;
+  }
+  for(i = 0; i< getNbElements_output(); i ++)
+  {
+    cout << "sortie : " << lireElements_output(i) <<endl;
+    ajouterElements_schema(lireElements_output(i));
   }
 
 }
