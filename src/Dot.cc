@@ -9,8 +9,8 @@ using namespace std;
 #include "../inc/And2.h"
 #include "../inc/Or2.h"
 #include "../inc/Dot.h"
-//#include "../inc/Input.h"
-//#include "../inc/Output.h"
+#include "../inc/Input.h"
+#include "../inc/Output.h"
 
 #define INPUT 0
 #define OUTPUT 1
@@ -27,7 +27,7 @@ Dot::Dot()
 
 void Dot::parsingDot()
 {
-  char tab[256];
+  char tab[500];
   char a;
   int i = 0;
   int b;
@@ -136,14 +136,14 @@ void Dot::parsingDot()
 
         //cout << "Entrée : " << entree << ", type : " << type << ", select :"<< select <<endl;
 
-        /*if(type == "INPUT")
+        if(type == "INPUT")
         {
           addItems(entree, new Input(entree, 0, 0));
         }
         if(type == "OUTPUT")
         {
-           addItems(entree, new Output(entree, 1, 0));
-        }*/
+           addItems(entree, new Output(entree, 1, 1));
+        }
         if(type == "NOT")
         {
           addItems(entree, new Not(entree, 2, 1));
@@ -241,7 +241,6 @@ void Dot::parsingDot()
   Items * Dot::trouverItemsParNom( const string & nom)
   {
     if(m.count(nom) > 0)  {
-      cout << "L'item existe " << endl;
       return m[nom];
     }
   }

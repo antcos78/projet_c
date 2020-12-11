@@ -47,7 +47,7 @@ public:
 
   virtual char getEtat(int numero_etat) const =0 ;
 
-  virtual int getNbEtat() const  =0 ;
+  virtual int getNbEtat() const  = 0 ;
 
   virtual void ajoutEtat(char etat, int numero_etat)  =0 ;
 

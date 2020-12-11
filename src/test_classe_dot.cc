@@ -7,6 +7,7 @@
 #include "../inc/Or2.h"
 #include "../inc/Dot.h"
 #include "../inc/Input.h"
+#include "../inc/Output.h"
 
 using namespace std;
 
