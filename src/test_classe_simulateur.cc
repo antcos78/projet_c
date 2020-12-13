@@ -25,12 +25,16 @@ int main ()
 
   string I1 = "I1";
   string I2 = "I2";
+  string I3 = "I3";
+
   string I1_etat = "0011001100110011";
   string I2_etat = "0010101001010001";
 
+  string I3_etat = "0101010101010101";
 
   s.addEntree(I1, I1_etat);
   s.addEntree(I2, I2_etat);
+  s.addEntree(I3, I3_etat);
 
   parsingDot.parsingDot();
 
@@ -102,12 +106,15 @@ int main ()
 
   cout <<" resultat   : " << simu.lireElements_resultat("O") << endl;
 
-
-  for(int i =0; i < s.getnbPeriode()+1; i++)
+  for(int j = 0; j < simu.getNbElements_resultat(); j++ )
   {
-    cout <<" resultat   : " << i << " : " << simu.lireElements_resultat("O")[i] << endl;
-
+    cout << " sortie : " << at.lireElements_output(j) << endl;
+    for(int i =0; i < s.getnbPeriode()+1; i++)
+    {
+      cout <<" resultat   : " << i << " : " << simu.lireElements_resultat(at.lireElements_output(j))[i] << endl;
+    }
   }
+
 
 
   return 0;

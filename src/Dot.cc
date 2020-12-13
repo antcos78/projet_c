@@ -191,7 +191,6 @@ void Dot::parsingDot()
                 i++;
                 cout << "Entrée1 :" << entree << endl;
                 cout << " porte : " << porte << endl;
-                cout << "taille " << entree.size() << endl;
                 trouverItemsParNom(entree)->ajoutOutput(porte);
 
                 entree = porte;
@@ -202,7 +201,6 @@ void Dot::parsingDot()
           }while(tab[i]!=';');
           cout << "Entrée1 :" << entree << endl;
           cout << " porte : " << porte << endl;
-          cout << "taille " << entree.size() << endl;
           trouverItemsParNom(entree)->ajoutOutput(porte);
           entree = porte;
           porte.clear();

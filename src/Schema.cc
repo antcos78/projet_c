@@ -36,29 +36,52 @@ void Schema::ajouterElements_output(const string & nom)
 
 string Schema::lireElements_schema(int numero)
 {
-  int i = 0;
-  list<string>::const_iterator itr;
+  if(numero < getNbElements_schema())
+  {
+    int i = 0;
+    list<string>::const_iterator itr;
+    for(itr = schema.begin() ; itr!= schema.end() ; ++itr) {
 
-  for(itr = schema.begin() ; itr!= schema.end() ; ++itr) {
-
-    if(i==numero)
-    {
-      return *itr;
+      if(i==numero)
+      {
+        return *itr;
+      }
+      i++;
     }
-    i++;
+    cout << "erreur lecture schema";
+    exit(1);
   }
-  cout << "erreur lecture schema";
-  exit(1);
+  else
+  {
+    cout << "erreur dimension schema ou erreur nb port" << endl;
+    exit(2);
+  }
 }
 
 string Schema::lireElements_output(int numero)
 {
-  return output[numero];
+  if(numero < getNbElements_output())
+  {
+    return output[numero];
+  }
+  else
+  {
+    cout << "erreur dimension output" << endl;
+    exit(2);
+  }
 }
 
 string Schema::lireElements_input(int numero)
 {
-  return input[numero];
+  if(numero < getNbElements_input())
+  {
+    return input[numero];
+  }
+  else
+  {
+    cout << "erreur dimension output" << endl;
+    exit(2);
+  }
 }
 
 
@@ -67,11 +90,11 @@ void Schema::construction_schema( Dot z )
   int i = 0;
   int j;
   string element;
-  for(i=0;i<z.getnbItems();i++)
+  for(i=0;i<z.getnbItems();i++)  //on verifie sur tous les éléments de la map si c'est une entrée
   {
     if(z.trouverItemsParNumero(i)->getType() == 0)
     {
-      ajouterElements_schema(z.trouverItemsParNumero(i)->getNom());
+      ajouterElements_schema(z.trouverItemsParNumero(i)->getNom());  //si oui on ajoute à la liste schema et input
       ajouterElements_input(z.trouverItemsParNumero(i)->getNom());
     }
   }
@@ -83,13 +106,16 @@ void Schema::construction_schema( Dot z )
   i = 0;
   j = 0;
 
-  while(getNbElements_schema()+getNbElements_output() < z.getnbItems())
+  while(getNbElements_schema()+getNbElements_output() < z.getnbItems()) //tant que les éléments stockés ne sont pas égaux
   {
-
-    if(z.trouverItemsParNom(lireElements_schema(j))->getType() != 1)
+    if(j == getNbElements_schema()) //si nombre d'élément trop grand (element non connecté)
     {
-
-      for(int i = 0; i < z.trouverItemsParNom(lireElements_schema(j))->getNbOutput() ; i++ )
+      cout << "erreur nb element schema et interconnexion" << endl;
+      exit(3);
+    }
+    if(z.trouverItemsParNom(lireElements_schema(j))->getType() != 1)  //si c'est une sortie, on gère différemment
+    {
+      for(int i = 0; i < z.trouverItemsParNom(lireElements_schema(j))->getNbOutput() ; i++ ) //pour chaque élément liste de sortie
       {
 
         element = z.trouverItemsParNom(lireElements_schema(j))->getOutput(i);
@@ -97,29 +123,42 @@ void Schema::construction_schema( Dot z )
 
         if(nb_port == 1)
         {
-          if(z.trouverItemsParNom(element)->getType() == 1)
+          if(z.trouverItemsParNom(element)->getFlag()==0 )
           {
-            ajouterElements_output(element);
+            if(z.trouverItemsParNom(element)->getType() == 1)
+            {
+              ajouterElements_output(element);
+            }
+            else
+            {
+              ajouterElements_schema(element);
+            }
+            z.trouverItemsParNom(element)->setFlag(1);
           }
           else
           {
-            ajouterElements_schema(element);
+            cout << "erreur nb entree 1 port" << endl;
+            exit(3);
           }
         }
 
         else if(nb_port == 2)
         {
-          if(z.trouverItemsParNom(element)->getFlag() != 1)
+          if(z.trouverItemsParNom(element)->getFlag() == 0)
           {
             z.trouverItemsParNom(element)->setFlag(1);
             //cout << "flag à 1" << endl;
           }
-          else
+          else if(z.trouverItemsParNom(element)->getFlag() == 1)
           {
             ajouterElements_schema(element);
-            z.trouverItemsParNom(element)->setFlag(0);
+            z.trouverItemsParNom(element)->setFlag(2);
             //cout << "flag OK" << endl;
-
+          }
+          else
+          {
+            cout << "erreur nb entree 2 ports" << endl;
+            exit(3);
           }
         }
 
@@ -129,19 +168,29 @@ void Schema::construction_schema( Dot z )
           {
             z.trouverItemsParNom(element)->setFlag(z.trouverItemsParNom(element)->getFlag() + 1);
           }
-          else
+          else if(z.trouverItemsParNom(element)->getFlag() == 2)
           {
             ajouterElements_schema(element);
-            z.trouverItemsParNom(element)->setFlag(0);
+            z.trouverItemsParNom(element)->setFlag(3);
+          }
+          else
+          {
+            cout << "erreur nb entree 3 ports" << endl;
+            exit(3);
           }
         }
       }
     }
     j++;
+
   }
-  for(i = 0; i< getNbElements_output(); i ++)
+  for(i = 0; i< getNbElements_output(); i ++)   //on met les output dans le schema  (à la fin)
   {
     ajouterElements_schema(lireElements_output(i));
+  }
+  for(i = getNbElements_output(); i < getNbElements_schema(); i++)  //on remet les flags à 0
+  {
+    z.trouverItemsParNom(lireElements_schema(i))->setFlag(0);
   }
 
 }

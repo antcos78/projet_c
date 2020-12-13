@@ -18,6 +18,8 @@ class Output : public  Items {
 private :
   int a;
   vector <char> etat;
+  int flag;
+
 
 public:
   //////constructeur-destructeur///////
@@ -48,8 +50,8 @@ public:
    int getNbEtat() const ;
    void ajoutEtat(char etat, int numero_etat) ;
 
-   void setFlag(char flag) {this->a=0;}
-   char getFlag()const {return 0;}
+   void setFlag(char flag) {this->flag = flag;}
+   char getFlag()const {return this->flag;}
 
 
 
