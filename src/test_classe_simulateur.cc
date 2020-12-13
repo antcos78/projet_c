@@ -85,9 +85,22 @@ int main ()
 
   cout <<" resultat   : " << simu.lireElements_resultat("O") << endl;
 
+  simu.calcul_simulation(8, at, parsingDot, s);
 
-  simu.algo_simulation(0, at, parsingDot);
 
+
+  cout << "nb resultat = " << simu.getNbElements_resultat() << endl;
+
+  cout << "taille " << simu.lireElements_resultat("O").size() << endl;
+
+  cout <<" resultat   : " << simu.lireElements_resultat("O") << endl;
+
+
+  for(int i =0; i < 9; i++)
+  {
+    cout <<" resultat   : " << i << " : " << simu.lireElements_resultat("O")[i] << endl;
+
+  }
 
 
   return 0;

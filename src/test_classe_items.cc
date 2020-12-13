@@ -20,17 +20,17 @@ int main ()
   And2 tigre("porte",2,2);
   Items *lll = new Input ("input",2,2);
 
-  salut.ajoutEtat(0,0);
-  salut.ajoutEtat(0,1);
+  salut.ajoutEtat('0',0);
+  salut.ajoutEtat('0',1);
   cout << "Etat avec etat_1 " << salut.getEtat(0) << " et etat2 " << salut.getEtat(1) <<": " << salut.calculEtat() << endl;
-  salut.ajoutEtat(1,0);
-  salut.ajoutEtat(0,1);
+  salut.ajoutEtat('1',0);
+  salut.ajoutEtat('0',1);
   cout << "Etat avec etat_1 0 et etat2 1: " << (int*)salut.calculEtat() << endl;
-  salut.ajoutEtat(0,0);
-  salut.ajoutEtat(1,1);
+  salut.ajoutEtat('0',0);
+  salut.ajoutEtat('1',1);
   cout << "Etat avec etat_1 1 et etat2 0: " << (int*)salut.calculEtat() << endl;
-  salut.ajoutEtat(1,0);
-  salut.ajoutEtat(1,1);
+  salut.ajoutEtat('1',0);
+  salut.ajoutEtat('1',1);
   cout << "Etat avec etat_1 1 et etat2 1: " << (int*)salut.calculEtat() << endl;
 
 

@@ -10,8 +10,11 @@
 
 
 #include <map>
+#include <vector>
+
 
 #include "Schema.h"
+#include "Stimuli.h"
 
 
 using namespace std;
@@ -19,6 +22,7 @@ using namespace std;
 class Simulateur{
 private:
   map <string,string> resultat;
+  vector <char> delta_cycle;
 
 public:
   //////constructeur-destructeur///////
@@ -43,9 +47,15 @@ public:
   string lireElements_resultat(const string & nom);
 
 
-  void calcul_simulation();
 
-  void algo_simulation(int numero, Schema sch, Dot d);
+  void calcul_simulation(int nb_periode, Schema sch, Dot d, Stimuli sti);
+
+  void algo_simulation(int numero, Schema sch, Dot d, Stimuli sti);
+
+
+  void calcul_delta_cycle(Stimuli sti, Schema sch);
+  char getDelta_cycle(int periode);
+  void setDelta_cycle(char value);
 
 };
 

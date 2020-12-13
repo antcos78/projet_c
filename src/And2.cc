@@ -6,5 +6,5 @@ using namespace std;
 
 char And2::calculEtat()
 {
-  return (getEtat(0))&&(getEtat(1));
+  return getEtat(0)&&getEtat(1);
 }
