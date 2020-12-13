@@ -35,7 +35,8 @@ public:
 
   int getnbPeriode()const
   {
-    return m_stimuli.size();
+    map<string,string>::const_iterator it=m_stimuli.begin();
+    return it->second.size();
   }
 
 

@@ -25,8 +25,8 @@ int main ()
 
   string I1 = "I1";
   string I2 = "I2";
-  string I1_etat = "10101010";
-  string I2_etat = "00110011";
+  string I1_etat = "0011001100110011";
+  string I2_etat = "0010101001010001";
 
 
   s.addEntree(I1, I1_etat);
@@ -84,8 +84,15 @@ int main ()
   cout << "taille " << simu.lireElements_resultat("O").size() << endl;
 
   cout <<" resultat   : " << simu.lireElements_resultat("O") << endl;
+  simu.calcul_delta_cycle(s, at);
 
-  simu.calcul_simulation(8, at, parsingDot, s);
+  for(int l = 0; l < s.getnbPeriode(); l++)
+  {
+    cout << "delta_cycle : " << simu.getDelta_cycle(l) << endl;
+  }
+
+
+  simu.calcul_simulation(s.getnbPeriode(), at, parsingDot, s);
 
 
 
@@ -96,7 +103,7 @@ int main ()
   cout <<" resultat   : " << simu.lireElements_resultat("O") << endl;
 
 
-  for(int i =0; i < 9; i++)
+  for(int i =0; i < s.getnbPeriode()+1; i++)
   {
     cout <<" resultat   : " << i << " : " << simu.lireElements_resultat("O")[i] << endl;
 

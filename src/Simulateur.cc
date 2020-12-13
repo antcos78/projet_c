@@ -102,7 +102,8 @@ void Simulateur::calcul_simulation(int nb_periode, Schema sch, Dot d, Stimuli st
 
   for(int i = 0; i < nb_periode; i ++)
   {
-    if(getDelta_cycle(nb_periode) == 0)
+    cout << " nb_periode :    " << getDelta_cycle(i) << endl;
+    if(getDelta_cycle(i) == 0)
     {
       algo_simulation(i, sch, d, sti);
     }
@@ -110,8 +111,13 @@ void Simulateur::calcul_simulation(int nb_periode, Schema sch, Dot d, Stimuli st
     {
       for(int j = 0; j <sch.getNbElements_output(); j++)
       {
-        string sortie = lireElements_resultat(sch.lireElements_output(j));
-        ajouterElements_resultat(sch.lireElements_output(j),sortie.back());
+        string sortie ;
+        sortie = lireElements_resultat(sch.lireElements_output(j));
+        cout << "element dernier   :"  << sortie[sortie.size()-1] << endl;
+        char test = sortie[sortie.size()-1];
+        string::iterator it=sortie.end();
+        *it--;
+        ajouterElements_resultat(sch.lireElements_output(j),test);
       }
     }
   }
@@ -124,22 +130,24 @@ void Simulateur::calcul_simulation(int nb_periode, Schema sch, Dot d, Stimuli st
 void Simulateur::calcul_delta_cycle(Stimuli sti, Schema sch)
 {
   int flag;
+  int i;
   for(int j = 1; j < sti.getnbPeriode(); j++)
   {
-    flag = 0;
-    for(int i = 0; i < sch.getNbElements_output(); i++)
+    flag = 1;
+    i = 0;
+    while((i < sch.getNbElements_input())&&(flag!=0))
     {
-      if(sti.recupEntreeParNom(sch.lireElements_input(i),j)==sti.recupEntreeParNom(sch.lireElements_input(i),j-1))
+      if((sti.recupEntreeParNom(sch.lireElements_input(i),j))==(sti.recupEntreeParNom(sch.lireElements_input(i),j-1)))
       {
-        setDelta_cycle(1);
         flag = 1;
-        continue;
       }
+      else
+      {
+        flag = 0;
+      }
+      i++;
     }
-    if(flag == 0)
-    {
-      setDelta_cycle(0);
-    }
+    setDelta_cycle(flag);
   }
 }
 
