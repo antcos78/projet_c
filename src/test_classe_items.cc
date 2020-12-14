@@ -6,6 +6,10 @@
 #include "../inc/And2.h"
 #include "../inc/Or2.h"
 #include "../inc/Input.h"
+#include "../inc/Nor2.h"
+#include "../inc/Xnor2.h"
+#include "../inc/Xor2.h"
+#include "../inc/Nand2.h"
 
 using namespace std;
 
@@ -15,23 +19,23 @@ int main ()
 {
   cout << "salut" << endl;
 
-  OR2 salut("porte_AND2",2,26);
+  Xor2 salut("porte_AND2",2,26);
   Not notnot("not2",1,1);
   And2 tigre("porte",2,2);
   Items *lll = new Input ("input",2,2);
 
   salut.ajoutEtat(0,0);
   salut.ajoutEtat(0,1);
-  cout << salut.calculEtat();
+  cout << "etat 1 :"<< salut.calculEtat() <<endl;
   salut.ajoutEtat(1,0);
   salut.ajoutEtat(0,1);
-  cout << salut.calculEtat();
+  cout << "etat 2 :"<< salut.calculEtat() <<endl;
   salut.ajoutEtat(0,0);
   salut.ajoutEtat(1,1);
-  cout << salut.calculEtat();
+  cout << "etat 3 :"<< salut.calculEtat() <<endl;
   salut.ajoutEtat(1,0);
   salut.ajoutEtat(1,1);
-  cout << salut.calculEtat();
+  cout << "etat 4 :"<< salut.calculEtat() <<endl;
 
 /*
   lll->ajoutOutput(notnot.getNom());
