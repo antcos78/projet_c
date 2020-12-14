@@ -15,25 +15,25 @@ int main ()
 {
   cout << "salut" << endl;
 
-  And2 salut("porte_AND2",2,26);
+  OR2 salut("porte_AND2",2,26);
   Not notnot("not2",1,1);
   And2 tigre("porte",2,2);
   Items *lll = new Input ("input",2,2);
 
-  salut.ajoutEtat('0',0);
-  salut.ajoutEtat('0',1);
-  cout << "Etat avec etat_1 " << salut.getEtat(0) << " et etat2 " << salut.getEtat(1) <<": " << salut.calculEtat() << endl;
-  salut.ajoutEtat('1',0);
-  salut.ajoutEtat('0',1);
-  cout << "Etat avec etat_1 0 et etat2 1: " << (int*)salut.calculEtat() << endl;
-  salut.ajoutEtat('0',0);
-  salut.ajoutEtat('1',1);
-  cout << "Etat avec etat_1 1 et etat2 0: " << (int*)salut.calculEtat() << endl;
-  salut.ajoutEtat('1',0);
-  salut.ajoutEtat('1',1);
-  cout << "Etat avec etat_1 1 et etat2 1: " << (int*)salut.calculEtat() << endl;
+  salut.ajoutEtat(0,0);
+  salut.ajoutEtat(0,1);
+  cout << salut.calculEtat();
+  salut.ajoutEtat(1,0);
+  salut.ajoutEtat(0,1);
+  cout << salut.calculEtat();
+  salut.ajoutEtat(0,0);
+  salut.ajoutEtat(1,1);
+  cout << salut.calculEtat();
+  salut.ajoutEtat(1,0);
+  salut.ajoutEtat(1,1);
+  cout << salut.calculEtat();
 
-
+/*
   lll->ajoutOutput(notnot.getNom());
   lll->ajoutOutput(tigre.getNom());
   cout << "en sortie : " << lll->getOutput(0) << endl;
@@ -49,5 +49,6 @@ int main ()
 
   cout << "en sortie : " << tigrre->getType() << endl;
   cout << "en sortie : " << tigrre->getNbPorts() << endl;
+  */
   return 0;
 }
