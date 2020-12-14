@@ -9,7 +9,7 @@
 using namespace std;
 
 
-void Wavedrom::generation_Wavedrom()
+void Wavedrom::generation_Wavedrom(Simulateur simu, Schema sch)
 {
-  
+
 }

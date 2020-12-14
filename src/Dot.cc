@@ -244,11 +244,19 @@ void Dot::parsingDot()
               i++;
               cout << "Entrée1 :" << entree << endl;
               cout << " porte : " << porte << endl;
-              if(m.count(entree) > 0){
-                if(m.count(porte) > 0){
-                  trouverItemsParNom(entree)->ajoutOutput(porte);
-                  entree = porte;
-                  porte.clear();
+              if(trouverItemsParNom(entree)->getType()!=1)
+              {
+                if(m.count(entree) > 0){
+                  if(m.count(porte) > 0){
+                    trouverItemsParNom(entree)->ajoutOutput(porte);
+                    entree = porte;
+                    porte.clear();
+                  }
+                  else
+                  {
+                    cout << "erreur nom interconnexion" << endl;
+                    exit(5);
+                  }
                 }
                 else
                 {
@@ -258,7 +266,7 @@ void Dot::parsingDot()
               }
               else
               {
-                cout << "erreur nom interconnexion" << endl;
+                cout << "erreur Output en entree" << endl;
                 exit(5);
               }
             }
