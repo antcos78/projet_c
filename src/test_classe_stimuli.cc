@@ -22,9 +22,9 @@ int main ()
 
 
   // parsing.addEntree("en", "1010");
-  parsing.parsingStimuli(); 
-  // cout << parsing.recupEntreeParNom("I1",0) << endl;
-  // cout << parsingStimuli.recupEntreeParNumero(0,1) << endl;
+  parsing.parsingStimuli();
+  //cout << parsing.recupEntreeParNom("I4",0) << endl;
+  //cout << parsing.recupEntreeParNumero(3,1) << endl;
 
 
 
