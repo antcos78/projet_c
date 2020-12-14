@@ -69,6 +69,7 @@ void Stimuli::parsingStimuli()
         if(tab[i] == '{')
         {
           i++;
+          
           if(tab[i] == '}')
           {
             continue;
