@@ -2,7 +2,7 @@ CFLAGS = -g -lm -Wall
 LDFLAGS = -lm
 
 
-all : test3
+all : test2
 
 test1 :  ../src/test_classe_dot.o ../src/Dot.o ../src/Items.o ../src/Porte.o  ../src/Not.o ../src/And2.o ../src/Or2.o ../src/Dot.o ../src/Schema.o ../src/Simulateur.o ../src/Input.o ../src/Output.o ../src/Stimuli.o ../src/Xor2.o ../src/Xnor2.o ../src/Nor2.o ../src/Nand2.o
 	g++ -o $@ $^ $(LDFLAGS)
@@ -18,4 +18,4 @@ test3 : ../src/test_classe_simulateur.o ../src/Dot.o ../src/Items.o ../src/Porte
 
 
 clean:
-	rm -f *.o ../src/*.o *~ test
+	rm -f *.o ../src/*.o *~ test2

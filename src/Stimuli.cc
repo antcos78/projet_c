@@ -69,7 +69,7 @@ void Stimuli::parsingStimuli()
         if(tab[i] == '{')
         {
           i++;
-          
+
           if(tab[i] == '}')
           {
             continue;
@@ -80,16 +80,10 @@ void Stimuli::parsingStimuli()
           {
             if(tab[i]!=name[c])
             {
-              cout << "Erreur name " << endl;
+              cout << "Erreur dans le name " << endl;
               exit(1);
             }
           }
-
-          // if(tab[i] != 39)
-          // {
-          //   cout << "Erreur : Il n'y a pas d'apostrophe" << endl;
-          //   exit(1);
-          // }
 
           if(tab[i] == 39)
           {
@@ -97,9 +91,19 @@ void Stimuli::parsingStimuli()
             while(tab[i]!=39)
             {
               nom += tab[i]; //Récupération du type présent dans label = " "
+              if(tab[i] == ',')
+              {
+                cout << "Erreur : il manque l'apostrophe après le nom" << endl;
+                exit(1);
+              }
               i++;
             }
             cout << "Nom : " << nom << endl;
+          }
+          else
+          {
+            cout << "Erreur : il manque l'apostrophe avant le nom" << endl;
+            exit(1);
           }
           i++;
 
@@ -108,7 +112,7 @@ void Stimuli::parsingStimuli()
           {
             if(tab[i]!=wave[e])
             {
-              cout << "Erreur : Mauvais texte pour la récupération de l'état" << endl;
+              cout << "Erreur dans le wave" << endl;
               exit(1);
             }
           }
@@ -121,15 +125,26 @@ void Stimuli::parsingStimuli()
               {
                 tab[i] = tab[i-1];
               }
+
               etat += tab[i]; //Récupération du type présent dans label = " "
+              if(tab[i] == '}')
+              {
+                cout << "Erreur : il manque l'apostrophe après l'état" << endl;
+                exit(1);
+              }
               i++;
             }
             cout << "Etat : " << etat << endl;
           }
+          else
+          {
+            cout << "Erreur : il manque l'apostrophe avant l'état" << endl;
+            exit(1);
+          }
           i++;
           if(tab[i]!='}')
           {
-            cout << "Erreur : Il manque l'accolade de fin" << endl;
+            cout << "Erreur : il manque l'accolade de fin" << endl;
             exit(1);
           }
           i++;
@@ -137,13 +152,19 @@ void Stimuli::parsingStimuli()
           {
             i++;
           }
-
-          cout << tab[i] << endl;
-          if(tab[i]!='\n')
+          else
           {
-            cout <<"Erreur : Il n'y a pas de saut de ligne" << endl;
+            cout << "Erreur : il manque la virgule de fin" << endl;
+            exit(1);
           }
           i++;
+          // cout << tab[i] << endl;
+          // if(tab[i]!='\n')
+          // {
+          //   cout <<"Erreur : Il n'y a pas de saut de ligne" << endl;
+          //   exit(1);
+          // }
+          // i++;
           //cout << tab[i] << endl;
           addEntree(nom, etat);
 
@@ -166,13 +187,11 @@ void Stimuli::parsingStimuli()
         // }
       }
 
-
-
     }
     i++;
   }
 
-  cout << "fin du DOT" << endl;
+  cout << "fin du Stimuli" << endl;
 
 }
 
