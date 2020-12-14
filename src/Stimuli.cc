@@ -70,6 +70,12 @@ void Stimuli::parsingStimuli()
         {
           i++;
 
+          if(tab[i] == ' ')
+          {
+            cout << "Espace en trop après l'accolade de début de ligne" << endl;
+            exit(1);
+          }
+
           if(tab[i] == '}')
           {
             continue;
@@ -85,6 +91,7 @@ void Stimuli::parsingStimuli()
             }
           }
 
+
           if(tab[i] == 39)
           {
             i++;
@@ -93,7 +100,7 @@ void Stimuli::parsingStimuli()
               nom += tab[i]; //Récupération du type présent dans label = " "
               if(tab[i] == ',')
               {
-                cout << "Erreur : il manque l'apostrophe après le nom" << endl;
+                cout << "Erreur sur l'apostrophe après le nom" << endl;
                 exit(1);
               }
               i++;
@@ -102,7 +109,7 @@ void Stimuli::parsingStimuli()
           }
           else
           {
-            cout << "Erreur : il manque l'apostrophe avant le nom" << endl;
+            cout << "Erreur pour l'apostrophe avant le nom" << endl;
             exit(1);
           }
           i++;
@@ -121,6 +128,15 @@ void Stimuli::parsingStimuli()
             i++;
             while(tab[i]!=39)
             {
+              // for(i=0;i<nbPeriode;i++)
+              // {
+              //   if(tab[0] == 46)
+              //   {
+              //     cout << "Erreur : premier état est un point" << endl;
+              //     exit(1);
+              //   }
+              // }
+
               if(tab[i] == 46)
               {
                 tab[i] = tab[i-1];
@@ -138,34 +154,56 @@ void Stimuli::parsingStimuli()
           }
           else
           {
-            cout << "Erreur : il manque l'apostrophe avant l'état" << endl;
+            cout << "Erreur avant l'apostrophe avant l'état" << endl;
             exit(1);
           }
           i++;
+          if(tab[i] == ' ')
+          {
+            cout << "Espace en trop avant l'accolade de fin" << endl;
+            exit(1);
+          }
           if(tab[i]!='}')
           {
-            cout << "Erreur : il manque l'accolade de fin" << endl;
+            cout << "Erreur avant l'accolade de fin" << endl;
             exit(1);
           }
           i++;
+          if(tab[i] == ' ')
+          {
+            cout << "Espace en trop avant la virgule" << endl;
+            exit(1);
+          }
           if(tab[i] == ',')
           {
             i++;
           }
-          else
-          {
-            cout << "Erreur : il manque la virgule de fin" << endl;
-            exit(1);
-          }
-          i++;
-          // cout << tab[i] << endl;
-          // if(tab[i]!='\n')
+          // else
           // {
-          //   cout <<"Erreur : Il n'y a pas de saut de ligne" << endl;
+          //   cout << "Erreur : il manque la virgule de fin" << endl;
           //   exit(1);
           // }
           // i++;
-          //cout << tab[i] << endl;
+
+          // if(tab[i] == ' ')
+          // {
+          //   cout << "Espace en trop avant saut de ligne" << endl;
+          //   exit(1);
+          // }
+
+          if(tab[i]!='\n')
+          {
+            cout << "Erreur après l'accolade de fin de ligne" << endl;
+            exit(1);
+          }
+          // else
+          // {
+          //   cout << "Erreur après l'accolade de fin de ligne" << endl;
+          //   exit(1);
+          // }
+          i++;
+
+
           addEntree(nom, etat);
 
           nom.clear();
