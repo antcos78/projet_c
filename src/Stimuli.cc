@@ -26,8 +26,12 @@ void Stimuli::parsingStimuli()
   int i = 0;
   int b;
   int d;
+<<<<<<< HEAD
   
   ifstream monFlux("/Users/leomichel/Desktop/Phelma_2A/Projet_info/Projet_C/Inputs.json");
+=======
+  ifstream monFlux("/home/phelma/Documents/Inputs.json");
+>>>>>>> bbada33cd50d989899b7e8941b03ea3a8899f141
 
   char signal [10] = {'{','s','i','g','n','a','l',':',' ','['};
   char name [6] = {'n','a','m','e',':',' '};
