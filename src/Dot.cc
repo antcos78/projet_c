@@ -37,7 +37,7 @@ void Dot::parsingDot()
   int i = 0;
   int b;
   int d;
-  ifstream monFlux("/home/phelma/Documents/AND.gv");
+  ifstream monFlux("/Users/leomichel/Desktop/Phelma_2A/Projet_info/Projet_C/AND.gv");
 
   char digraph [14] = {'d','i','g','r','a','p','h',' ','t','e','s','t',' ','{'};
   char label [8] = {'l','a','b','e','l',' ','=',' '};
@@ -65,8 +65,8 @@ void Dot::parsingDot()
     if(tab[i]!=digraph[i])
     {
       cout <<" erreur1" << endl; //Si texte différente de digraph test{ alors erreur
+      }
     }
-  }
     while(tab[i]!='}')
     {
       while(tab[i]=='\n'){i++;}
@@ -157,100 +157,106 @@ void Dot::parsingDot()
           }
         }
 
-      i++;
-
-      if(tab[i]!=';')
-      {
-        cout <<"erreur point virgule" << endl;
-        exit(4);
-      }
-      i++;
-
-      if(tab[i]!='\n')
-      {
-        cout <<"erreur saut de ligne" << endl;
-        exit(4);
-      }
-      i++;
-
-
-      if(type == "INPUT")
-      {
-        addItems(entree, new Input(entree, 0, 0));
-      }
-      else if(type == "OUTPUT")
-      {
-        addItems(entree, new Output(entree, 1, 1));
-      }
-      else if(type == "NOT")
-      {
-        addItems(entree, new Not(entree, 2, 1));
-      }
-      else if(type == "AND2")
-      {
-        addItems(entree, new And2(entree, 3, 2));
-      }
-      else if(type == "OR2")
-      {
-        addItems(entree, new Or2(entree, 4, 2));
-      }
-      else if(type == "NOR2")
-      {
-        addItems(entree, new Nor2(entree, 5, 2));
-      }
-      else if(type == "XOR2")
-      {
-        addItems(entree, new Xor2(entree, 7, 2));
-      }
-      else if(type == "XNOR2")
-      {
-        addItems(entree, new Xnor2(entree, 8, 2));
-      }
-      else if(type == "NAND2")
-      {
-        addItems(entree, new Nand2(entree, 9, 2));
-      }
-      else
-      {
-        cout << "erreur, porte non existante" << endl;
-        exit(4);
-      }
-
-      entree.clear();
-      type.clear();
-
-      cout << "Ligne finie" << endl;
-      /////CREATION DE L'OBJET//////
-    }
-
-    else if(tab[i]=='-')
-    {
-      i++;
-      if(tab[i]=='>')
-      {
         i++;
 
-        do{
-          if(tab[i] != ' ')
-          {
-            porte += tab[i]; //Récupération du nom d'élement
-          }
+        if(tab[i]!=';')
+        {
+          cout <<"erreur point virgule" << endl;
+          exit(4);
+        }
+        i++;
+
+        if(tab[i]!='\n')
+        {
+          cout <<"erreur saut de ligne" << endl;
+          exit(4);
+        }
+        i++;
+
+
+        if(type == "INPUT")
+        {
+          addItems(entree, new Input(entree, 0, 0));
+        }
+        else if(type == "OUTPUT")
+        {
+          addItems(entree, new Output(entree, 1, 1));
+        }
+        else if(type == "NOT")
+        {
+          addItems(entree, new Not(entree, 2, 1));
+        }
+        else if(type == "AND2")
+        {
+          addItems(entree, new And2(entree, 3, 2));
+        }
+        else if(type == "OR2")
+        {
+          addItems(entree, new Or2(entree, 4, 2));
+        }
+        else if(type == "NOR2")
+        {
+          addItems(entree, new Nor2(entree, 5, 2));
+        }
+        else if(type == "XOR2")
+        {
+          addItems(entree, new Xor2(entree, 7, 2));
+        }
+        else if(type == "XNOR2")
+        {
+          addItems(entree, new Xnor2(entree, 8, 2));
+        }
+        else if(type == "NAND2")
+        {
+          addItems(entree, new Nand2(entree, 9, 2));
+        }
+        else
+        {
+          cout << "erreur, porte non existante" << endl;
+          exit(4);
+        }
+
+        entree.clear();
+        type.clear();
+
+        cout << "Ligne finie" << endl;
+        /////CREATION DE L'OBJET//////
+      }
+
+      else if(tab[i]=='-')
+      {
+        i++;
+        if(tab[i]=='>')
+        {
           i++;
-          if(tab[i]=='-')
-          {
+
+          do{
+            if(tab[i] != ' ')
+            {
+              porte += tab[i]; //Récupération du nom d'élement
+            }
             i++;
-            if(tab[i]=='>')
+            if(tab[i]=='-')
             {
               i++;
-              cout << "Entrée1 :" << entree << endl;
-              cout << " porte : " << porte << endl;
-              if(trouverItemsParNom(entree)->getType()!=1)
+              if(tab[i]=='>')
               {
-                if(m.count(entree) > 0){
-                  if(m.count(porte) > 0){
-                    trouverItemsParNom(entree)->ajoutOutput(porte);
-                    entree = porte;
-                    porte.clear();
+                i++;
+                cout << "Entrée1 :" << entree << endl;
+                cout << " porte : " << porte << endl;
+                if(trouverItemsParNom(entree)->getType()!=1)
+                {
+                  if(m.count(entree) > 0){
+                    if(m.count(porte) > 0){
+                      trouverItemsParNom(entree)->ajoutOutput(porte);
+                      entree = porte;
+                      porte.clear();
+                    }
+                    else
+                    {
+                      cout << "erreur nom interconnexion" << endl;
+                      exit(5);
+                    }
                   }
                   else
                   {
@@ -260,109 +266,111 @@ void Dot::parsingDot()
                 }
                 else
                 {
-                  cout << "erreur nom interconnexion" << endl;
+                  cout << "erreur Output en entree" << endl;
                   exit(5);
                 }
               }
               else
               {
-                cout << "erreur Output en entree" << endl;
+                cout << "manque >" << endl;
+                exit(3);
+              }
+
+            }
+            else if(tab[i]=='>')
+            {
+              cout << "manque -" << endl;
+              exit(10);
+            }
+
+          }while((tab[i]!=';')&&(tab[i]!='\n'));
+          if(tab[i]=='\n')
+          {
+            cout << "erreur fin de ligne";
+            exit(3);
+          }
+          cout << "Entrée1 :" << entree << endl;
+          cout << " porte : " << porte << endl;
+          if(trouverItemsParNom(entree)->getType()!=1)
+          {
+            if(m.count(entree) > 0){
+              if(m.count(porte) > 0){
+                trouverItemsParNom(entree)->ajoutOutput(porte);
+                entree = porte;
+                porte.clear();
+              }
+              else
+              {
+                cout << "erreur nom interconnexion" << endl;
                 exit(5);
               }
             }
             else
             {
-              cout << "manque >" << endl;
-              exit(3);
+              cout << "erreur nom interconnexion" << endl;
+              exit(5);
             }
-
-          }
-          else if(tab[i]=='>')
-          {
-            cout << "manque -" << endl;
-            exit(10);
-          }
-
-        }while((tab[i]!=';')&&(tab[i]!='\n'));
-        if(tab[i]=='\n')
-        {
-          cout << "erreur fin de ligne";
-          exit(3);
-        }
-        cout << "Entrée1 :" << entree << endl;
-        cout << " porte : " << porte << endl;
-        if(m.count(entree) > 0){
-          if(m.count(porte) > 0){
-            trouverItemsParNom(entree)->ajoutOutput(porte);
-            entree = porte;
-            porte.clear();
           }
           else
           {
-            cout << "erreur nom interconnexion" << endl;
+            cout << "erreur Output en entree" << endl;
             exit(5);
           }
+
         }
         else
         {
-          cout << "erreur nom interconnexion" << endl;
-          exit(5);
+          cout << "manque >" << endl;
+          exit(1);
         }
+        i++;
+        if(tab[i]!='\n')
+        {
+          cout <<"erreur6" << endl;
+        }
+        i++;
 
+        entree.clear();
+        cout << "Ligne finie" << endl;
       }
       else
       {
-        cout << "manque >" << endl;
-        exit(1);
+        cout << "manque [ ou -" <<endl;
+        exit(5);
       }
-      i++;
-      if(tab[i]!='\n')
+
+      while(tab[i] == '\n')
       {
-        cout <<"erreur6" << endl;
+        i++;
       }
-      i++;
-
-      entree.clear();
-      cout << "Ligne finie" << endl;
     }
-    else
-    {
-      cout << "manque [ ou -" <<endl;
-      exit(5);
-    }
+    cout << "fin du DOT" << endl;
+  }
 
-    while(tab[i] == '\n')
-    {
-      i++;
+
+  //addItems(porte, Not(porte,0,1))
+
+  void Dot::addItems(const string & nom, Items *p_items)
+  {
+    if(m.count(p_items->getNom()) > 0)  {
+      cout << "L'item existe déjà" << endl;
+      exit(1);
+    }
+    m[p_items->getNom()] = p_items;
+    v.push_back(p_items->getNom());
+
+    cout << "l'item est ajouté" << p_items->getNom() << endl;
+
+  }
+
+  Items * Dot::trouverItemsParNom( const string & nom)
+  {
+    if(m.count(nom) > 0)  {
+      return m[nom];
     }
   }
-  cout << "fin du DOT" << endl;
-}
 
-
-//addItems(porte, Not(porte,0,1))
-
-void Dot::addItems(const string & nom, Items *p_items)
-{
-  if(m.count(p_items->getNom()) > 0)  {
-    cout << "L'item existe déjà" << endl;
-    exit(1);
+  Items * Dot::trouverItemsParNumero(int numero)
+  {
+    return m[v[numero]];
   }
-  m[p_items->getNom()] = p_items;
-  v.push_back(p_items->getNom());
-
-  cout << "l'item est ajouté" << p_items->getNom() << endl;
-
-}
-
-Items * Dot::trouverItemsParNom( const string & nom)
-{
-  if(m.count(nom) > 0)  {
-    return m[nom];
-  }
-}
-
-Items * Dot::trouverItemsParNumero(int numero)
-{
-  return m[v[numero]];
-}

@@ -79,7 +79,7 @@ void Stimuli::parsingStimuli()
           {
             if(tab[i]!=name[c])
             {
-              cout << "Erreur : Mauvais texte pour la récupération du nom " << endl;
+              cout << "Erreur name " << endl;
               exit(1);
             }
           }
