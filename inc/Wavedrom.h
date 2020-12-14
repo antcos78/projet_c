@@ -35,7 +35,7 @@ public:
   }
 
 
-  void generation_Wavedrom(Simulateur simu, Schema sch);
+  void generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu);
 
 };
 
