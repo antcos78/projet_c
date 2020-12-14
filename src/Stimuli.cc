@@ -26,6 +26,7 @@ void Stimuli::parsingStimuli()
   int i = 0;
   int b;
   int d;
+  
   ifstream monFlux("/Users/leomichel/Desktop/Phelma_2A/Projet_info/Projet_C/Inputs.json");
 
   char signal [10] = {'{','s','i','g','n','a','l',':',' ','['};
