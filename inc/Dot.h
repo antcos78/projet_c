@@ -40,7 +40,7 @@ public:
   }
 
 
-  void parsingDot();
+  void parsingDot(char *mon_fichier);
 
   void addItems(const string & nom, Items *p_items);
 

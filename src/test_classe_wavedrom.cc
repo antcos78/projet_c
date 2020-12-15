@@ -27,7 +27,10 @@ int main ()
   Stimuli sti;
 
 
-  dov.parsingDot();
+
+  char *mon_fichier = "/home/phelma/Documents/AND.gv";
+
+  dov.parsingDot(mon_fichier);
 
   sti.parsingStimuli();
 

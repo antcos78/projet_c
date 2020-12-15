@@ -30,14 +30,14 @@ Dot::Dot()
   cout << "construction du Dot" << endl;
 }
 
-void Dot::parsingDot()
+void Dot::parsingDot(char *mon_fichier)
 {
   char tab[500];
   char a;
   int i = 0;
   int b;
   int d;
-  ifstream monFlux("/Users/leomichel/Desktop/Phelma_2A/Projet_info/Projet_C/AND.gv");
+  ifstream monFlux(mon_fichier);
 
   char digraph [14] = {'d','i','g','r','a','p','h',' ','t','e','s','t',' ','{'};
   char label [8] = {'l','a','b','e','l',' ','=',' '};
@@ -49,6 +49,12 @@ void Dot::parsingDot()
   string porte;
 
 
+  if (monFlux.is_open()!=true)
+  {
+    cout << "Problème de fichier" << endl;
+    exit(3);
+  }
+  cout << "Fichier ouvert" << endl;
 
 
   while(monFlux.get(a)) //Récupération des données
