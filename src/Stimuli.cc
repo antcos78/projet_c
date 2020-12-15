@@ -19,7 +19,7 @@ Stimuli::Stimuli()
   cout << "construction du Stimuli" << endl;
 }
 
-void Stimuli::parsingStimuli()
+void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
 {
 
   char tab[500];
@@ -27,7 +27,11 @@ void Stimuli::parsingStimuli()
   int i = 0;
   int b;
   int d;
-  ifstream monFlux("/Users/leomichel/Desktop/Phelma_2A/Projet_info/Projet_C/Inputs.json");
+  int f;
+  int periode;
+  int line;
+  int flag;
+  ifstream monFlux(mon_fichier_stimuli);
 
   char signal [10] = {'{','s','i','g','n','a','l',':',' ','['};
   char name [6] = {'n','a','m','e',':',' '};
@@ -36,6 +40,12 @@ void Stimuli::parsingStimuli()
   string nom;
   string etat;
 
+  if (monFlux.is_open()!=true)
+  {
+    cout << "Problème de fichier" << endl;
+    exit(3);
+  }
+  cout << "Fichier ouvert" << endl;
 
 
   while(monFlux.get(a)) //Récupération des données
@@ -126,16 +136,15 @@ void Stimuli::parsingStimuli()
           if(tab[i] == 39)
           {
             i++;
+            f = i;
+            line = 0;
             while(tab[i]!=39)
             {
-              // for(i=0;i<nbPeriode;i++)
-              // {
-              //   if(tab[0] == 46)
-              //   {
-              //     cout << "Erreur : premier état est un point" << endl;
-              //     exit(1);
-              //   }
-              // }
+                if(tab[f] == 46)
+                {
+                  cout << "Erreur : premier état est un point" << endl;
+                  exit(1);
+                }
 
               if(tab[i] == 46)
               {
@@ -157,6 +166,18 @@ void Stimuli::parsingStimuli()
             cout << "Erreur avant l'apostrophe avant l'état" << endl;
             exit(1);
           }
+
+
+          // if(line == 0)
+          // {
+          //   periode = etat.size();
+          // }
+          // if(line != 0)
+          // {
+          //   if(periode)
+          //
+          // }
+
           i++;
           if(tab[i] == ' ')
           {

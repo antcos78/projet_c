@@ -28,7 +28,8 @@ int main ()
 
 
 
-  char *mon_fichier = "/home/phelma/Documents/AND.gv";
+  char *mon_fichier = "/Users/leomichel/Desktop/Phelma_2A/Projet_info/Projet_C/AND.gv";
+  char *mon_fichier_stimuli = "/Users/leomichel/Desktop/Phelma_2A/Projet_info/Projet_C/Inputs.json";
 
   dov.parsingDot(mon_fichier);
 
