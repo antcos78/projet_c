@@ -3,10 +3,9 @@
 ['Entrees',
 {name:'I1',wave :'0...1...'},
 {name:'I2',wave :'10101010'},
-{name:'I3',wave :'1.0.1.0.'},
 ],
 {},
 ['Sorties',
-{name:'O',wave :'10..101.'},
+{name:'O',wave :'0...1010'},
 ],
 ]}

@@ -19,23 +19,31 @@ int main ()
 {
   cout << "salut" << endl;
 
-  Xor2 salut("porte_AND2",2,26);
+  Xnor2 salut("porte_AND2",2,3);
   Not notnot("not2",1,1);
   And2 tigre("porte",2,2);
   Items *lll = new Input ("input",2,2);
 
   salut.ajoutEtat(0,0);
   salut.ajoutEtat(0,1);
+  salut.ajoutEtat(0,2);
   cout << "etat 1 :"<< salut.calculEtat() <<endl;
   salut.ajoutEtat(1,0);
-  salut.ajoutEtat(0,1);
+  salut.ajoutEtat(1,1);
+  salut.ajoutEtat(1,2);
   cout << "etat 2 :"<< salut.calculEtat() <<endl;
   salut.ajoutEtat(0,0);
   salut.ajoutEtat(1,1);
+  salut.ajoutEtat(0,2);
   cout << "etat 3 :"<< salut.calculEtat() <<endl;
   salut.ajoutEtat(1,0);
-  salut.ajoutEtat(1,1);
+  salut.ajoutEtat(0,1);
+  salut.ajoutEtat(0,2);
   cout << "etat 4 :"<< salut.calculEtat() <<endl;
+  salut.ajoutEtat(1,0);
+  salut.ajoutEtat(0,1);
+  salut.ajoutEtat(1,2);
+  cout << "etat 5 :"<< salut.calculEtat() <<endl;
 
 /*
   lll->ajoutOutput(notnot.getNom());
