@@ -72,9 +72,15 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
         i++;
       }
 
-      if(tab[i] != 9)
+      while(tab[i] != '{')
       {
         i++;
+        if(tab[i] == ']')
+        {
+          cout << "Erreur pour le crochet de fin" << endl;
+          exit(1);
+        }
+      }
 
         if(tab[i] == '{')
         {
@@ -139,11 +145,11 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
             f = i;
             while(tab[i]!=39)
             {
-                if(tab[f] == 46)
-                {
-                  cout << "Erreur : premier état est un point" << endl;
-                  exit(1);
-                }
+              if(tab[f] == 46)
+              {
+                cout << "Erreur : premier état est un point" << endl;
+                exit(1);
+              }
 
               if(tab[i] == 46)
               {
@@ -166,8 +172,6 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
             exit(1);
           }
 
-          cout << "ligne : " << line << endl;
-
           if(line == 0)
           {
             periode = etat.size();
@@ -176,7 +180,7 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
           {
             if(periode != etat.size())
             {
-              cout << "Erreur : nb période différente" << endl;
+              cout << "Erreur : nb période différent" << endl;
               exit(1);
             }
           }
@@ -236,6 +240,12 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
 
           cout << "Ligne finie" << endl;
         }
+        if(tab[i]=='\n')
+        {
+          i++;
+        }
+
+
 
         // else
         // {
@@ -248,10 +258,22 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
         //   cout << "Erreur : La ligne doit commencer par une accolade" << endl;
         //   exit(1);
         // }
-      }
+
+      // cout << tab[i] << "a" << endl;
+      // if(tab[i]!=']')
+      // {
+      //   cout << "Erreur avant le crochet de fin de programme" << endl;
+      //   exit(1);
+      // }
 
     }
     i++;
+
+    if(tab[i]!='}')
+    {
+      cout << "Erreur avant l'accolade de fin de programme" << endl;
+      exit(1);
+    }
   }
 
   cout << "fin du Stimuli" << endl;
