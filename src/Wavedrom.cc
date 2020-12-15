@@ -22,13 +22,15 @@ void Wavedrom::generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu)
   char entree[12] = {'[',39,'E','n','t','r','e','e','s',39,',','\n'};
   char sortie[12] = {'[',39,'S','o','r','t','i','e','s',39,',','\n'};
 
+  char point [30];
+  char ligne_milieu1[3] = {']',',','\n'};
+  char ligne_milieu2[4] = {'{','}',',','\n'};
+
   outfile.write (debut,11);
   outfile.write (name,7);
   outfile.write (clk,3);
   outfile.write (wave,9);
 
-  cout << "nb periode "<< stimu.getnbPeriode()<< endl;
-  char point [30];
   point[0] = 'p';
   for(int i = 1; i < stimu.getnbPeriode() ;i++ )
   {
@@ -73,9 +75,7 @@ void Wavedrom::generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu)
     outfile.write (fin_ligne,4);
   }
 
-  char ligne_milieu1[3] = {']',',','\n'};
   outfile.write (ligne_milieu1,3);
-  char ligne_milieu2[4] = {'{','}',',','\n'};
   outfile.write (ligne_milieu2,4);
 
   outfile.write (sortie,12);
@@ -111,9 +111,4 @@ void Wavedrom::generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu)
   outfile.write (ligne_milieu1,3);
   char fin_fichier[2] = {']','}'};
   outfile.write (fin_fichier,2);
-
-  // for(int i = 0; i < sch.getNbElements_output();i++)
-  // {
-  //
-  // }
 }

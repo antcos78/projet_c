@@ -1,4 +1,3 @@
-
 #include "../inc/Mux.h"
 
 using namespace std;
@@ -13,7 +12,6 @@ char Mux::calculEtat()
   if(getEtat(2)==0)
   {
     cout << "etat 1";
-
     return (getEtat(0));
   }
   else
