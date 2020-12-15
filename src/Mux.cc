@@ -12,10 +12,13 @@ char Mux::calculEtat()
 
   if(getEtat(2)==0)
   {
+    cout << "etat 1";
+
     return (getEtat(0));
   }
   else
   {
+    cout << "etat 2";
     return (getEtat(1));
   }
 }

@@ -78,19 +78,24 @@ void Simulateur::algo_simulation(int numero, Schema sch, Dot d, Stimuli sti)
               d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  2);
               cout << "sortie mux" << element << endl;
             }
+            else if(d.trouverItemsParNom(sortie)->getFlag() != 1 )
+            {
+              d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  0);
+              d.trouverItemsParNom(sortie)->setFlag(1);
+            }
+            else
+            {
+              d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  1);
+              cout << "deuxieme etape" << endl;
+              cout << "delta etat" << delta_etat << endl;
+            }
           }
-          else if(d.trouverItemsParNom(sortie)->getFlag() != 1 )
+          else if(d.trouverItemsParNom(sortie)->getFlag() != (d.trouverItemsParNom(element)->getNbPorts() - 1) )
           {
-            d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  0);
-            d.trouverItemsParNom(sortie)->setFlag(1);
+            d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  d.trouverItemsParNom(sortie)->getFlag() );
+            d.trouverItemsParNom(sortie)->setFlag(d.trouverItemsParNom(sortie)->getFlag() + 1);
           }
-          else
-          {
-            d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  1);
-            cout << "deuxieme etape" << endl;
-            cout << "delta etat" << delta_etat << endl;
 
-          }
         }
       }
     }

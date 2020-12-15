@@ -109,6 +109,8 @@ void Schema::construction_schema( Dot z )
   while(getNbElements_schema()+getNbElements_output() < z.getnbItems()) //tant que les éléments stockés ne sont pas égaux
   {
     cout << "connexion : " << j;
+    cout << "element dans le schema : " << getNbElements_schema() << endl;
+
     if(j == getNbElements_schema()) //si nombre d'élément trop grand (element non connecté)
     {
       cout << "erreur nb element schema et interconnexion" << endl;
@@ -121,6 +123,7 @@ void Schema::construction_schema( Dot z )
 
         element = z.trouverItemsParNom(lireElements_schema(j))->getOutput(i);
         char nb_port = z.trouverItemsParNom(element)->getNbPorts();
+        cout << element;
 
         if(nb_port == 1)
         {
@@ -143,40 +146,20 @@ void Schema::construction_schema( Dot z )
           }
         }
 
-        else if(nb_port == 2)
+        else
         {
-          if(z.trouverItemsParNom(element)->getFlag() == 0)
+          if(z.trouverItemsParNom(element)->getFlag() != (z.trouverItemsParNom(element)->getNbPorts() - 1))
           {
-            z.trouverItemsParNom(element)->setFlag(1);
-            //cout << "flag à 1" << endl;
+            z.trouverItemsParNom(element)->setFlag(z.trouverItemsParNom(element)->getFlag() +1);
           }
-          else if(z.trouverItemsParNom(element)->getFlag() == 1)
+          else if(z.trouverItemsParNom(element)->getFlag() == (z.trouverItemsParNom(element)->getNbPorts() - 1))
           {
             ajouterElements_schema(element);
-            z.trouverItemsParNom(element)->setFlag(2);
-            //cout << "flag OK" << endl;
+            z.trouverItemsParNom(element)->setFlag(z.trouverItemsParNom(element)->getNbPorts());
           }
           else
           {
-            cout << "erreur nb entree 2 ports" << endl;
-            exit(3);
-          }
-        }
-
-        else if(nb_port == 3)
-        {
-          if(z.trouverItemsParNom(element)->getFlag() != 2)
-          {
-            z.trouverItemsParNom(element)->setFlag(z.trouverItemsParNom(element)->getFlag() + 1);
-          }
-          else if(z.trouverItemsParNom(element)->getFlag() == 2)
-          {
-            ajouterElements_schema(element);
-            z.trouverItemsParNom(element)->setFlag(3);
-          }
-          else
-          {
-            cout << "erreur nb entree 3 ports" << endl;
+            cout << "erreur nb entrees ports" << endl;
             exit(3);
           }
         }
@@ -185,6 +168,7 @@ void Schema::construction_schema( Dot z )
     j++;
 
   }
+
   for(i = 0; i< getNbElements_output(); i ++)   //on met les output dans le schema  (à la fin)
   {
     ajouterElements_schema(lireElements_output(i));
@@ -193,5 +177,6 @@ void Schema::construction_schema( Dot z )
   {
     z.trouverItemsParNom(lireElements_schema(i))->setFlag(0);
   }
+  cout << "fin schema" << endl;
 
 }

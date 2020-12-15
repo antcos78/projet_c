@@ -64,6 +64,8 @@ void Wavedrom::generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu)
       else
       {
         point[k] = element;
+        element_k = 2;
+
       }
 
     }
@@ -100,6 +102,7 @@ void Wavedrom::generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu)
       else
       {
         point[k-1] = element;
+        element_k = 2;
       }
     }
     outfile.write (point,stimu.getnbPeriode());

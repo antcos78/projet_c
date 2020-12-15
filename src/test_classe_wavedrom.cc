@@ -35,10 +35,23 @@ int main ()
 
   sti.parsingStimuli(mon_fichier_stimuli);
 
+
   sch.construction_schema( dov );
+  cout << "schema ok" << endl;
   simu.declaration_resultat(sch);
   simu.calcul_delta_cycle(sti, sch);
   simu.calcul_simulation(sti.getnbPeriode(), sch, dov,sti);
+
+
+  for(int j = 0; j < simu.getNbElements_resultat(); j++ )
+  {
+    cout << " sortie : " << sch.lireElements_output(j) << endl;
+    for(int i =0; i < sti.getnbPeriode()+1; i++)
+    {
+      cout <<" resultat   : " << i << " : " << simu.lireElements_resultat(sch.lireElements_output(j))[i] << endl;
+    }
+  }
+
   wave.generation_Wavedrom( simu, sch, sti);
 
   return 0;
