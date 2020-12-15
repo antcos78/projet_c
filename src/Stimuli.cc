@@ -29,7 +29,7 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
   int d;
   int f;
   int periode;
-  int line;
+  int line = 0;
   int flag;
   ifstream monFlux(mon_fichier_stimuli);
 
@@ -137,7 +137,6 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
           {
             i++;
             f = i;
-            line = 0;
             while(tab[i]!=39)
             {
                 if(tab[f] == 46)
@@ -167,23 +166,21 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
             exit(1);
           }
 
+          cout << "ligne : " << line << endl;
 
-          // if(line == 0)
-          // {
-          //   periode = etat.size();
-          // }
-          // if(line != 0)
-          // {
-          //   if(periode != etat.size())
-          //   {
-          //     flag = 1;
-          //     exit(1);
-          //   }
-          //   else
-          //   {
-          //     flag = 0;
-          //   }
-          // }
+          if(line == 0)
+          {
+            periode = etat.size();
+          }
+          else if(line != 0)
+          {
+            if(periode != etat.size())
+            {
+              cout << "Erreur : nb période différente" << endl;
+              exit(1);
+            }
+          }
+          line ++;
 
           i++;
           if(tab[i] == ' ')
