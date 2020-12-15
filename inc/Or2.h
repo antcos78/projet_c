@@ -34,6 +34,8 @@ public:
   ///////méthodes//////
   char calculEtat();
 
+  string getEntreeSel() const{cout << "voila";}
+  void setEntreeSel(const string & entree_sel) {cout << "voila";}
 
 };
 

@@ -15,6 +15,7 @@ using namespace std;
 #include "../inc/Xor2.h"
 #include "../inc/Nand2.h"
 #include "../inc/Nor2.h"
+#include "../inc/Mux.h"
 
 
 #define INPUT 0
@@ -128,11 +129,11 @@ void Dot::parsingDot(char *mon_fichier)
         if(tab[i]!=']')
         {
           d = i;
-          if(tab[i] == ' ')
+          /*if(tab[i] == ' ')
           {
             cout << "espace en trop avant ]" << endl;
             exit(4);
-          }
+          }*/
           if(tab[i]!=';')
           {
             i++;
@@ -144,11 +145,13 @@ void Dot::parsingDot(char *mon_fichier)
                 exit(4);
               }
             }
+            i++;
             if(tab[i] == 34)
             {
               i++;
               while(tab[i]!=34)
               {
+                cout << select;
                 select += tab[i]; //Récupération du sel présent dans sel = " "
                 i++;
               }
@@ -216,6 +219,30 @@ void Dot::parsingDot(char *mon_fichier)
         {
           addItems(entree, new Nand2(entree, 9, 2));
         }
+        else if(type == "MUX")
+        {
+          addItems(entree, new Mux(entree, 10, 3,select));
+
+          if(m.count(entree) > 0){
+            if(m.count(select) > 0){
+              trouverItemsParNom(select)->ajoutOutput(entree);
+            }
+            else
+            {
+              cout << "erreur nom interconnexion" << endl;
+              exit(5);
+            }
+          }
+          else
+          {
+            cout << "erreur nom interconnexion" << endl;
+            exit(5);
+          }
+        }
+
+
+
+
         else
         {
           cout << "erreur, porte non existante" << endl;
@@ -224,6 +251,7 @@ void Dot::parsingDot(char *mon_fichier)
 
         entree.clear();
         type.clear();
+        select.clear();
 
         cout << "Ligne finie" << endl;
         /////CREATION DE L'OBJET//////

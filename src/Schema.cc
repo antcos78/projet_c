@@ -108,6 +108,7 @@ void Schema::construction_schema( Dot z )
 
   while(getNbElements_schema()+getNbElements_output() < z.getnbItems()) //tant que les éléments stockés ne sont pas égaux
   {
+    cout << "connexion : " << j;
     if(j == getNbElements_schema()) //si nombre d'élément trop grand (element non connecté)
     {
       cout << "erreur nb element schema et interconnexion" << endl;

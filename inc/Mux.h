@@ -1,5 +1,5 @@
-#ifndef _XNOR2_H_
-#define _XNOR2_H_
+#ifndef _MUX_H_
+#define _MUX_H_
 
 
 #include <iostream>
@@ -13,19 +13,21 @@
 using namespace std;
 
 
-class Xnor2 : public Porte {
-
+class Mux : public Porte {
+private:
+  string entree_sel;
 
 public:
   //////constructeur-destructeur///////
-  Xnor2(const string &nom, char type, char nbPorts,char flag = 0):
+  Mux(const string &nom, char type, char nbPorts,string entree_sel,char flag = 0):
   Porte(nom,type,nbPorts,flag)
   {
+    this->entree_sel = entree_sel;
     cout << "constructeur" << endl;
   }
 
 
-  ~Xnor2()
+  ~Mux()
   {
     cout << "destruction" << endl;
 
@@ -33,9 +35,9 @@ public:
 
   ///////méthodes//////
   char calculEtat();
-  string getEntreeSel() const{cout << "voila";}
-  void setEntreeSel(const string & entree_sel) {cout << "voila";}
 
+  string getEntreeSel() const{return this->entree_sel;}
+  void setEntreeSel(const string & entree_sel){this->entree_sel = entree_sel; }
 
 };
 

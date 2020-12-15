@@ -40,10 +40,13 @@ void Wavedrom::generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu)
 
   outfile.write (entree,12);
   char name_entree[30];
+  char element_k;
+  char element;
 
   for(int i = 0; i < sch.getNbElements_input(); i++)
   {
     outfile.write (name,7);
+    element_k=2;
     for(int j = 0; j < sch.lireElements_input(i).size(); j++)
     {
       name_entree[j] = sch.lireElements_input(i)[j];
@@ -52,8 +55,7 @@ void Wavedrom::generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu)
     outfile.write (wave,9);
     for(int k = 0; k < stimu.getnbPeriode();k++)
     {
-      char element = stimu.recupEntreeParNom(sch.lireElements_input(i),k);
-      char element_k;
+      element = stimu.recupEntreeParNom(sch.lireElements_input(i),k);
       if(( element == element_k)||(point[k-1]==element))
       {
         point[k]='.';
@@ -78,6 +80,7 @@ void Wavedrom::generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu)
 
   for(int i = 0; i < sch.getNbElements_output(); i++)
   {
+    element_k=2;
     outfile.write (name,7);
     for(int j = 0; j < sch.lireElements_output(i).size(); j++)
     {
@@ -88,8 +91,7 @@ void Wavedrom::generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu)
 
     for(int k = 1; k < stimu.getnbPeriode()+1;k++ )
     {
-      char element = simu.lireElements_resultat(sch.lireElements_output(i)).at(k);
-      char element_k;
+      element = simu.lireElements_resultat(sch.lireElements_output(i)).at(k);
       if(( element == element_k)||(point[k-2]==element))
       {
         point[k-1] = '.';

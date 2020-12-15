@@ -52,6 +52,8 @@ public:
 
    void setFlag(char flag) {this->flag = flag;}
    char getFlag()const {return this->flag;}
+   string getEntreeSel() const{cout << "voila";}
+   void setEntreeSel(const string & entree_sel) {cout << "voila";}
 
 
 
