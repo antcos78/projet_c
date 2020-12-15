@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <math.h>
 
 using namespace std;
 
@@ -18,14 +19,6 @@ using namespace std;
 #include "../inc/Mux.h"
 
 
-#define INPUT 0
-#define OUTPUT 1
-#define NOT 2
-#define AND2 3
-#define OR2 4
-#define MUX 5
-
-
 Dot::Dot()
 {
   cout << "construction du Dot" << endl;
@@ -38,6 +31,8 @@ void Dot::parsingDot(char *mon_fichier)
   int i = 0;
   int b;
   int d;
+  // int e;
+  int nbPorts;
   ifstream monFlux(mon_fichier);
 
   char digraph [14] = {'d','i','g','r','a','p','h',' ','t','e','s','t',' ','{'};
@@ -182,6 +177,16 @@ void Dot::parsingDot(char *mon_fichier)
         }
         i++;
 
+        // e = i;
+        if((type != "NOT") && (type != "INPUT") && (type != "OUTPUT"))
+        {
+          // for(e = i; tab[e] < type.size(); e++, i++)
+          // {
+            nbPorts = type[type.size() - 1] - 48;
+            cout << "nb de port = " << nbPorts << endl;
+            type.erase(type.size() - 1);
+          // }
+        }
 
         if(type == "INPUT")
         {
@@ -195,33 +200,33 @@ void Dot::parsingDot(char *mon_fichier)
         {
           addItems(entree, new Not(entree, 2, 1));
         }
-        else if(type == "AND2")
+        else if(type == "AND")
         {
-          addItems(entree, new And2(entree, 3, 2));
+          addItems(entree, new And2(entree, 3, nbPorts));
         }
-        else if(type == "OR2")
+        else if(type == "OR")
         {
-          addItems(entree, new Or2(entree, 4, 2));
+          addItems(entree, new Or2(entree, 4, nbPorts));
         }
-        else if(type == "NOR2")
+        else if(type == "NOR")
         {
-          addItems(entree, new Nor2(entree, 5, 2));
+          addItems(entree, new Nor2(entree, 5, nbPorts));
         }
-        else if(type == "XOR2")
+        else if(type == "XOR")
         {
-          addItems(entree, new Xor2(entree, 7, 2));
+          addItems(entree, new Xor2(entree, 7, nbPorts));
         }
-        else if(type == "XNOR2")
+        else if(type == "XNOR")
         {
-          addItems(entree, new Xnor2(entree, 8, 2));
+          addItems(entree, new Xnor2(entree, 8, nbPorts));
         }
-        else if(type == "NAND2")
+        else if(type == "NAND")
         {
-          addItems(entree, new Nand2(entree, 9, 2));
+          addItems(entree, new Nand2(entree, 9, nbPorts));
         }
         else if(type == "MUX")
         {
-          addItems(entree, new Mux(entree, 10, 3,select));
+          addItems(entree, new Mux(entree, 10, nbPorts+log2(nbPorts) ,select));
 
           if(m.count(entree) > 0){
             if(m.count(select) > 0){

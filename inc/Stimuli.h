@@ -39,6 +39,11 @@ public:
     return it->second.size();
   }
 
+  int getnbEntree()const
+  {
+    return m_stimuli.size();
+  }
+
 
   void parsingStimuli(char *mon_fichier_stimuli);
 
