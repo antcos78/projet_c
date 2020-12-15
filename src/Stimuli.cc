@@ -174,8 +174,15 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
           // }
           // if(line != 0)
           // {
-          //   if(periode)
-          //
+          //   if(periode != etat.size())
+          //   {
+          //     flag = 1;
+          //     exit(1);
+          //   }
+          //   else
+          //   {
+          //     flag = 0;
+          //   }
           // }
 
           i++;

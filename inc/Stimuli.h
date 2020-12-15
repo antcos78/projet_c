@@ -40,7 +40,7 @@ public:
   }
 
 
-  void parsingStimuli();
+  void parsingStimuli(char *mon_fichier_stimuli);
 
   void addEntree(const string & nom, const string & etat);
 
