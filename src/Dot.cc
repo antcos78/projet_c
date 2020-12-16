@@ -17,6 +17,7 @@ using namespace std;
 #include "../inc/Nand2.h"
 #include "../inc/Nor2.h"
 #include "../inc/Mux.h"
+#include "../inc/Bascule.h"
 
 
 Dot::Dot()
@@ -235,6 +236,10 @@ void Dot::parsingDot(char *mon_fichier)
         {
           addItems(entree, new Nand2(entree, 9, nbPorts));
         }
+        else if(type == "BASCULE")
+        {
+          addItems(entree, new Bascule(entree, 11, 1));
+        }
         else if(type == "MUX")
         {
           addItems(entree, new Mux(entree, 10, nbPorts+log2(nbPorts) ));
@@ -256,10 +261,6 @@ void Dot::parsingDot(char *mon_fichier)
             exit(5);
           }
         }
-
-
-
-
         else
         {
           cout << "erreur, porte non existante" << endl;

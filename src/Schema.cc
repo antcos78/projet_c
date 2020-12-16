@@ -93,6 +93,15 @@ void Schema::construction_schema( Dot z )
   string element;
   for(i=0;i<z.getnbItems();i++)  //on verifie sur tous les éléments de la map si c'est une entrée
   {
+    if(z.trouverItemsParNumero(i)->getType() == 11)
+    {
+      ajouterElements_schema(z.trouverItemsParNumero(i)->getNom());  //si oui on ajoute à la liste schema et input
+    }
+  }
+
+  for(i=0;i<z.getnbItems();i++)  //on verifie sur tous les éléments de la map si c'est une entrée
+  {
+
     if(z.trouverItemsParNumero(i)->getType() == 0)
     {
       ajouterElements_schema(z.trouverItemsParNumero(i)->getNom());  //si oui on ajoute à la liste schema et input
@@ -122,8 +131,12 @@ void Schema::construction_schema( Dot z )
 
         element = z.trouverItemsParNom(lireElements_schema(j))->getOutput(i);
         char nb_port = z.trouverItemsParNom(element)->getNbPorts();
+        if(z.trouverItemsParNom(element)->getType() == 11)
+        {
+          cout << "bascule " << endl;
+        }
 
-        if(nb_port == 1)
+        else if(nb_port == 1)
         {
           if(z.trouverItemsParNom(element)->getFlag()==0 )
           {

@@ -12,6 +12,7 @@
 #include "../inc/Output.h"
 #include "../inc/Simulateur.h"
 #include "../inc/Wavedrom.h"
+#include "../inc/Bascule.h"
 
 
 using namespace std;
