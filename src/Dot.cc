@@ -107,7 +107,7 @@ void Dot::parsingDot(char *mon_fichier)
             type += tab[i]; //Récupération du type présent dans label = " "
             if(tab[i] == ']')
             {
-              cout << "erreur guillemet" << endl;
+              cout << "erreur guillemet de fin" << endl;
               exit(4);
             }
             i++;
@@ -116,49 +116,61 @@ void Dot::parsingDot(char *mon_fichier)
         }
         else
         {
-          cout << "erreur guillemet" << endl;
+          cout << "erreur guillemet de début" << endl;
           exit(4);
         }
-
         i++;
-        if(tab[i]!=']')
+
+        if((type != "INPUT") && (type != "OUTPUT"))
         {
-          d = i;
-          /*if(tab[i] == ' ')
+          if(tab[i]!=' ')
           {
-          cout << "espace en trop avant ]" << endl;
-          exit(4);
-        }*/
-        if(tab[i]!=';')
-        {
-          i++;
-          for(int s = 0;i<d+6;i++,s++)
-          {
-            if(tab[i]!=sel[s])
-            {
-              cout <<" erreur sel mux" << endl;
-              exit(4);
-            }
+            cout << "Erreur : il doit y avoir un espace ou type différent de input/output" << endl;
+            exit(1);
           }
+
           i++;
-          if(tab[i] == 34)
+
+          if(tab[i]!=']')
+          {
+            d = i;
+            /*if(tab[i] == ' ')
+            {
+            cout << "espace en trop avant ]" << endl;
+            exit(4);
+          }*/
+          if(tab[i]!=';')
           {
             i++;
-            while(tab[i]!=34)
+            for(int s = 0;i<d+6;i++,s++)
             {
-              cout << select;
-              select += tab[i]; //Récupération du sel présent dans sel = " "
-              i++;
+              if(tab[i]!=sel[s])
+              {
+                cout <<" erreur sel mux" << endl;
+                exit(4);
+              }
             }
+            i++;
+            if(tab[i] == 34)
+            {
+              i++;
+              while(tab[i]!=34)
+              {
+                cout << select;
+                select += tab[i]; //Récupération du sel présent dans sel = " "
+                i++;
+              }
+            }
+            i++;
+            cout << "Entrée : " << entree << ", type : " << type << ", select :"<< select <<endl;
           }
-          i++;
-          cout << "Entrée : " << entree << ", type : " << type << ", select :"<< select <<endl;
+
         }
-        else
-        {
-          cout << "erreur crochet" << endl;
-          exit(4);
-        }
+      }
+      if(tab[i]!=']')
+      {
+        cout << "erreur crochet" << endl;
+        exit(4);
       }
 
       i++;
@@ -295,7 +307,7 @@ void Dot::parsingDot(char *mon_fichier)
                 if(m.count(entree) > 0){
                   if(m.count(porte) > 0){
                     trouverItemsParNom(entree)->ajoutOutput(porte);
-                    cout << "entree " << entree << "ajoute a " << porte << "mais inutile pour mux" << endl;
+                    cout << "entree " << entree << "ajoute a " << porte << endl;
 
                     entree = porte;
                     porte.clear();
