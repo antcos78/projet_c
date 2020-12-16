@@ -22,7 +22,7 @@ Stimuli::Stimuli()
 void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
 {
 
-  char tab[500];
+  char tab[3000];
   char a;
   int i = 0;
   int b;
@@ -199,7 +199,7 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
           }
           if(tab[i]!='}')
           {
-            cout << "Erreur avant l'accolade de fin" << endl;
+            cout << "Erreur à l'accolade de fin" << endl;
             exit(1);
           }
           i++;
@@ -208,10 +208,20 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
             cout << "Espace en trop avant la virgule" << endl;
             exit(1);
           }
-          if(tab[i] == ',')
+
+          if((tab[i]!=',')&&(tab[i+1] != ']'))
+          {
+            cout << "Erreur : il doit y avoir une virgule" << endl;
+            exit(1);
+          }
+          else if(tab[i]==',')
           {
             i++;
           }
+          // else
+          // {
+          //   i++;
+          // }
           // else
           // {
           //   cout << "Erreur : il manque la virgule de fin" << endl;
@@ -224,10 +234,9 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
           //   cout << "Espace en trop avant saut de ligne" << endl;
           //   exit(1);
           // }
-
           if(tab[i]!='\n')
           {
-            cout << "Erreur après l'accolade de fin de ligne" << endl;
+            cout << "Erreur après la fin de ligne" << endl;
             exit(1);
           }
           // else
