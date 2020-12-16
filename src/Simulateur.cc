@@ -73,15 +73,15 @@ void Simulateur::algo_simulation(int numero, Schema sch, Dot d, Stimuli sti)
         {
           if(d.trouverItemsParNom(sortie)->getType() == 10) //MUX
           {
-            if(d.trouverItemsParNom(sortie)->getEntreeSel()==d.trouverItemsParNom(element)->getNom())
+            if(d.trouverItemsParNom(sortie)->element_present_entree(element)==true)
             {
-              d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  2);
-              cout << "sortie mux" << element << endl;
+              d.trouverItemsParNom(sortie)->setEntree(element, delta_etat);
+              cout << "sortie mux " << element << endl;
             }
-            else if(d.trouverItemsParNom(sortie)->getFlag() != 1 )
+            else if(d.trouverItemsParNom(sortie)->element_present_entree_sel(element)==true)
             {
-              d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  0);
-              d.trouverItemsParNom(sortie)->setFlag(1);
+              d.trouverItemsParNom(sortie)->setEntreeSel(element,delta_etat);
+              cout << "sortie mux sel" << element << endl;
             }
             else
             {

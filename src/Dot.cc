@@ -226,11 +226,12 @@ void Dot::parsingDot(char *mon_fichier)
       }
       else if(type == "MUX")
       {
-        addItems(entree, new Mux(entree, 10, nbPorts+log2(nbPorts) ,select));
+        addItems(entree, new Mux(entree, 10, nbPorts+log2(nbPorts) ));
 
         if(m.count(entree) > 0){
           if(m.count(select) > 0){
             trouverItemsParNom(select)->ajoutOutput(entree);
+            trouverItemsParNom(entree)->setEntreeSel(select,0);
           }
           else
           {
@@ -283,11 +284,19 @@ void Dot::parsingDot(char *mon_fichier)
               i++;
               cout << "Entrée1 :" << entree << endl;
               cout << " porte : " << porte << endl;
+              if(trouverItemsParNom(porte)->getType()==10)
+              {
+                trouverItemsParNom(porte)->setEntree(entree,0);
+                cout << "entree " << entree << "ajoute a " << porte << endl;
+              }
               if(trouverItemsParNom(entree)->getType()!=1)
               {
+
                 if(m.count(entree) > 0){
                   if(m.count(porte) > 0){
                     trouverItemsParNom(entree)->ajoutOutput(porte);
+                    cout << "entree " << entree << "ajoute a " << porte << "mais inutile pour mux" << endl;
+
                     entree = porte;
                     porte.clear();
                   }
@@ -332,6 +341,11 @@ void Dot::parsingDot(char *mon_fichier)
         cout << " porte : " << porte << endl;
 
         if(m.count(entree) > 0){
+          if(trouverItemsParNom(porte)->getType()==10)
+          {
+            trouverItemsParNom(porte)->setEntree(entree,0);
+            cout << "entree " << entree << "ajoute a " << porte << endl;
+          }
           if(trouverItemsParNom(entree)->getType()!=1)
           {
             if(m.count(porte) > 0){

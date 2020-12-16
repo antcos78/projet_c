@@ -63,8 +63,19 @@ public:
   virtual char calculEtat(Stimuli sti, int numero_periode) {return 0;}
 
 
-  virtual string getEntreeSel() const=0;
-  virtual void setEntreeSel(const string & entree_sel) = 0;
+
+  virtual bool element_present_entree_sel(string nom) = 0;
+  virtual bool element_present_entree(string nom) = 0;
+
+  virtual char getEntreeSel_par_nom(string nom) {return 0;}
+  virtual char getEntreeSel_par_numero(int numero) {return 0;}
+
+  virtual void setEntreeSel(const string & nom,char etat)=0;
+
+  virtual char getEntree_par_nom(string nom) {return 0;}
+  virtual char getEntree_par_numero(int numero) {return 0;}
+
+  virtual void setEntree(const string & nom,char etat)=0;
 };
 
 

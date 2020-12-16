@@ -34,9 +34,18 @@ public:
   ///////méthodes//////
   char calculEtat();
 
-  string getEntreeSel() const{cout << "voila";}
-  void setEntreeSel(const string & entree_sel) {cout << "voila";}
+  virtual bool element_present_entree_sel(string nom) {int a = 0;}
+  virtual bool element_present_entree(string nom) {int a = 0;}
 
+  virtual char getEntreeSel_par_nom(string nom) {return 0;}
+  virtual char getEntreeSel_par_numero(int numero) {return 0;}
+
+  virtual void setEntreeSel(const string & nom,char etat){int a = 0;}
+
+  virtual char getEntree_par_nom(string nom){return 0;}
+  virtual char getEntree_par_numero(int numero) {return 0;}
+
+  virtual void setEntree(const string & nom,char etat){int a = 0;}
 };
 
 

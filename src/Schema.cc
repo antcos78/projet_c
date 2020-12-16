@@ -108,6 +108,7 @@ void Schema::construction_schema( Dot z )
 
   while(getNbElements_schema()+getNbElements_output() < z.getnbItems()) //tant que les éléments stockés ne sont pas égaux
   {
+    cout << lireElements_schema(j);
 
     if(j == getNbElements_schema()) //si nombre d'élément trop grand (element non connecté)
     {
@@ -120,6 +121,7 @@ void Schema::construction_schema( Dot z )
       {
 
         element = z.trouverItemsParNom(lireElements_schema(j))->getOutput(i);
+        cout << element;
         char nb_port = z.trouverItemsParNom(element)->getNbPorts();
 
         if(nb_port == 1)

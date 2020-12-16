@@ -7,6 +7,8 @@
 #include <sstream>
 #include <stdlib.h>
 #include <iomanip>
+#include <map>
+#include <vector>
 
 #include "Porte.h"
 
@@ -15,14 +17,17 @@ using namespace std;
 
 class Mux : public Porte {
 private:
-  string entree_sel;
+  map <string,char> m_entree_sel;
+  vector <string> v_entree_sel;
+  map <string,char> m_entree;
+  vector <string> v_entree;
+
 
 public:
   //////constructeur-destructeur///////
-  Mux(const string &nom, char type, char nbPorts,string entree_sel,char flag = 0):
+  Mux(const string &nom, char type, char nbPorts,char flag = 0):
   Porte(nom,type,nbPorts,flag)
   {
-    this->entree_sel = entree_sel;
     cout << "constructeur" << endl;
   }
 
@@ -36,8 +41,20 @@ public:
   ///////méthodes//////
   char calculEtat();
 
-  string getEntreeSel() const{return this->entree_sel;}
-  void setEntreeSel(const string & entree_sel){this->entree_sel = entree_sel; }
+  bool element_present_entree_sel(string nom);
+  bool element_present_entree(string nom);
+
+  char getEntreeSel_par_nom(string nom) const;
+  char getEntreeSel_par_numero(int numero) const;
+
+  void setEntreeSel(const string & nom,char etat){m_entree_sel[nom] = etat;
+                                                  v_entree_sel.push_back(nom);}
+
+  char getEntree_par_nom(string nom) const;
+  char getEntree_par_numero(int numero) const;
+
+  void setEntree(const string & nom,char etat){m_entree[nom] = etat;
+                                                v_entree.push_back(nom);}
 
 };
 
