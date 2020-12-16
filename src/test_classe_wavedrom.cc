@@ -35,11 +35,19 @@ int main ()
 
   sti.parsingStimuli(mon_fichier_stimuli);
 
+  //Ajouter controle taille sti et dot
 
   sch.construction_schema( dov );
   cout << "schema ok" << endl;
+  for(int i = 0; i < sch.getNbElements_schema() ; i ++)
+  {
+    cout << sch.lireElements_schema(i) << endl;
+  }
+
   simu.declaration_resultat(sch);
+  cout << "delcaration ok" << endl;
   simu.calcul_delta_cycle(sti, sch);
+  cout << "delta_cycle ok" << endl;
   simu.calcul_simulation(sti.getnbPeriode(), sch, dov,sti);
 
 
