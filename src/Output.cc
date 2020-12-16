@@ -22,6 +22,5 @@ int Output::getNbEtat() const
 
 void Output::ajoutEtat(char etat_s, int numero_etat)
 {
-  cout << "ca marche";
   etat[numero_etat] = etat_s;
 }

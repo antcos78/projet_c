@@ -53,7 +53,6 @@ void Simulateur::algo_simulation(int numero, Schema sch, Dot d, Stimuli sti)
     }
     else
     {
-
       delta_etat = d.trouverItemsParNom(element)->calculEtat();
       d.trouverItemsParNom(element)->setFlag(0);
     }
@@ -64,10 +63,10 @@ void Simulateur::algo_simulation(int numero, Schema sch, Dot d, Stimuli sti)
       for(int j = 0; j < d.trouverItemsParNom(element)->getNbOutput(); j++) //Pour chaque sortie
       {
         string sortie = d.trouverItemsParNom(element)->getOutput(j);
-
-        if(d.trouverItemsParNom(sortie)->getNbPorts() == 1)
+        cout << "element" << element <<" sortie" << sortie << " etat  " << delta_etat << "flag : " << d.trouverItemsParNom(sortie)->getFlag()<< endl;
+        if(d.trouverItemsParNom(sortie)->getNbPorts() == 1) //output
         {
-          d.trouverItemsParNom(sortie)->ajoutEtat(delta_etat, j);
+          d.trouverItemsParNom(sortie)->ajoutEtat(delta_etat, 0);
         }
         else
         {
@@ -90,7 +89,7 @@ void Simulateur::algo_simulation(int numero, Schema sch, Dot d, Stimuli sti)
               cout << "delta etat" << delta_etat << endl;
             }
           }
-          else if(d.trouverItemsParNom(sortie)->getFlag() != (d.trouverItemsParNom(element)->getNbPorts() - 1) )
+          else
           {
             d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  d.trouverItemsParNom(sortie)->getFlag() );
             d.trouverItemsParNom(sortie)->setFlag(d.trouverItemsParNom(sortie)->getFlag() + 1);
