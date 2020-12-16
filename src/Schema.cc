@@ -23,6 +23,7 @@ int Schema::getNbElements_output()
 
 void Schema::ajouterElements_schema(const string & nom)
 {
+  cout << "element ajouté" << endl;
   schema.push_back(nom);
 }
 void Schema::ajouterElements_input(const string & nom)
@@ -145,7 +146,9 @@ void Schema::construction_schema( Dot z )
 
         else
         {
-          if(z.trouverItemsParNom(element)->getFlag() != (z.trouverItemsParNom(element)->getNbPorts() - 1))
+          cout << "nb ports : " << z.trouverItemsParNom(element)->getNbPorts() << endl;
+          cout << "element " << element << "flag : " << z.trouverItemsParNom(element)->getFlag() << endl;
+          if(z.trouverItemsParNom(element)->getFlag() < (z.trouverItemsParNom(element)->getNbPorts() - 1))
           {
             z.trouverItemsParNom(element)->setFlag(z.trouverItemsParNom(element)->getFlag() +1);
           }

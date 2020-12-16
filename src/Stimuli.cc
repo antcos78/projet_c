@@ -162,6 +162,11 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
                 cout << "Erreur : il manque l'apostrophe après l'état" << endl;
                 exit(1);
               }
+              if((tab[i]!='0')&&(tab[i]!='1')&&(tab[i]!='.'))
+              {
+                cout << "Erreur dans les valeurs d'état" << endl;
+                exit(1);
+              }
               i++;
             }
             cout << "Etat : " << etat << endl;
