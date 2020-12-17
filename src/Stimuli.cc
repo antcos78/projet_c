@@ -34,8 +34,8 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
   ifstream monFlux(mon_fichier_stimuli);
 
   char signal [10] = {'{','s','i','g','n','a','l',':',' ','['};
-  char name [6] = {'n','a','m','e',':',' '};
-  char wave [8] = {',',' ','w','a','v','e',':',' '};
+  char name [5] = {'n','a','m','e',':'};
+  char wave [6] = {'w','a','v','e',':',' '};
 
   string nom;
   string etat;
@@ -50,8 +50,15 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
 
   while(monFlux.get(a)) //Récupération des données
   {
+    // if(tab[i] == ' ')
+    // {
+    //   i++;
+    // }
+    // else
+    // {
     tab[i] = a; //On transfère la donnée
     i++;
+    // }
   }
 
 
@@ -98,7 +105,7 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
           }
 
           b = i;
-          for(int c = 0;i<b+6;i++,c++)
+          for(int c = 0;i<b+5;i++,c++)
           {
             if(tab[i]!=name[c])
             {
@@ -107,6 +114,10 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
             }
           }
 
+          while(tab[i]==' ')
+          {
+            i++;
+          }
 
           if(tab[i] == 39)
           {
@@ -129,9 +140,20 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
             exit(1);
           }
           i++;
+          if(tab[i]!=',')
+          {
+            cout << "Erreur il doit y avoir une virgule" << endl;
+            exit(1);
+          }
+          i++;
+
+          while(tab[i]==' ')
+          {
+            i++;
+          }
 
           d = i;
-          for(int e = 0;i<d+8;i++,e++)
+          for(int e = 0;i<d+6;i++,e++)
           {
             if(tab[i]!=wave[e])
             {
