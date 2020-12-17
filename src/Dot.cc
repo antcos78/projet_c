@@ -37,7 +37,7 @@ void Dot::parsingDot(char *mon_fichier)
   int nbPorts;
   ifstream monFlux(mon_fichier);
 
-  char digraph [14] = {'d','i','g','r','a','p','h',' ','t','e','s','t',' ','{'};
+  char digraph [7] = {'d','i','g','r','a','p','h'};
   char label [8] = {'l','a','b','e','l',' ','=',' '};
   char sel [6] = {'s','e','l',' ','=',' '};
 
@@ -46,6 +46,7 @@ void Dot::parsingDot(char *mon_fichier)
   string select;
   string porte;
 
+  bool flag = false;
 
   if (monFlux.is_open()!=true)
   {
@@ -67,29 +68,37 @@ void Dot::parsingDot(char *mon_fichier)
   //i = 0; //Remise à 0 du compteur
   while(tab[i]=='\n'){i++;}
   b = i;
-  for(int c = 0;i<b+14;i++,c++)
+  for(int c = 0;i<b+7;i++,c++)
   {
     if(tab[i]!=digraph[c])
     {
       cout <<" Erreur digraph" << endl; //Si texte différente de digraph test{ alors erreur
+      exit(1);
       }
     }
+    while(tab[i]!='{'){i++;}
+    i++;
     while(tab[i]!='}')
     {
       while(tab[i]=='\n'){i++;}
-      while((tab[i]!=' '))
+      while((tab[i]!=' ')&&(flag == false))
       {
 
-        entree += tab[i];
         if((tab[i]=='[')||(tab[i]=='-'))
         {
           cout << "manque espace après nom" << endl;
-          exit(5);
+          flag = true;
+          continue;
         }
+        else
+        {
+          entree += tab[i];
+        }
+
         i++;
       }
+      flag = false;
       while(tab[i] == ' '){i++;}
-
       if(tab[i] == '[')
       {
         i++;
@@ -126,15 +135,12 @@ void Dot::parsingDot(char *mon_fichier)
         }
         i++;
 
-        if((type != "INPUT") && (type != "OUTPUT"))
-        {
-          if(tab[i]!=' ')
+
+          while(tab[i]==' ')
           {
-            cout << "Erreur : il doit y avoir un espace ou type différent de input/output" << endl;
-            exit(1);
+            i++;
           }
 
-          i++;
 
           if(tab[i]!=']')
           {
@@ -164,12 +170,11 @@ void Dot::parsingDot(char *mon_fichier)
             }
 
           }
-        }
-        cout << tab[i];
+
 
         if(tab[i]!=']')
         {
-          cout << "erreur crochet" << endl;
+          cout << "erreur crochet de fin" << endl;
           exit(4);
         }
 
@@ -189,8 +194,13 @@ void Dot::parsingDot(char *mon_fichier)
         }
         i++;
 
-        // e = i;
-        if((type != "NOT") && (type != "INPUT") && (type != "OUTPUT"))
+        if(type.size() == 0)
+        {
+          cout << "Pas de type dans le label" << endl;
+          exit(5);
+        }
+
+        if((type != "NOT") && (type != "INPUT") && (type != "OUTPUT")&&(type != "FF"))
         {
           // for(e = i; tab[e] < type.size(); e++, i++)
           // {
@@ -236,7 +246,7 @@ void Dot::parsingDot(char *mon_fichier)
         {
           addItems(entree, new Nand2(entree, 9, nbPorts));
         }
-        else if(type == "BASCULE")
+        else if(type == "FF")
         {
           addItems(entree, new Bascule(entree, 11, 1));
         }
@@ -325,13 +335,13 @@ void Dot::parsingDot(char *mon_fichier)
                   }
                   else
                   {
-                    cout << "erreur nom interconnexion" << endl;
+                    cout << "Erreur porte non existante 1" << endl;
                     exit(5);
                   }
                 }
                 else
                 {
-                  cout << "erreur nom interconnexion" << endl;
+                  cout << "Erreur porte non existante 2" << endl;
                   exit(5);
                 }
               }
@@ -357,14 +367,13 @@ void Dot::parsingDot(char *mon_fichier)
             exit(3);
           }
           cout << "Entrée1 :" << entree << endl;
-          cout << " porte : " << porte << endl;
+          cout << "Porte : " << porte << endl;
 
           if(m.count(porte) > 0){
-
             if(m.count(entree) > 0){
               if(trouverItemsParNom(porte)->getType()==0)
               {
-                cout << "attention entrée en sortie d'élément" <<endl;
+                cout << "Attention INPUT en sortie d'élément" <<endl;
                 exit(4);
               }
               if(trouverItemsParNom(porte)->getType()==10)
@@ -374,16 +383,10 @@ void Dot::parsingDot(char *mon_fichier)
               }
               if(trouverItemsParNom(entree)->getType()!=1)
               {
-                if(m.count(porte) > 0){
                   trouverItemsParNom(entree)->ajoutOutput(porte);
                   entree = porte;
                   porte.clear();
-                }
-                else
-                {
-                  cout << "erreur nom interconnexion" << endl;
-                  exit(5);
-                }
+
               }
               else
               {
@@ -393,13 +396,13 @@ void Dot::parsingDot(char *mon_fichier)
             }
             else
             {
-              cout << "erreur nom interconnexion" << endl;
+              cout << "Erreur porte non existante 3" << endl;
               exit(5);
             }
           }
           else
           {
-            cout << "erreur nom interconnexion" << endl;
+            cout << "Erreur porte non existante 4" << endl;
             exit(5);
           }
         }
@@ -433,7 +436,6 @@ void Dot::parsingDot(char *mon_fichier)
   }
 
 
-  //addItems(porte, Not(porte,0,1))
 
   void Dot::addItems(const string & nom, Items *p_items)
   {
