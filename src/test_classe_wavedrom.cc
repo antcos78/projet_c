@@ -29,28 +29,46 @@ int main ()
 
 
 
-  char *mon_fichier = "/home/phelma/Documents/AND.gv";
-  char *mon_fichier_stimuli = "/home/phelma/Documents/Inputs.json";
+  char *mon_fichier = "/home/phelma/Documents/Examen/structure_ok/register.dot";
+  char *mon_fichier_stimuli = "/home/phelma/Documents/Examen/Stimuli_check/Erreur_mauvais_nom2.json";
 
   dov.parsingDot(mon_fichier);
 
   sti.parsingStimuli(mon_fichier_stimuli);
 
-  //Ajouter controle taille sti et dot
+
+
 
   sch.construction_schema( dov );
   cout << "schema ok" << endl;
+  cout << endl << endl;
+
+  if(sch.getNbElements_input() == sti.getnbEntree())
+  {
+    for(int i = 0; i < sch.getNbElements_input(); i++)
+    {
+      sti.recupEntreeParNom(dov.trouverItemsParNumero(i)->getNom(),0);
+    }
+  }
+  else
+  {
+    cout << "erreur nombre entree stimuli et dot" << endl;
+    exit(1);
+  }
+
+
   for(int i = 0; i < sch.getNbElements_schema() ; i ++)
   {
-    cout << sch.lireElements_schema(i) << endl;
+    cout << "Nom : " <<sch.lireElements_schema(i)<< "    Type : " << (int*)dov.trouverItemsParNom(sch.lireElements_schema(i))->getType();
+    cout <<"    Ports : " << (int*)dov.trouverItemsParNom(sch.lireElements_schema(i))->getNbPorts() << endl;
   }
+  cout << endl << endl;
 
   simu.declaration_resultat(sch);
   cout << "delcaration ok" << endl;
   simu.calcul_delta_cycle(sti, sch);
   cout << "delta_cycle ok" << endl;
   simu.calcul_simulation(sti.getnbPeriode(), sch, dov,sti);
-
 
   for(int j = 0; j < simu.getNbElements_resultat(); j++ )
   {

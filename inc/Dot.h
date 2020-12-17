@@ -16,10 +16,6 @@
 using namespace std;
 
 class Dot{
-
-//  friend ostream& operator<<(ostream& out, const Zoo &z);
-
-
 private:
 
   map<string,Items*> m;
@@ -40,16 +36,13 @@ public:
   }
 
 
-  void parsingDot(char *mon_fichier);
+  void parsingDot(char *mon_fichier);  //parsing
 
-  void addItems(const string & nom, Items *p_items);
+  void addItems(const string & nom, Items *p_items);  //Ajoute élément map
 
-  Items * trouverItemsParNom( const string & nom);
+  Items * trouverItemsParNom( const string & nom);  //Récupère élement map à l'aide d'un nom
 
-  Items * trouverItemsParNumero(int numero);
-
-
-
+  Items * trouverItemsParNumero(int numero);  //Récupère élement map à l'aide d'un numéro
 };
 
 

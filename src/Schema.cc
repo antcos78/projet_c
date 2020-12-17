@@ -1,11 +1,10 @@
-
 #include "../inc/Schema.h"
 
 
 
 using namespace std;
 
-int Schema::getNbElements_schema()
+int Schema::getNbElements_schema()  
 {
   return schema.size();
 }
@@ -20,6 +19,10 @@ int Schema::getNbElements_output()
   return output.size();
 }
 
+int Schema::getNbElements_bascule()
+{
+  return bascule.size();
+}
 
 void Schema::ajouterElements_schema(const string & nom)
 {
@@ -33,6 +36,10 @@ void Schema::ajouterElements_input(const string & nom)
 void Schema::ajouterElements_output(const string & nom)
 {
   output.push_back(nom);
+}
+void Schema::ajouterElements_bascule(const string & nom)
+{
+  bascule.push_back(nom);
 }
 
 string Schema::lireElements_schema(int numero)
@@ -85,17 +92,30 @@ string Schema::lireElements_input(int numero)
   }
 }
 
+string Schema::lireElements_bascule(int numero)
+{
+  if(numero < getNbElements_bascule())
+  {
+    return bascule[numero];
+  }
+  else
+  {
+    cout << "erreur dimension bascule" << endl;
+    exit(2);
+  }
+}
 
 void Schema::construction_schema( Dot z )
 {
   int i = 0;
   int j;
   string element;
-  for(i=0;i<z.getnbItems();i++)  //on verifie sur tous les éléments de la map si c'est une entrée
+  for(i=z.getnbItems()-1;i>=0;i--)  //on verifie sur tous les éléments de la map si c'est une entrée
   {
     if(z.trouverItemsParNumero(i)->getType() == 11)
     {
-      ajouterElements_schema(z.trouverItemsParNumero(i)->getNom());  //si oui on ajoute à la liste schema et input
+      ajouterElements_schema(z.trouverItemsParNumero(i)->getNom());  //si oui on ajoute à la liste schema et bascule
+      ajouterElements_bascule(z.trouverItemsParNumero(i)->getNom());
     }
   }
 

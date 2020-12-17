@@ -34,7 +34,7 @@ public:
     cout << "destruction" << endl;
   }
 
-
+  //Permet de générer le fichier .json
   void generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu);
 
 };

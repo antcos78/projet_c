@@ -41,18 +41,22 @@ public:
   ///////méthodes//////
   char calculEtat();
 
+  //Récupère présence élément dans les map//
   bool element_present_entree_sel(string nom);
   bool element_present_entree(string nom);
 
+  //Accesseurs entrée sel
   char getEntreeSel_par_nom(string nom) const;
   char getEntreeSel_par_numero(int numero) const;
 
+  //modifieur SEL
   void setEntreeSel(const string & nom,char etat){m_entree_sel[nom] = etat;
                                                   v_entree_sel.push_back(nom);}
 
+  //Accesseurs entrée
   char getEntree_par_nom(string nom) const;
   char getEntree_par_numero(int numero) const;
-
+  //Modifieur entréé
   void setEntree(const string & nom,char etat){m_entree[nom] = etat;
                                                 v_entree.push_back(nom);}
 

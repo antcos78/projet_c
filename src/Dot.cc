@@ -33,13 +33,16 @@ void Dot::parsingDot(char *mon_fichier)
   int b;
   int d;
   int q = 0;
-  // int e;
   int nbPorts;
+
+
   ifstream monFlux(mon_fichier);
+
 
   char digraph [7] = {'d','i','g','r','a','p','h'};
   char label [8] = {'l','a','b','e','l',' ','=',' '};
   char sel [6] = {'s','e','l',' ','=',' '};
+
 
   string entree;
   string type;
@@ -47,6 +50,8 @@ void Dot::parsingDot(char *mon_fichier)
   string porte;
 
   bool flag = false;
+
+
 
   if (monFlux.is_open()!=true)
   {
@@ -60,12 +65,10 @@ void Dot::parsingDot(char *mon_fichier)
   {
 
     tab[i] = a; //On transfère la donnée
-    //cout << a << endl; //On affiche chaque caractère
     i++;
   }
   i = 0;
 
-  //i = 0; //Remise à 0 du compteur
   while(tab[i]=='\n'){i++;}
   b = i;
   for(int c = 0;i<b+7;i++,c++)
@@ -86,7 +89,6 @@ void Dot::parsingDot(char *mon_fichier)
 
         if((tab[i]=='[')||(tab[i]=='-'))
         {
-          cout << "manque espace après nom" << endl;
           flag = true;
           continue;
         }
@@ -98,6 +100,8 @@ void Dot::parsingDot(char *mon_fichier)
         i++;
       }
       flag = false;
+
+      //Crochet
       while(tab[i] == ' '){i++;}
       if(tab[i] == '[')
       {
@@ -113,6 +117,7 @@ void Dot::parsingDot(char *mon_fichier)
           }
         }
 
+        //Guillemet
         if(tab[i] == 34)
         {
           i++;
@@ -128,6 +133,7 @@ void Dot::parsingDot(char *mon_fichier)
           }
           cout << "Entrée : " << entree << ", type : " << type <<endl;
         }
+
         else
         {
           cout << "erreur guillemet de début" << endl;
@@ -200,16 +206,14 @@ void Dot::parsingDot(char *mon_fichier)
           exit(5);
         }
 
-        if((type != "NOT") && (type != "INPUT") && (type != "OUTPUT")&&(type != "FF"))
+        if((type != "NOT") && (type != "INPUT") && (type != "OUTPUT")&&(type != "FF")) //Pour le choix du nombre de ports
         {
-          // for(e = i; tab[e] < type.size(); e++, i++)
-          // {
           nbPorts = type[type.size() - 1] - 48;
           cout << "nb de port = " << nbPorts << endl;
           type.erase(type.size() - 1);
-          // }
         }
 
+        //Liste des portes possibles et ajout à la map des objets
         if(type == "INPUT")
         {
           addItems(entree, new Input(entree, 0, 0));
@@ -282,7 +286,6 @@ void Dot::parsingDot(char *mon_fichier)
         select.clear();
 
         cout << "Ligne finie" << endl;
-        /////CREATION DE L'OBJET//////
       }
 
       else if(tab[i]=='-')

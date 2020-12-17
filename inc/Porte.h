@@ -41,27 +41,19 @@ public:
     cout << "destruction" << endl;
   }
 
-  //////accesseur//////
+  //////OUTPUT//////
   string getOutput(int numero_element) const;
-
   int getNbOutput() const;
-
   void ajoutOutput(string output_d);
 
-
+  ////ETAT////
   char getEtat(int numero_etat) const;
-
   int getNbEtat() const;
-
   void ajoutEtat(char etat, int numero_etat);
 
-
+  /////FLAG/////
   void setFlag(char flag);
-
   char getFlag()const;
-
-
-
 };
 
 

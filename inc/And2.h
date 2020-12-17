@@ -21,18 +21,20 @@ public:
   And2(const string &nom, char type, char nbPorts,char flag = 0):
   Porte(nom,type,nbPorts,flag)
   {
-    cout << "constructeur" << endl;
+    cout << "constructeur AND2" << endl;
   }
-
 
   ~And2()
   {
-    cout << "destruction" << endl;
+    cout << "destruction AND2" << endl;
 
   }
 
   ///////méthodes//////
   char calculEtat();
+
+
+  //inutile
   virtual bool element_present_entree_sel(string nom) {int a = 0;}
   virtual bool element_present_entree(string nom) {int a = 0;}
 

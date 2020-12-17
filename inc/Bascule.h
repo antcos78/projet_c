@@ -24,20 +24,20 @@ public:
   Bascule(const string &nom, char type, char nbPorts,int flag = 0):
   Porte(nom,type,nbPorts,flag)
   {
-    cout << "constructeur" << endl;
+    cout << "constructeur Bascule" << endl;
   }
 
 
   ~Bascule()
   {
-    cout << "destruction" << endl;
+    cout << "destruction Bascule" << endl;
   }
 
   ///////méthodes//////
   char calculEtat();
 
 
-
+  //inutile
   virtual bool element_present_entree_sel(string nom) {int a = 0;}
   virtual bool element_present_entree(string nom) {int a = 0;}
 

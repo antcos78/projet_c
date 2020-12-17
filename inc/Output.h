@@ -42,6 +42,7 @@ public:
   ///////méthodes//////
   char calculEtat();
 
+  //INUTILE
    string getOutput(int numero_element) const{return "0";}
    int getNbOutput() const  {return 0;}
    void ajoutOutput(string output_d) {this->a=0;}

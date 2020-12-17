@@ -72,12 +72,12 @@ void Simulateur::algo_simulation(int numero, Schema sch, Dot d, Stimuli sti)
         {
           if(d.trouverItemsParNom(sortie)->getType() == 10) //MUX
           {
-            if(d.trouverItemsParNom(sortie)->element_present_entree(element)==true)
+            if(d.trouverItemsParNom(sortie)->element_present_entree(element)==true) //si entree est une "entree"
             {
               d.trouverItemsParNom(sortie)->setEntree(element, delta_etat);
               cout << "sortie mux " << element << endl;
             }
-            else if(d.trouverItemsParNom(sortie)->element_present_entree_sel(element)==true)
+            else if(d.trouverItemsParNom(sortie)->element_present_entree_sel(element)==true)  //Si entree est un "sel"
             {
               d.trouverItemsParNom(sortie)->setEntreeSel(element,delta_etat);
               cout << "sortie mux sel" << element << endl;
@@ -89,7 +89,7 @@ void Simulateur::algo_simulation(int numero, Schema sch, Dot d, Stimuli sti)
               cout << "delta etat" << delta_etat << endl;
             }
           }
-          else
+          else  //Si different de mux
           {
             d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  d.trouverItemsParNom(sortie)->getFlag() );
             d.trouverItemsParNom(sortie)->setFlag(d.trouverItemsParNom(sortie)->getFlag() + 1);
@@ -112,7 +112,7 @@ void Simulateur::calcul_simulation(int nb_periode, Schema sch, Dot d, Stimuli st
   for(int i = 0; i < nb_periode; i ++)
   {
     cout << " nb_periode :    " << getDelta_cycle(i) << endl;
-    if(getDelta_cycle(i) == 0)
+    if((getDelta_cycle(i) == 0)||(sch.getNbElements_bascule()!=0))
     {
       algo_simulation(i, sch, d, sti);
     }

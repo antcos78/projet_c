@@ -16,27 +16,24 @@ using namespace std;
 
 
 class Input : public  Porte {
-
-
 public:
   //////constructeur-destructeur///////
   Input(const string &nom, char type, char nbPorts,int flag = 0):
   Porte(nom,type,nbPorts,flag)
   {
-    cout << "constructeur" << endl;
+    cout << "constructeur Input" << endl;
   }
-
 
   ~Input()
   {
-    cout << "destruction" << endl;
+    cout << "destruction Input" << endl;
   }
 
   ///////méthodes//////
   char calculEtat(Stimuli sti, int numero_periode);
 
 
-
+  //inutile
   virtual bool element_present_entree_sel(string nom) {int a = 0;}
   virtual bool element_present_entree(string nom) {int a = 0;}
 

@@ -33,6 +33,9 @@ public:
 
   ///////méthodes//////
   char calculEtat();
+
+
+  //Inutile
   virtual bool element_present_entree_sel(string nom) {int a = 0;}
   virtual bool element_present_entree(string nom) {int a = 0;}
 

@@ -23,6 +23,7 @@ private:
   list <string> schema;
   vector <string> input;
   vector <string> output;
+  vector <string> bascule;
 
 public:
   //////constructeur-destructeur///////
@@ -41,14 +42,18 @@ public:
   int getNbElements_schema();
   int getNbElements_input();
   int getNbElements_output();
+  int getNbElements_bascule();
+
 
   void ajouterElements_schema(const string & nom);
   void ajouterElements_input(const string & nom);
   void ajouterElements_output(const string & nom);
+  void ajouterElements_bascule(const string & nom);
 
   string lireElements_schema(int numero);
   string lireElements_output(int numero);
   string lireElements_input(int numero);
+  string lireElements_bascule(int numero);
 
   void construction_schema( Dot z );
 

@@ -50,15 +50,8 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
 
   while(monFlux.get(a)) //Récupération des données
   {
-    // if(tab[i] == ' ')
-    // {
-    //   i++;
-    // }
-    // else
-    // {
     tab[i] = a; //On transfère la donnée
     i++;
-    // }
   }
 
 
@@ -85,6 +78,11 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
         if(tab[i] == ']')
         {
           cout << "Erreur pour le crochet de fin" << endl;
+          exit(1);
+        }
+        if(tab[i]=='n')
+        {
+          cout << "Erreur : manque accolade de début" << endl;
           exit(1);
         }
       }
@@ -146,7 +144,11 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
             exit(1);
           }
           i++;
-
+          if(nom.size() == 0)
+          {
+            cout <<"pas de nom d'entrée" << endl;
+            exit(5);
+          }
           while(tab[i]==' ')
           {
             i++;
@@ -198,7 +200,11 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
             cout << "Erreur avant l'apostrophe avant l'état" << endl;
             exit(1);
           }
-
+          if(etat.size() == 0)
+          {
+            cout <<"pas d'état" << endl;
+            exit(5);
+          }
           if(line == 0)
           {
             periode = etat.size();
@@ -231,7 +237,7 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
             exit(1);
           }
 
-          if((tab[i]!=',')&&(tab[i+1] != ']'))
+          if((tab[i]!=',')&&((tab[i+1] != ']')&&(tab[i+1] != '}')))
           {
             cout << "Erreur : il doit y avoir une virgule" << endl;
             exit(1);
@@ -240,32 +246,13 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
           {
             i++;
           }
-          // else
-          // {
-          //   i++;
-          // }
-          // else
-          // {
-          //   cout << "Erreur : il manque la virgule de fin" << endl;
-          //   exit(1);
-          // }
-          // i++;
 
-          // if(tab[i] == ' ')
-          // {
-          //   cout << "Espace en trop avant saut de ligne" << endl;
-          //   exit(1);
-          // }
           if(tab[i]!='\n')
           {
             cout << "Erreur après la fin de ligne" << endl;
             exit(1);
           }
-          // else
-          // {
-          //   cout << "Erreur après l'accolade de fin de ligne" << endl;
-          //   exit(1);
-          // }
+
           i++;
 
 
@@ -276,32 +263,15 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
 
           cout << "Ligne finie" << endl;
         }
+        else
+        {
+          cout << "Manque accolade de début" << endl;
+          exit (4);
+        }
         if(tab[i]=='\n')
         {
           i++;
         }
-
-
-
-        // else
-        // {
-        //   cout << "Erreur : La ligne doit commencer par une accolade" << endl;
-        //   exit(1);
-        // }
-
-        // if(tab[i]!='\n')
-        // {
-        //   cout << "Erreur : La ligne doit commencer par une accolade" << endl;
-        //   exit(1);
-        // }
-
-      // cout << tab[i] << "a" << endl;
-      // if(tab[i]!=']')
-      // {
-      //   cout << "Erreur avant le crochet de fin de programme" << endl;
-      //   exit(1);
-      // }
-
     }
     i++;
 
@@ -333,10 +303,7 @@ void Stimuli::addEntree(const string & nom, const string & etat)
 
 char Stimuli::recupEntreeParNom(const string & nom, int numero)
 {
-  //   // for (map<string,string>::const_iterator it =  m_stimuli.find(nom); it!=m_stimuli.end(); ++it)
-  //   // {
-  //   //   return it->second;
-  //   // }
+
   if(m_stimuli.count(nom) == 0)
   {
     cout << "L'entrée n'existe pas" << endl;
@@ -358,20 +325,6 @@ char Stimuli::recupEntreeParNom(const string & nom, int numero)
 
     i++;
   }
-
-  // i = 0;
-  // for(string::iterator iter=m_stimuli[nom].begin(); m_stimuli[nom]<getNbElements_input(); ++iter)
-  // {
-  //   if(i == nom)
-  //   {
-  //     continue;
-  //   }
-  //   else
-  //   {
-  //     return lireElements_input();
-  //   }
-  // }
-
 }
 
 char Stimuli::recupEntreeParNumero(int numeroEntree, int numeroBool)
@@ -383,8 +336,6 @@ char Stimuli::recupEntreeParNumero(int numeroEntree, int numeroBool)
   }
 
   string nom = v_stimuli[numeroEntree];
-  //cout << nom;
-
 
   map<string,string>::const_iterator it =  m_stimuli.find(nom);
   if(it == m_stimuli.end()) {
@@ -394,7 +345,6 @@ char Stimuli::recupEntreeParNumero(int numeroEntree, int numeroBool)
   int i = 0;
   for (string::iterator itr=m_stimuli[nom].begin(); itr!=m_stimuli[nom].end(); ++itr)
   {
-    //cout << i;
     if(i==numeroBool)
     {
       return *itr;
