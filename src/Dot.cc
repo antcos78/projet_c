@@ -58,7 +58,7 @@ void Dot::parsingDot(char *mon_fichier)
     cout << "Problème de fichier" << endl;
     exit(3);
   }
-  cout <<endl << endl << "Fichier ouvert" << endl << endl << endl;
+  cout <<endl << endl << "Fichier ouvert" << endl << endl;
 
 
   while(monFlux.get(a)) //Récupération des données
@@ -112,7 +112,7 @@ void Dot::parsingDot(char *mon_fichier)
         {
           if(tab[i]!=label[c])
           {
-            cout <<" erreur label" << endl;
+            cout <<" Erreur label" << endl;
             exit(4);
           }
         }
@@ -126,7 +126,7 @@ void Dot::parsingDot(char *mon_fichier)
             type += tab[i]; //Récupération du type présent dans label = " "
             if(tab[i] == ']')
             {
-              cout << "erreur guillemet de fin" << endl;
+              cout << "Erreur guillemet de fin" << endl;
               exit(4);
             }
             i++;
@@ -136,7 +136,7 @@ void Dot::parsingDot(char *mon_fichier)
 
         else
         {
-          cout << "erreur guillemet de début" << endl;
+          cout << "Erreur guillemet de début" << endl;
           exit(4);
         }
         i++;
@@ -159,7 +159,7 @@ void Dot::parsingDot(char *mon_fichier)
             {
               if(tab[i]!=sel[s])
               {
-                cout <<" erreur sel mux" << endl;
+                cout <<" Erreur sel mux" << endl;
                 exit(4);
               }
             }
@@ -182,7 +182,7 @@ void Dot::parsingDot(char *mon_fichier)
 
         if(tab[i]!=']')
         {
-          cout << "erreur crochet de fin" << endl;
+          cout << "Erreur crochet de fin" << endl;
           exit(4);
         }
 
@@ -190,28 +190,28 @@ void Dot::parsingDot(char *mon_fichier)
 
         if(tab[i]!=';')
         {
-          cout <<"erreur point virgule" << endl;
+          cout <<"Erreur point virgule" << endl;
           exit(4);
         }
         i++;
 
         if(tab[i]!='\n')
         {
-          cout <<"erreur saut de ligne" << endl;
+          cout <<"Erreur saut de ligne" << endl;
           exit(4);
         }
         i++;
 
         if(type.size() == 0)
         {
-          cout << "Pas de type dans le label" << endl;
+          cout << "Erreur pas de type dans le label" << endl;
           exit(5);
         }
 
         if((type != "NOT") && (type != "INPUT") && (type != "OUTPUT")&&(type != "FF")) //Pour le choix du nombre de ports, ceux la ne sont pas possibles
         {
           nbPorts = type[type.size() - 1] - 48;
-          cout << "nb de port = " << nbPorts << endl;
+          cout << "Nombre de ports = " << nbPorts << endl;
           type.erase(type.size() - 1);
         }
 
@@ -267,19 +267,19 @@ void Dot::parsingDot(char *mon_fichier)
             }
             else
             {
-              cout << "erreur nom interconnexion" << endl;
+              cout << "Erreur nom interconnexion" << endl;
               exit(5);
             }
           }
           else
           {
-            cout << "erreur nom interconnexion" << endl;
+            cout << "Erreur nom interconnexion" << endl;
             exit(5);
           }
         }
         else
         {
-          cout << "erreur, porte non existante" << endl;
+          cout << "Erreur, porte non existante" << endl;
           exit(4);
         }
 
@@ -320,13 +320,13 @@ void Dot::parsingDot(char *mon_fichier)
                     if(trouverItemsParNom(porte)->getType()==10) //Si mux
                     {
                       trouverItemsParNom(porte)->setEntree(entree,0);
-                      cout << "Entree " << entree << "ajoute a " << porte << endl<<endl;
+                      cout << "Entrée " << entree << " ajouté à " << porte << endl<<endl;
                     }
                     if(trouverItemsParNom(entree)->getType()!=1)  //Autre que output
                     {
 
                       trouverItemsParNom(entree)->ajoutOutput(porte);
-                      cout << "Entree " << entree << " ajoute a " << porte << endl<<endl;
+                      cout << "Entrée " << entree << " ajouté à " << porte << endl<<endl;
 
                       entree = porte;
                       porte.clear();
@@ -353,21 +353,21 @@ void Dot::parsingDot(char *mon_fichier)
 
               else
               {
-                cout << "manque >" << endl;
+                cout << "Manque >" << endl;
                 exit(3);
               }
 
             }
             else if(tab[i]=='>')
             {
-              cout << "manque -" << endl;
+              cout << "Manque -" << endl;
               exit(10);
             }
 
           }while((tab[i]!=';')&&(tab[i]!='\n'));
           if(tab[i]=='\n')
           {
-            cout << "erreur fin de ligne";
+            cout << "Erreur fin de ligne";
             exit(3);
           }
           cout << "Entrée :" << entree << endl;
@@ -383,12 +383,12 @@ void Dot::parsingDot(char *mon_fichier)
               if(trouverItemsParNom(porte)->getType()==10)
               {
                 trouverItemsParNom(porte)->setEntree(entree,0);
-                cout << "Entree " << entree << " ajoute a " << porte << endl<<endl;
+                cout << "Entrée " << entree << " ajouté à " << porte << endl<<endl;
               }
               if(trouverItemsParNom(entree)->getType()!=1)
               {
                 trouverItemsParNom(entree)->ajoutOutput(porte);
-                cout << "Entree " << entree << "ajoute a " << porte << endl<<endl;
+                cout << "Entrée " << entree << " ajouté à " << porte << endl<<endl;
 
                 entree = porte;
                 porte.clear();
@@ -396,7 +396,7 @@ void Dot::parsingDot(char *mon_fichier)
               }
               else
               {
-                cout << "erreur Output en entree" << endl;
+                cout << "Erreur Output en entree" << endl;
                 exit(5);
               }
             }
@@ -414,13 +414,13 @@ void Dot::parsingDot(char *mon_fichier)
         }
         else
         {
-          cout << "manque >" << endl;
+          cout << "Manque >" << endl;
           exit(1);
         }
         i++;
         if(tab[i]!='\n')
         {
-          cout <<"erreur6" << endl;
+          cout <<"Erreur6" << endl;
         }
         i++;
 
@@ -428,7 +428,7 @@ void Dot::parsingDot(char *mon_fichier)
       }
       else
       {
-        cout << "manque [ ou -" <<endl;
+        cout << "Manque [ ou -" <<endl;
         exit(5);
       }
 

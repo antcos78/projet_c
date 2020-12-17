@@ -286,7 +286,7 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
     }
   }
 
-  cout <<  endl << endl<< "fin du Stimuli" << endl<< endl << endl;
+  cout << "fin du Stimuli" << endl<< endl << endl;
 
 }
 

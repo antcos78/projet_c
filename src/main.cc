@@ -29,7 +29,7 @@ int main ()
 
   int enter = 0;
   cout << endl << endl << endl << endl;
-  cout << "SIMULATEUR DE CIRCUIT NUMERIQUE" << endl;
+  cout << "SIMULATEUR D'UN CIRCUIT NUMERIQUE" << endl;
   cout << "Les fichiers acceptés pour le schéma sont au format DOT" << endl;
   cout << "Pour le stimuli, les fichiers sont au format json" << endl;
 
@@ -40,16 +40,16 @@ int main ()
 
   char *mon_fichier_de_sorti = "resultat.dot";
 
-  cout << "Debut du parsing du .DOT" << endl;
+  cout << "Début du parsing du .DOT" << endl;
   //PARSING du DOT
   dov.parsingDot(mon_fichier_dot);
 
-  cout << "Debut du parsing du stimuli" << endl;
+  cout << "Début du parsing du stimuli" << endl;
   //PARSING du STIMULI
   sti.parsingStimuli(mon_fichier_stimuli);
 
   cout << "Reconstruction du schéma" << endl;
-  cout << "Elements du schema dans l'ordre : " << endl << endl;
+  cout << "Eléments du schema dans l'ordre : " << endl << endl;
 
   //PARSING du SCHEMA
   sch.construction_schema( dov );
@@ -71,12 +71,12 @@ int main ()
   }
   else
   {
-    cout << "erreur nombre entree stimuli et dot" << endl;
+    cout << "Erreur nombre entrées stimuli et dot" << endl;
     exit(1);
   }
 
 
-  cout << "Debut de la simulation" << endl<< endl;
+  cout << "Début de la simulation" << endl<< endl;
 
   //DECLARATION DES ELEMENTS DE SORTIE
   simu.declaration_resultat(sch);

@@ -68,7 +68,7 @@ void Simulateur::algo_simulation(int numero, Schema sch, Dot d, Stimuli sti)
       for(int j = 0; j < d.trouverItemsParNom(element)->getNbOutput(); j++) //Pour chaque sortie
       {
         string sortie = d.trouverItemsParNom(element)->getOutput(j);
-        cout << "Element " << element <<" entrée de " << sortie << " a pour etat  " << (int*)delta_etat << " et le flag vaut  " << (int*)d.trouverItemsParNom(sortie)->getFlag()<< endl;
+        cout << "L'élément " << element <<" est l'entrée de " << sortie << " qui a pour etat  " << (int*)delta_etat << ". Le flag est de  " << (int*)d.trouverItemsParNom(sortie)->getFlag()<< endl;
         if(d.trouverItemsParNom(sortie)->getNbPorts() == 1) //output
         {
           d.trouverItemsParNom(sortie)->ajoutEtat(delta_etat, 0);
