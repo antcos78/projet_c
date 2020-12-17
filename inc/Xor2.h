@@ -19,17 +19,10 @@ class Xor2 : public Porte {
 public:
   //////constructeur-destructeur///////
   Xor2(const string &nom, char type, char nbPorts,char flag = 0):
-  Porte(nom,type,nbPorts,flag)
-  {
-    cout << "constructeur" << endl;
-  }
+  Porte(nom,type,nbPorts,flag){;}
 
 
-  ~Xor2()
-  {
-    cout << "destruction" << endl;
-
-  }
+  ~Xor2(){;}
 
   ///////méthodes//////
   char calculEtat();

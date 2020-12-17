@@ -26,10 +26,7 @@ public:
   //////constructeur-destructeur///////
   Stimuli();
 
-  ~Stimuli()
-  {
-      cout << "Destruction du Stimuli" << endl;
-  }
+  ~Stimuli(){;}
 
   //Méthode du nombre de période
   int getnbPeriode()const

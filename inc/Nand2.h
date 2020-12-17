@@ -19,18 +19,10 @@ class Nand2 : public Porte {
 public:
   //////constructeur-destructeur///////
   Nand2(const string &nom, char type, char nbPorts,char flag = 0):
-  Porte(nom,type,nbPorts,flag)
-  {
-    cout << "constructeur" << endl;
-  }
+  Porte(nom,type,nbPorts,flag){;}
 
 
-  ~Nand2()
-  {
-    cout << "destruction" << endl;
-
-  }
-
+  ~Nand2(){;}
   ///////méthodes//////
   char calculEtat();
 

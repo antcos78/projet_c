@@ -19,17 +19,9 @@ class Xnor2 : public Porte {
 public:
   //////constructeur-destructeur///////
   Xnor2(const string &nom, char type, char nbPorts,char flag = 0):
-  Porte(nom,type,nbPorts,flag)
-  {
-    cout << "constructeur" << endl;
-  }
+  Porte(nom,type,nbPorts,flag){;}
 
-
-  ~Xnor2()
-  {
-    cout << "destruction" << endl;
-
-  }
+  ~Xnor2(){;}
 
   ///////méthodes//////
   char calculEtat();

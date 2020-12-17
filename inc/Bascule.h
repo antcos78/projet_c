@@ -22,17 +22,10 @@ private:
 public:
   //////constructeur-destructeur///////
   Bascule(const string &nom, char type, char nbPorts,int flag = 0):
-  Porte(nom,type,nbPorts,flag)
-  {
-    cout << "constructeur Bascule" << endl;
-  }
+  Porte(nom,type,nbPorts,flag){;}
 
 
-  ~Bascule()
-  {
-    cout << "destruction Bascule" << endl;
-  }
-
+  ~Bascule(){;}
   ///////méthodes//////
   char calculEtat();
 

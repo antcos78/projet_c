@@ -68,7 +68,7 @@ void Simulateur::algo_simulation(int numero, Schema sch, Dot d, Stimuli sti)
       for(int j = 0; j < d.trouverItemsParNom(element)->getNbOutput(); j++) //Pour chaque sortie
       {
         string sortie = d.trouverItemsParNom(element)->getOutput(j);
-        cout << "element" << element <<" sortie" << sortie << " etat  " << delta_etat << "flag : " << d.trouverItemsParNom(sortie)->getFlag()<< endl;
+        cout << "Element " << element <<" entrée de " << sortie << " a pour etat  " << (int*)delta_etat << " et le flag vaut  " << (int*)d.trouverItemsParNom(sortie)->getFlag()<< endl;
         if(d.trouverItemsParNom(sortie)->getNbPorts() == 1) //output
         {
           d.trouverItemsParNom(sortie)->ajoutEtat(delta_etat, 0);
@@ -116,7 +116,7 @@ void Simulateur::calcul_simulation(int nb_periode, Schema sch, Dot d, Stimuli st
 
   for(int i = 0; i < nb_periode; i ++)
   {
-    cout << " nb_periode :    " << getDelta_cycle(i) << endl;
+    cout << "Période : " << i +1 << endl;
     if((getDelta_cycle(i) == 0)||(sch.getNbElements_bascule()!=0))  //Si delta cycle == 0, on calcul tous les états
     {
       algo_simulation(i, sch, d, sti);
@@ -127,13 +127,13 @@ void Simulateur::calcul_simulation(int nb_periode, Schema sch, Dot d, Stimuli st
       {
         string sortie ;
         sortie = lireElements_resultat(sch.lireElements_output(j));
-        cout << "element dernier   :"  << sortie[sortie.size()-1] << endl;
         char test = sortie[sortie.size()-1];
         string::iterator it=sortie.end();
         *it--;
         ajouterElements_resultat(sch.lireElements_output(j),test);
       }
     }
+    cout << endl;
   }
 
 

@@ -6,7 +6,7 @@ using namespace std;
 char Mux::calculEtat()
 {
   int nb_sel;
-  if((m_entree_sel.size()>1))
+  if((m_entree_sel.size()>1))  //Si plusieurs entrées sel
   {
     nb_sel = (getEntreeSel_par_numero(0) + (getEntreeSel_par_numero(1)<<1));
     for(int i = 2; i < m_entree_sel.size();i++)
@@ -16,7 +16,7 @@ char Mux::calculEtat()
   }
   else
   {
-    nb_sel = (getEntreeSel_par_numero(0));
+    nb_sel = (getEntreeSel_par_numero(0));  //Sinon, on prend la valeur de l'entrée sel 0
   }
 
   return (getEntree_par_numero(nb_sel));
@@ -26,7 +26,7 @@ char Mux::calculEtat()
 
 bool Mux::element_present_entree(string nom)
 {
-  if(m_entree.count(nom)>0)
+  if(m_entree.count(nom)>0)  //si present
   {
     return true;
   }
@@ -37,7 +37,7 @@ bool Mux::element_present_entree(string nom)
 }
 bool Mux::element_present_entree_sel(string nom)
 {
-  if(m_entree_sel.count(nom)>0)
+  if(m_entree_sel.count(nom)>0)  //si present
   {
     return true;
   }

@@ -19,15 +19,9 @@ class Input : public  Porte {
 public:
   //////constructeur-destructeur///////
   Input(const string &nom, char type, char nbPorts,int flag = 0):
-  Porte(nom,type,nbPorts,flag)
-  {
-    cout << "constructeur Input" << endl;
-  }
+  Porte(nom,type,nbPorts,flag){;}
 
-  ~Input()
-  {
-    cout << "destruction Input" << endl;
-  }
+  ~Input(){;}
 
   ///////méthodes//////
   char calculEtat(Stimuli sti, int numero_periode);

@@ -10,9 +10,9 @@
 using namespace std;
 
 
-void Wavedrom::generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu)
+void Wavedrom::generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu, char *mon_fichier)
 {
-  ofstream outfile ("sortie.json");
+  ofstream outfile (mon_fichier);
   char debut [11]= {'{','s','i','g','n','a','l',':',' ','[','\n'};
   char name [7] = {'{','n','a','m','e',':',39};
   char wave [9] = {39,',','w','a','v','e',' ',':',39};

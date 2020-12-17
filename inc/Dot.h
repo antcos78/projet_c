@@ -25,10 +25,7 @@ public:
   //////constructeur-destructeur///////
   Dot();
 
-  ~Dot()
-  {
-      cout << "Destruction du Dot" << endl;
-  }
+  ~Dot(){;}
 
   int getnbItems()const
   {

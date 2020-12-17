@@ -266,7 +266,6 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
           nom.clear();
           etat.clear();
 
-          cout << "Ligne finie" << endl;
         }
         else
         {
@@ -287,7 +286,7 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
     }
   }
 
-  cout << "fin du Stimuli" << endl;
+  cout <<  endl << endl<< "fin du Stimuli" << endl<< endl << endl;
 
 }
 
@@ -303,7 +302,7 @@ void Stimuli::addEntree(const string & nom, const string & etat)
 
   v_stimuli.push_back(nom);
 
-  cout << "l'entrée est ajoutée" << nom << endl;
+  cout << "L'entrée " << nom << " est ajoutée "  << endl << endl;
 }
 
 char Stimuli::recupEntreeParNom(const string & nom, int numero)

@@ -19,17 +19,10 @@ class Nor2 : public Porte {
 public:
   //////constructeur-destructeur///////
   Nor2(const string &nom, char type, char nbPorts,char flag = 0):
-  Porte(nom,type,nbPorts,flag)
-  {
-    cout << "constructeur" << endl;
-  }
+  Porte(nom,type,nbPorts,flag){;}
 
 
-  ~Nor2()
-  {
-    cout << "destruction" << endl;
-
-  }
+  ~Nor2(){;}
 
   ///////méthodes//////
   char calculEtat();

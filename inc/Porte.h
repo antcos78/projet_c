@@ -33,13 +33,9 @@ public:
     etat.push_back(0);
     etat.push_back(0);
     etat.push_back(0);
-    cout << "constructeur" << endl;
   }
 
-  ~Porte()
-  {
-    cout << "destruction" << endl;
-  }
+  ~Porte(){;}
 
   //////OUTPUT//////
   string getOutput(int numero_element) const;

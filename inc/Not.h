@@ -19,17 +19,10 @@ class Not : public  Porte {
 public:
   //////constructeur-destructeur///////
   Not(const string &nom, char type, char nbPorts,int flag = 0):
-  Porte(nom,type,nbPorts,flag)
-  {
-    cout << "constructeur" << endl;
-  }
+  Porte(nom,type,nbPorts,flag){;}
 
 
-  ~Not()
-  {
-    cout << "destruction" << endl;
-
-  }
+  ~Not(){;}
 
   ///////méthodes//////
   char calculEtat();

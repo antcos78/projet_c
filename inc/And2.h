@@ -24,11 +24,7 @@ public:
     cout << "constructeur AND2" << endl;
   }
 
-  ~And2()
-  {
-    cout << "destruction AND2" << endl;
-
-  }
+  ~And2(){;}
 
   ///////méthodes//////
   char calculEtat();

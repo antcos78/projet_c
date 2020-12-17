@@ -27,39 +27,20 @@ int main ()
   Wavedrom wave;
   Stimuli sti;
 
-  int enter = 0;
-  cout << endl << endl << endl << endl;
-  cout << "SIMULATEUR DE CIRCUIT NUMERIQUE" << endl;
-  cout << "Les fichiers acceptés pour le schéma sont au format DOT" << endl;
-  cout << "Pour le stimuli, les fichiers sont au format json" << endl;
-
 
   //NOM ET EMPLACEMENT DES FICHIERS
-  char *mon_fichier_dot = "/home/phelma/Documents/Examen/circuits/full_adder.dot";
-  char *mon_fichier_stimuli = "/home/phelma/Documents/Examen/stimuli/full_adder.json";
+  char *mon_fichier_dot = "/home/phelma/Documents/Examen/structure_ok/register.dot";
+  char *mon_fichier_stimuli = "/home/phelma/Documents/Examen/Stimuli_check/Erreur_mauvais_nom2.json";
 
-  char *mon_fichier_de_sorti = "resultat.dot";
-
-  cout << "Debut du parsing du .DOT" << endl;
   //PARSING du DOT
   dov.parsingDot(mon_fichier_dot);
 
-  cout << "Debut du parsing du stimuli" << endl;
   //PARSING du STIMULI
   sti.parsingStimuli(mon_fichier_stimuli);
-
-  cout << "Reconstruction du schéma" << endl;
-  cout << "Elements du schema dans l'ordre : " << endl << endl;
 
   //PARSING du SCHEMA
   sch.construction_schema( dov );
 
-  for(int i = 0; i < sch.getNbElements_schema() ; i ++)
-  {
-    cout << sch.lireElements_schema(i) << endl;
-  }
-
-  cout <<endl<<endl<< "Schéma reconstruit" << endl;
 
   //Verification des données entre Stimuli et DOT
   if(sch.getNbElements_input() == sti.getnbEntree())
@@ -76,7 +57,6 @@ int main ()
   }
 
 
-  cout << "Debut de la simulation" << endl<< endl;
 
   //DECLARATION DES ELEMENTS DE SORTIE
   simu.declaration_resultat(sch);
@@ -85,27 +65,18 @@ int main ()
   //SIMULATION COMPLETE
   simu.calcul_simulation(sti.getnbPeriode(), sch, dov,sti);
 
-  cout << "La simulation est terminée" << endl<< endl;
-
   //AFFICHAGE DES ELEMENTS DE SIMULATION
-  cout << "Les résultats de la simulation sont disponibles ci-dessous : " << endl;
   for(int j = 0; j < simu.getNbElements_resultat(); j++ )
   {
-    cout << "Sortie " << sch.lireElements_output(j) << ": ";
+    cout << " sortie : " << sch.lireElements_output(j) << endl;
     for(int i = 0; i < sti.getnbPeriode()+1; i++)
     {
-      cout<< simu.lireElements_resultat(sch.lireElements_output(j))[i] ;
+      cout <<" resultat   : " << i << " : " << simu.lireElements_resultat(sch.lireElements_output(j))[i] << endl;
     }
-    cout << endl;
-
   }
 
-  cout <<endl<<endl<< "Le fichier de sortie va être fabriqué...." << endl;
   //GENERATION DU CHRONOGRAMME DE SORTIE
-  wave.generation_Wavedrom( simu, sch, sti,mon_fichier_de_sorti);
-
-  cout << "...le voici livré à l'emplacement voulu sour le nom de : "<< mon_fichier_de_sorti<< endl;
-
+  wave.generation_Wavedrom( simu, sch, sti);
 
   return 0;
 }

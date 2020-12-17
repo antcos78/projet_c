@@ -26,17 +26,10 @@ private:
 public:
   //////constructeur-destructeur///////
   Mux(const string &nom, char type, char nbPorts,char flag = 0):
-  Porte(nom,type,nbPorts,flag)
-  {
-    cout << "constructeur" << endl;
-  }
+  Porte(nom,type,nbPorts,flag){;}
 
 
-  ~Mux()
-  {
-    cout << "destruction" << endl;
-
-  }
+  ~Mux(){;}
 
   ///////méthodes//////
   char calculEtat();

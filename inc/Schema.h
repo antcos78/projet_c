@@ -28,15 +28,9 @@ private:
 public:
   //////constructeur-destructeur///////
 
-  Schema()
-  {
-    cout << "constructeur" << endl;
-  }
+  Schema(){;}
 
-  ~Schema()
-  {
-    cout << "destruction" << endl;
-  }
+  ~Schema(){;}
 
 
   int getNbElements_schema();

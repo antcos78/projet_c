@@ -26,7 +26,6 @@ int Schema::getNbElements_bascule()
 
 void Schema::ajouterElements_schema(const string & nom)
 {
-  cout << "element ajouté" << endl;
   schema.push_back(nom);
 }
 void Schema::ajouterElements_input(const string & nom)
@@ -129,8 +128,8 @@ void Schema::construction_schema( Dot z )
     }
   }
 
-  cout << "element dans le schema : " << getNbElements_schema() << endl;
-  cout << "element dans le input : " << getNbElements_input()<< endl;
+  //cout << "element dans le schema : " << getNbElements_schema() << endl;
+  //cout << "element dans le input : " << getNbElements_input()<< endl;
 
   if(getNbElements_input()==0)
   {
@@ -226,6 +225,6 @@ void Schema::construction_schema( Dot z )
   {
     z.trouverItemsParNom(lireElements_schema(i))->setFlag(0);
   }
-  cout << "fin schema" << endl;
+  //cout << "fin schema" << endl;
 
 }

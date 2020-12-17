@@ -27,15 +27,9 @@ private:
 public:
   //////constructeur-destructeur///////
 
-  Simulateur()
-  {
-    cout << "constructeur" << endl;
-  }
+  Simulateur(){;}
 
-  ~Simulateur()
-  {
-    cout << "destruction" << endl;
-  }
+  ~Simulateur(){;}
 
   //Méthode permettant de configurer les ports de sortie
   void declaration_resultat( Schema sch);

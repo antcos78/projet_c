@@ -23,10 +23,7 @@ public:
 
   Items(const string &nom, char type, char nbPorts);
 
-  virtual ~Items()
-  {
-    cout << "destruction" << endl;
-  }
+  virtual ~Items(){;}
 
 
   //////accesseur//////

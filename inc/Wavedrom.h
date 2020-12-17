@@ -24,18 +24,12 @@ private:
 public:
   //////constructeur-destructeur///////
 
-  Wavedrom()
-  {
-    cout << "constructeur" << endl;
-  }
+  Wavedrom(){;}
 
-  ~Wavedrom()
-  {
-    cout << "destruction" << endl;
-  }
+  ~Wavedrom(){;}
 
   //Permet de générer le fichier .json
-  void generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu);
+  void generation_Wavedrom(Simulateur simu, Schema sch, Stimuli stimu, char *mon_fichier);
 
 };
 

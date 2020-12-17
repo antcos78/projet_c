@@ -58,7 +58,7 @@ void Dot::parsingDot(char *mon_fichier)
     cout << "Problème de fichier" << endl;
     exit(3);
   }
-  cout << "Fichier ouvert" << endl;
+  cout <<endl << endl << "Fichier ouvert" << endl << endl << endl;
 
 
   while(monFlux.get(a)) //Récupération des données
@@ -76,7 +76,7 @@ void Dot::parsingDot(char *mon_fichier)
     if(tab[i]!=digraph[c])
     {
       cout <<" Erreur digraph" << endl; //Si texte différente de digraph test{ alors erreur
-      exit(1);
+        exit(1);
       }
     }
     while(tab[i]!='{'){i++;}
@@ -141,41 +141,43 @@ void Dot::parsingDot(char *mon_fichier)
         }
         i++;
 
+        //On enleve les espaces
+        while(tab[i]==' ')
+        {
+          i++;
+        }
 
-          while(tab[i]==' ')
+
+        if(tab[i]!=']')
+        {
+          d = i;
+
+          if(tab[i]!=';')
           {
-            i++;
-          }
-
-
-          if(tab[i]!=']')
-          {
-            d = i;
-
-            if(tab[i]!=';')
+            //Si pas de point virgule, alors c'est qu'il y a un mux
+            for(int s = 0;i<d+6;i++,s++)
             {
-              for(int s = 0;i<d+6;i++,s++)
+              if(tab[i]!=sel[s])
               {
-                if(tab[i]!=sel[s])
-                {
-                  cout <<" erreur sel mux" << endl;
-                  exit(4);
-                }
+                cout <<" erreur sel mux" << endl;
+                exit(4);
               }
-              if(tab[i] == 34)
-              {
-                i++;
-                while(tab[i]!=34)
-                {
-                  select += tab[i]; //Récupération du sel présent dans sel = " "
-                  i++;
-                }
-              }
-              i++;
-              cout << "Entrée : " << entree << ", type : " << type << ", select :"<< select <<endl;
             }
-
+            //recupération de l'entrée sel
+            if(tab[i] == 34)
+            {
+              i++;
+              while(tab[i]!=34)
+              {
+                select += tab[i]; //Récupération du sel présent dans sel = " "
+                i++;
+              }
+            }
+            i++;
+            cout << "Entrée : " << entree << ", type : " << type << ", select :"<< select <<endl;  //On affiche les informations recueillies
           }
+
+        }
 
 
         if(tab[i]!=']')
@@ -206,7 +208,7 @@ void Dot::parsingDot(char *mon_fichier)
           exit(5);
         }
 
-        if((type != "NOT") && (type != "INPUT") && (type != "OUTPUT")&&(type != "FF")) //Pour le choix du nombre de ports
+        if((type != "NOT") && (type != "INPUT") && (type != "OUTPUT")&&(type != "FF")) //Pour le choix du nombre de ports, ceux la ne sont pas possibles
         {
           nbPorts = type[type.size() - 1] - 48;
           cout << "nb de port = " << nbPorts << endl;
@@ -260,8 +262,8 @@ void Dot::parsingDot(char *mon_fichier)
 
           if(m.count(entree) > 0){
             if(m.count(select) > 0){
-              trouverItemsParNom(select)->ajoutOutput(entree);
-              trouverItemsParNom(entree)->setEntreeSel(select,0);
+              trouverItemsParNom(select)->ajoutOutput(entree);  //on ajoute le mux comme sortie de l'élément
+              trouverItemsParNom(entree)->setEntreeSel(select,0); //on ajoute l'entrée dans le mux
             }
             else
             {
@@ -285,7 +287,6 @@ void Dot::parsingDot(char *mon_fichier)
         type.clear();
         select.clear();
 
-        cout << "Ligne finie" << endl;
       }
 
       else if(tab[i]=='-')
@@ -307,30 +308,30 @@ void Dot::parsingDot(char *mon_fichier)
               if(tab[i]=='>')
               {
                 i++;
-                cout << "Entrée1 :" << entree << endl;
-                cout << " porte : " << porte << endl;
+                cout << "Entrée :" << entree << endl;
+                cout << "Porte : " << porte << endl;
                 if(m.count(entree) > 0){
                   if(m.count(porte) > 0){
-                    if(trouverItemsParNom(porte)->getType()==0)
+                    if(trouverItemsParNom(porte)->getType()==0) //Si input
                     {
                       cout << "Attention entrée en sortie d'élément" <<endl;
                       exit(4);
                     }
-                    if(trouverItemsParNom(porte)->getType()==10)
+                    if(trouverItemsParNom(porte)->getType()==10) //Si mux
                     {
                       trouverItemsParNom(porte)->setEntree(entree,0);
-                      cout << "entree " << entree << "ajoute a " << porte << endl;
+                      cout << "Entree " << entree << "ajoute a " << porte << endl<<endl;
                     }
-                    if(trouverItemsParNom(entree)->getType()!=1)
+                    if(trouverItemsParNom(entree)->getType()!=1)  //Autre que output
                     {
 
                       trouverItemsParNom(entree)->ajoutOutput(porte);
-                      cout << "entree " << entree << "ajoute a " << porte << endl;
+                      cout << "Entree " << entree << " ajoute a " << porte << endl<<endl;
 
                       entree = porte;
                       porte.clear();
                     }
-                    else
+                    else  //Si output
                     {
                       cout << "erreur Output en entree" << endl;
                       exit(5);
@@ -369,7 +370,7 @@ void Dot::parsingDot(char *mon_fichier)
             cout << "erreur fin de ligne";
             exit(3);
           }
-          cout << "Entrée1 :" << entree << endl;
+          cout << "Entrée :" << entree << endl;
           cout << "Porte : " << porte << endl;
 
           if(m.count(porte) > 0){
@@ -382,13 +383,15 @@ void Dot::parsingDot(char *mon_fichier)
               if(trouverItemsParNom(porte)->getType()==10)
               {
                 trouverItemsParNom(porte)->setEntree(entree,0);
-                cout << "entree " << entree << "ajoute a " << porte << endl;
+                cout << "Entree " << entree << " ajoute a " << porte << endl<<endl;
               }
               if(trouverItemsParNom(entree)->getType()!=1)
               {
-                  trouverItemsParNom(entree)->ajoutOutput(porte);
-                  entree = porte;
-                  porte.clear();
+                trouverItemsParNom(entree)->ajoutOutput(porte);
+                cout << "Entree " << entree << "ajoute a " << porte << endl<<endl;
+
+                entree = porte;
+                porte.clear();
 
               }
               else
@@ -422,7 +425,6 @@ void Dot::parsingDot(char *mon_fichier)
         i++;
 
         entree.clear();
-        cout << "Ligne finie" << endl;
       }
       else
       {
@@ -435,7 +437,7 @@ void Dot::parsingDot(char *mon_fichier)
         i++;
       }
     }
-    cout << "fin du DOT" << endl;
+    cout << "fin du DOT" << endl << endl << endl << endl;
   }
 
 
@@ -449,7 +451,7 @@ void Dot::parsingDot(char *mon_fichier)
     m[p_items->getNom()] = p_items;
     v.push_back(p_items->getNom());
 
-    cout << "l'item est ajouté" << p_items->getNom() << endl;
+    cout << "L'item " << nom << " est ajouté "  << endl <<endl;
 
   }
 

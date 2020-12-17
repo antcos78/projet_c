@@ -26,18 +26,13 @@ public:
   Output(const string &nom, char type, char nbPorts):
   Items(nom,type,nbPorts)
   {
-    cout << "constructeur" << endl;
     etat.push_back(0);
     etat.push_back(0);
     etat.push_back(0);
   }
 
 
-  ~Output()
-  {
-    cout << "destruction" << endl;
-
-  }
+  ~Output(){;}
 
   ///////méthodes//////
   char calculEtat();
