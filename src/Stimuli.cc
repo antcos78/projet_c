@@ -40,7 +40,7 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
   string nom;
   string etat;
 
-  if (monFlux.is_open()!=true)
+  if (monFlux.is_open()!=true) //Vérification si le fichier est bien ouvert
   {
     cout << "Problème de fichier" << endl;
     exit(3);
@@ -54,7 +54,7 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
     i++;
   }
 
-
+  // Vérification de la première ligne
   for(i=0;i<10;i++)
   {
     if(tab[i]!=signal[i])
@@ -63,7 +63,9 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
       exit(1);
     }
   }
-  while(tab[i]!='}')
+
+
+  while(tab[i]!='}') //Permet de parcourir le fichier jusqu'à la fin
   {
     while(tab[i]!=']')
     {
@@ -72,6 +74,7 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
         i++;
       }
 
+      //Récupération des élements d'entrées
       while(tab[i] != '{')
       {
         i++;
@@ -105,7 +108,7 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
           b = i;
           for(int c = 0;i<b+5;i++,c++)
           {
-            if(tab[i]!=name[c])
+            if(tab[i]!=name[c]) //Vérification de la forme avant de récupérérer le nom de l'entrée
             {
               cout << "Erreur dans le name " << endl;
               exit(1);
@@ -117,12 +120,13 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
             i++;
           }
 
+          //Récupération du nom de l'entrée
           if(tab[i] == 39)
           {
             i++;
             while(tab[i]!=39)
             {
-              nom += tab[i]; //Récupération du type présent dans label = " "
+              nom += tab[i];
               if(tab[i] == ',')
               {
                 cout << "Erreur sur l'apostrophe après le nom" << endl;
@@ -154,6 +158,7 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
             i++;
           }
 
+          //Récupération de l'état de l'entrée
           d = i;
           for(int e = 0;i<d+6;i++,e++)
           {
@@ -175,18 +180,18 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
                 exit(1);
               }
 
-              if(tab[i] == 46)
+              if(tab[i] == 46) // Quand l'état est un point alors il prend la valeur du bit précédent
               {
                 tab[i] = tab[i-1];
               }
 
-              etat += tab[i]; //Récupération du type présent dans label = " "
+              etat += tab[i];
               if(tab[i] == '}')
               {
                 cout << "Erreur : il manque l'apostrophe après l'état" << endl;
                 exit(1);
               }
-              if((tab[i]!='0')&&(tab[i]!='1')&&(tab[i]!='.'))
+              if((tab[i]!='0')&&(tab[i]!='1')&&(tab[i]!='.')) //Prise en compte si l'état n'est ni un 1, ni un 0, ni un point
               {
                 cout << "Erreur dans les valeurs d'état" << endl;
                 exit(1);
@@ -202,10 +207,10 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
           }
           if(etat.size() == 0)
           {
-            cout <<"pas d'état" << endl;
+            cout << "pas d'état" << endl;
             exit(5);
           }
-          if(line == 0)
+          if(line == 0) //Vérification si les états ont tous le même nombre de période
           {
             periode = etat.size();
           }
@@ -256,7 +261,7 @@ void Stimuli::parsingStimuli(char *mon_fichier_stimuli)
           i++;
 
 
-          addEntree(nom, etat);
+          addEntree(nom, etat); //On associe l'état à son entrée correspondante
 
           nom.clear();
           etat.clear();
