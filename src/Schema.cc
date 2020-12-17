@@ -112,6 +112,11 @@ void Schema::construction_schema( Dot z )
   cout << "element dans le schema : " << getNbElements_schema() << endl;
   cout << "element dans le input : " << getNbElements_input()<< endl;
 
+  if(getNbElements_input()==0)
+  {
+    cout << "Pas d'entrée dans le schéma" << endl;
+    exit(4);
+  }
 
   i = 0;
   j = 0;
@@ -179,7 +184,7 @@ void Schema::construction_schema( Dot z )
       }
       if(z.trouverItemsParNom(lireElements_schema(j))->getNbOutput() == 0)
       {
-        cout << "erreur nb sorties" << endl;
+        cout << "Erreur nb sortie de l'élément (0 sortie)" << endl;
         exit(5);
       }
     }
@@ -187,6 +192,12 @@ void Schema::construction_schema( Dot z )
 
   }
 
+
+  if(getNbElements_output()==0)
+  {
+    cout << "Pas de sortie dans le schéma" << endl;
+    exit(4);
+  }
   for(i = 0; i< getNbElements_output(); i ++)   //on met les output dans le schema  (à la fin)
   {
     ajouterElements_schema(lireElements_output(i));
