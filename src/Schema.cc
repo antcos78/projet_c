@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int Schema::getNbElements_schema()  
+int Schema::getNbElements_schema()
 {
   return schema.size();
 }
@@ -161,48 +161,46 @@ void Schema::construction_schema( Dot z )
           cout << "bascule " << endl;
         }
 
-        else if(nb_port == 1)
+        else if(nb_port == 1)  //S'il y a un port
         {
-          if(z.trouverItemsParNom(element)->getFlag()==0 )
+          if(z.trouverItemsParNom(element)->getFlag()==0 )  //Si flag à 0
           {
-            if(z.trouverItemsParNom(element)->getType() == 1)
+            if(z.trouverItemsParNom(element)->getType() == 1)  //Type est sortie
             {
-              ajouterElements_output(element);
+              ajouterElements_output(element);  //On ajoute à la liste output
             }
             else
             {
               ajouterElements_schema(element);
             }
-            z.trouverItemsParNom(element)->setFlag(1);
+            z.trouverItemsParNom(element)->setFlag(1);  //On met le flag à 1
           }
           else
           {
-            cout << "erreur nb entree 1 port" << endl;
+            cout << "erreur nb entree 1 port" << endl;  //ERREUR NB PORTS D'ENTREE
             exit(3);
           }
         }
 
-        else
+        else  //SI plus d'un port
         {
-          cout << "nb ports : " << z.trouverItemsParNom(element)->getNbPorts() << endl;
-          cout << "element " << element << "flag : " << z.trouverItemsParNom(element)->getFlag() << endl;
-          if(z.trouverItemsParNom(element)->getFlag() < (z.trouverItemsParNom(element)->getNbPorts() - 1))
+          if(z.trouverItemsParNom(element)->getFlag() < (z.trouverItemsParNom(element)->getNbPorts() - 1))  //Si nbport-1 > flag
           {
-            z.trouverItemsParNom(element)->setFlag(z.trouverItemsParNom(element)->getFlag() +1);
+            z.trouverItemsParNom(element)->setFlag(z.trouverItemsParNom(element)->getFlag() +1);  //on met + 1 a flag
           }
-          else if(z.trouverItemsParNom(element)->getFlag() == (z.trouverItemsParNom(element)->getNbPorts() - 1))
+          else if(z.trouverItemsParNom(element)->getFlag() == (z.trouverItemsParNom(element)->getNbPorts() - 1)) //Si nb port - 1 == flag
           {
-            ajouterElements_schema(element);
+            ajouterElements_schema(element);                                                          //On ajoute element
             z.trouverItemsParNom(element)->setFlag(z.trouverItemsParNom(element)->getNbPorts());
           }
-          else
+          else  //Si flag trop grand, trop de ports
           {
             cout << "erreur nb entrees ports" << endl;
             exit(3);
           }
         }
       }
-      if(z.trouverItemsParNom(lireElements_schema(j))->getNbOutput() == 0)
+      if(z.trouverItemsParNom(lireElements_schema(j))->getNbOutput() == 0)  //Si output, problème
       {
         cout << "Erreur nb sortie de l'élément (0 sortie)" << endl;
         exit(5);
@@ -213,11 +211,13 @@ void Schema::construction_schema( Dot z )
   }
 
 
-  if(getNbElements_output()==0)
+  if(getNbElements_output()==0)  //si list output vide
   {
     cout << "Pas de sortie dans le schéma" << endl;
     exit(4);
   }
+
+
   for(i = 0; i< getNbElements_output(); i ++)   //on met les output dans le schema  (à la fin)
   {
     ajouterElements_schema(lireElements_output(i));

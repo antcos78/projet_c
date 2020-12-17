@@ -28,21 +28,21 @@ int main ()
   Stimuli sti;
 
 
+  //NOM ET EMPLACEMENT DES FICHIERS
+  char *mon_fichier_dot = "/home/phelma/Documents/Examen/structure_ok/register.dot";
+  char *mon_fichier_stimuli = "/home/phelma/Documents/Examen/stimuli/three_inputs.json";
 
-  char *mon_fichier = "/home/phelma/Documents/Examen/structure_ok/register.dot";
-  char *mon_fichier_stimuli = "/home/phelma/Documents/Examen/Stimuli_check/Erreur_mauvais_nom2.json";
+  //PARSING du DOT
+  dov.parsingDot(mon_fichier_dot);
 
-  dov.parsingDot(mon_fichier);
-
+  //PARSING du STIMULI
   sti.parsingStimuli(mon_fichier_stimuli);
 
-
-
-
+  //PARSING du SCHEMA
   sch.construction_schema( dov );
-  cout << "schema ok" << endl;
-  cout << endl << endl;
 
+
+  //Verification des données entre Stimuli et DOT
   if(sch.getNbElements_input() == sti.getnbEntree())
   {
     for(int i = 0; i < sch.getNbElements_input(); i++)
@@ -57,28 +57,25 @@ int main ()
   }
 
 
-  for(int i = 0; i < sch.getNbElements_schema() ; i ++)
-  {
-    cout << "Nom : " <<sch.lireElements_schema(i)<< "    Type : " << (int*)dov.trouverItemsParNom(sch.lireElements_schema(i))->getType();
-    cout <<"    Ports : " << (int*)dov.trouverItemsParNom(sch.lireElements_schema(i))->getNbPorts() << endl;
-  }
-  cout << endl << endl;
 
+  //DECLARATION DES ELEMENTS DE SORTIE
   simu.declaration_resultat(sch);
-  cout << "delcaration ok" << endl;
+  //CALCUL DU DELTA CYCLE
   simu.calcul_delta_cycle(sti, sch);
-  cout << "delta_cycle ok" << endl;
+  //SIMULATION COMPLETE
   simu.calcul_simulation(sti.getnbPeriode(), sch, dov,sti);
 
+  //AFFICHAGE DES ELEMENTS DE SIMULATION
   for(int j = 0; j < simu.getNbElements_resultat(); j++ )
   {
     cout << " sortie : " << sch.lireElements_output(j) << endl;
-    for(int i =0; i < sti.getnbPeriode()+1; i++)
+    for(int i = 0; i < sti.getnbPeriode()+1; i++)
     {
       cout <<" resultat   : " << i << " : " << simu.lireElements_resultat(sch.lireElements_output(j))[i] << endl;
     }
   }
 
+  //GENERATION DU CHRONOGRAMME DE SORTIE
   wave.generation_Wavedrom( simu, sch, sti);
 
   return 0;

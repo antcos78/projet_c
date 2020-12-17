@@ -35,6 +35,11 @@ string Simulateur::lireElements_resultat(const string & nom)
   return resultat[nom];
 }
 
+
+
+
+
+
 void Simulateur::algo_simulation(int numero, Schema sch, Dot d, Stimuli sti)
 {
   char delta_etat;
@@ -91,8 +96,8 @@ void Simulateur::algo_simulation(int numero, Schema sch, Dot d, Stimuli sti)
           }
           else  //Si different de mux
           {
-            d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  d.trouverItemsParNom(sortie)->getFlag() );
-            d.trouverItemsParNom(sortie)->setFlag(d.trouverItemsParNom(sortie)->getFlag() + 1);
+            d.trouverItemsParNom(sortie)->ajoutEtat( delta_etat,  d.trouverItemsParNom(sortie)->getFlag() );  //On place l'état à son emplacement en fonction du flag
+            d.trouverItemsParNom(sortie)->setFlag(d.trouverItemsParNom(sortie)->getFlag() + 1);  //On ajoute 1 au flag pour l'état suivant
           }
 
         }
@@ -112,11 +117,11 @@ void Simulateur::calcul_simulation(int nb_periode, Schema sch, Dot d, Stimuli st
   for(int i = 0; i < nb_periode; i ++)
   {
     cout << " nb_periode :    " << getDelta_cycle(i) << endl;
-    if((getDelta_cycle(i) == 0)||(sch.getNbElements_bascule()!=0))
+    if((getDelta_cycle(i) == 0)||(sch.getNbElements_bascule()!=0))  //Si delta cycle == 0, on calcul tous les états
     {
       algo_simulation(i, sch, d, sti);
     }
-    else
+    else  //Sinon, on recopie les valeurs précédentes
     {
       for(int j = 0; j <sch.getNbElements_output(); j++)
       {
@@ -146,7 +151,7 @@ void Simulateur::calcul_delta_cycle(Stimuli sti, Schema sch)
     i = 0;
     while((i < sch.getNbElements_input())&&(flag!=0))
     {
-      if((sti.recupEntreeParNom(sch.lireElements_input(i),j))==(sti.recupEntreeParNom(sch.lireElements_input(i),j-1)))
+      if((sti.recupEntreeParNom(sch.lireElements_input(i),j))==(sti.recupEntreeParNom(sch.lireElements_input(i),j-1)))  //On regarde deux états successifs s'ils sont égaux
       {
         flag = 1;
       }
@@ -156,9 +161,11 @@ void Simulateur::calcul_delta_cycle(Stimuli sti, Schema sch)
       }
       i++;
     }
-    setDelta_cycle(flag);
+    setDelta_cycle(flag);  //On met le flag dans la valeur du delta cycle
   }
 }
+
+
 
 char Simulateur::getDelta_cycle(int periode)
 {
